@@ -3,13 +3,12 @@ name: Build and Deploy Frontend
 on:
   push:
     branches:
-      - master
       - main
   workflow_dispatch:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}/frontend
+  IMAGE_NAME: redaezziani/electro-zane-front/frontend
 
 jobs:
   build-and-push:
@@ -30,7 +29,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.GIT_TOKEN }}
 
       - name: Extract metadata
         id: meta
@@ -70,7 +69,7 @@ jobs:
             cd ${{ secrets.APP_DIRECTORY || '/opt/app' }}
 
             # Login to GitHub Container Registry
-            echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+            echo "${{ secrets.GIT_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
             # Pull latest image
             docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest

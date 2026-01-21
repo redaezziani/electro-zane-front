@@ -31,7 +31,7 @@ export interface LogEntry {
   action?: LogAction;
   entity?: string;
   entityId?: string;
-  metadata?: any;
+  metadata?: Record<string, unknown>;
   ipAddress?: string;
   userAgent?: string;
   context?: string;

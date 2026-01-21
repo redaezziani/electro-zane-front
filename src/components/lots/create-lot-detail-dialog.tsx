@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
-import { lotsApi, CreateLotDetailDto, Lot, PieceDetail } from "@/services/api/lots";
+import { lotsApi, CreateLotDetailDto, Lot } from "@/services/api/lots";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

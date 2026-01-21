@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { LogsTable } from "@/components/logs/logs-table";
 import { LogsFilters } from "@/components/logs/logs-filters";
-import { logsApi, LogsQuery, LogType, LogAction } from "@/services/api/logs";
+import { logsApi, LogsQuery, LogType, LogEntry } from "@/services/api/logs";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
 import { toast } from "sonner";
@@ -12,7 +12,7 @@ export default function LogsPage() {
   const { locale } = useLocale();
   const t = getMessages(locale);
 
-  const [logs, setLogs] = useState<any[]>([]);
+  const [logs, setLogs] = useState<LogEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
     page: 1,
@@ -28,7 +28,7 @@ export default function LogsPage() {
   });
 
   // Fetch logs
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     try {
       setLoading(true);
       const response = await logsApi.getLogs(filters);
@@ -40,16 +40,17 @@ export default function LogsPage() {
         totalPages: response.totalPages,
       });
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error("Error fetching logs:", error);
       toast.error(t.pages.logs.table.error);
     } finally {
       setLoading(false);
     }
-  };
+  }, [filters, t.pages.logs.table.error]);
 
   useEffect(() => {
     fetchLogs();
-  }, [filters]);
+  }, [fetchLogs]);
 
   const handleFilterChange = (newFilters: Partial<LogsQuery>) => {
     setFilters((prev) => ({ ...prev, ...newFilters, page: 1 }));

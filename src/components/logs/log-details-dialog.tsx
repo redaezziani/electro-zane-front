@@ -26,7 +26,7 @@ export function LogDetailsDialog({
   const { locale } = useLocale();
   const t = getMessages(locale);
 
-  const DetailRow = ({ label, value }: { label: string; value: any }) => {
+  const DetailRow = ({ label, value }: { label: string; value: unknown }) => {
     if (!value) return null;
 
     return (
