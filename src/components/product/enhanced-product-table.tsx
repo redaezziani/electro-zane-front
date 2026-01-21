@@ -68,7 +68,7 @@ export function EnhancedProductTable({}: EnhancedProductTableProps) {
   const { locale } = useLocale();
   const lang = getMessages(locale);
   const t = lang.pages?.products?.components?.productTable || {};
-  const tCommon = lang.pages?.common || {};
+  const tCommon = lang.common || {};
 
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);

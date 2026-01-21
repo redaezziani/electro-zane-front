@@ -43,7 +43,7 @@ export function EnhancedProductVariantTable({}: EnhancedProductVariantTableProps
   const { locale } = useLocale();
   const lang = getMessages(locale);
   const t = lang.pages?.variants?.components?.variantTable || {};
-  const tCommon = lang.pages?.common || {};
+  const tCommon = lang.common || {};
 
   // Local pagination state for variants
   const [variantCurrentPage, setVariantCurrentPage] = useState(1);

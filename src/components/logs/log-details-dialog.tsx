@@ -29,17 +29,22 @@ export function LogDetailsDialog({
   const DetailRow = ({ label, value }: { label: string; value: unknown }) => {
     if (!value) return null;
 
+    const renderValue = () => {
+      if (typeof value === "object" && value !== null) {
+        return (
+          <pre className="bg-muted p-2 rounded text-xs overflow-auto max-h-40">
+            {JSON.stringify(value, null, 2)}
+          </pre>
+        );
+      }
+      return String(value);
+    };
+
     return (
       <div className="grid grid-cols-3 gap-4 py-2 border-b">
         <div className="font-medium text-sm text-muted-foreground">{label}</div>
         <div className="col-span-2 text-sm break-all">
-          {typeof value === "object" ? (
-            <pre className="bg-muted p-2 rounded text-xs overflow-auto max-h-40">
-              {JSON.stringify(value, null, 2)}
-            </pre>
-          ) : (
-            value
-          )}
+          {renderValue()}
         </div>
       </div>
     );
