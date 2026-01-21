@@ -1,0 +1,1443 @@
+{
+  "errors": {
+    "permissionDenied": "You don't have permission to access this resource"
+  },
+  "theme": {
+    "selectColor": "Select color theme",
+    "colorScheme": "Color Scheme",
+    "toggleMode": "Toggle theme mode",
+    "colors": {
+      "default": "Orange",
+      "blue": "Blue",
+      "green": "Green",
+      "purple": "Purple",
+      "rose": "Rose"
+    }
+  },
+  "sidebar": {
+    "storeManager": "Comodo Store ",
+    "user": "User",
+    "links": {
+      "dashboard": "Dashboard",
+      "users": "Users",
+      "roles": "Roles",
+      "categories": "Categories",
+      "products": "Products",
+      "productVariants": "Product Variants",
+      "skus": "SKUs & Inventory",
+      "orders": "Orders",
+      "orderItems": "Order Items",
+      "reviews": "Reviews",
+      "analytics": "Analytics",
+      "logs": "Activity Logs",
+      "lots": "Lots Management",
+      "lotArrivals": "Lot Arrivals",
+      "settings": "Settings"
+    },
+    "navUser": {
+      "logout": "Logout",
+      "logoutWarningTitle": "Logout Warning",
+      "logoutWarningDesc": "You have logged out locally, but the server-side logout may have failed."
+    }
+  },
+  "pagination": {
+    "rowsPerPage": "Rows per page",
+    "selectRows": "Select rows",
+    "of": "/",
+    "firstPage": "First page",
+    "prevPage": "Previous page",
+    "nextPage": "Next page",
+    "lastPage": "Last page"
+  },
+  "multiImageUploader": {
+    "dropHere": "Drop your images here",
+    "selectImages": "Select images",
+    "formats": "SVG, PNG, JPG or GIF (max. {maxSizeMB}MB)",
+    "errors": {
+      "maxSize": "{name} exceeds the maximum file size"
+    }
+  },
+  "pages": {
+    "forgotPassword": {
+      "title": "Reset Password",
+      "description": {
+        "initial": "Enter your email address and we'll send you a reset link",
+        "success": "Check your email for a password reset link"
+      },
+      "sending": "Sending reset link...",
+      "sent": "Email Sent!",
+      "sendLink": "Send Reset Link",
+      "email": "Email",
+      "toast": {
+        "successTitle": "Reset link sent!",
+        "successDescription": "If an account with that email exists, we've sent a password reset link.",
+        "failedTitle": "Failed to send reset link",
+        "failedDescription": "An error occurred. Please try again."
+      },
+      "messages": {
+        "sentTitle": "Reset link sent",
+        "sentDescription": "We've sent a password reset link to {email}. Please check your email and follow the instructions."
+      },
+      "actions": {
+        "sendAnotherLink": "Send Another Link",
+        "rememberPassword": "Remember your password?",
+        "signIn": "Sign in"
+      }
+    },
+    "login": {
+      "title": "Sign In",
+      "description": "Enter your email and password to access your account",
+      "loggingIn": "Logging in...",
+      "login": "Login",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "toast": {
+        "failed": "Login failed",
+        "invalid": "Invalid email or password."
+      }
+    },
+    "unauthorized": {
+      "title": "Access Denied",
+      "description": "You don't have permission to access this page",
+      "message": "This page is restricted to users with specific roles. Please contact your administrator if you believe you should have access.",
+      "goBack": "Go Back",
+      "goToDashboard": "Go to Dashboard"
+    },
+    "skus": {
+      "title": "SKU & Inventory Management",
+      "description": "Manage product SKUs, pricing, and stock levels",
+      "components": {
+        "skuTable": {
+          "title": "SKU List",
+          "table": {
+            "selectRow": "Select this row",
+            "sku": "SKU",
+            "productVariant": "Product / Variant",
+            "pricing": "Pricing",
+            "cost": "Cost",
+            "stock": "Stock",
+            "units": "Units",
+            "alert": "Alert",
+            "details": "Details",
+            "weight": "Weight",
+            "dimensions": "Dimensions",
+            "status": "Status",
+            "active": "Active",
+            "inactive": "Inactive",
+            "searchPlaceholder": "Search SKU...",
+            "empty": "No SKUs found",
+            "deleteSelected": "Delete {0} selected",
+            "addSKU": "Add SKU",
+            "edit": "Edit",
+            "delete": "Delete",
+            "openMenu": "Open action menu",
+            "created": "Created At",
+            "actions": "Actions"
+          },
+          "dialogs": {
+            "deleteTitle": "Delete SKU",
+            "deleteDesc": "Are you sure you want to delete this SKU? This action cannot be undone.",
+            "bulkDeleteTitle": "Delete selected SKUs",
+            "bulkDeleteDesc": "Are you sure you want to delete the selected {0} SKUs? This action cannot be undone.",
+            "cancel": "Cancel",
+            "delete": "Delete"
+          },
+          "toast": {
+            "skuDeleted": "SKU deleted",
+            "skuDeleteFailed": "Failed to delete SKU",
+            "bulkDeleted": "{0} SKUs deleted",
+            "bulkDeleteFailed": "Failed to delete selected SKUs"
+          },
+          "stock": {
+            "inStock": "In Stock",
+            "lowStock": "Low Stock",
+            "outOfStock": "Out of Stock"
+          },
+          "printLabels": {
+            "menuItem": "Print Labels",
+            "dialogTitle": "Print Barcode Labels",
+            "dialogDescription": "Generate printable barcode labels for {sku}",
+            "quantity": "Quantity",
+            "cancel": "Cancel",
+            "printButton": "Print {count} Label(s)",
+            "allowPopupsMessage": "Please allow popups to print labels",
+            "printingMessage": "Printing {count} label(s) for {sku}"
+          }
+        }
+      },
+      "dialogs": {
+        "createSKU": {
+          "title": "Create SKU",
+          "description": "Add a new SKU to a product variant and set pricing and stock information.",
+          "fields": {
+            "productVariant": "Product Variant",
+            "sku": "SKU Code (optional)",
+            "barcode": "Barcode (optional)",
+            "price": "Price",
+            "comparePrice": "Compare Price (optional)",
+            "costPrice": "Cost Price (optional)",
+            "stock": "Stock Quantity",
+            "lowStockAlert": "Low Stock Alert",
+            "weight": "Weight (optional)",
+            "dimensions": "Dimensions (optional)",
+            "isActive": "Active",
+            "images": "SKU Images (optional)"
+          },
+          "placeholders": {
+            "sku": "e.g., TSHIRT-COT-M-BLK",
+            "barcode": "e.g., 1234567890123",
+            "dimensions": "{\"length\":10,\"width\":5,\"height\":2}"
+          },
+          "submit": {
+            "creating": "Creating...",
+            "create": "Create SKU",
+            "cancel": "Cancel"
+          },
+          "toast": {
+            "skuCreated": "SKU created successfully",
+            "skuCreateFailed": "Failed to create SKU"
+          }
+        },
+        "editSKU": {
+          "title": "Edit SKU",
+          "description": "Update the SKU details, pricing, inventory, and images.",
+          "fields": {
+            "variant": "Product Variant",
+            "sku": "SKU Code",
+            "barcode": "Barcode",
+            "price": "Price",
+            "comparePrice": "Compare Price",
+            "costPrice": "Cost Price",
+            "stock": "Stock",
+            "lowStockAlert": "Low Stock Alert",
+            "weight": "Weight",
+            "dimensions": "Dimensions",
+            "isActive": "Active",
+            "images": "Images"
+          },
+          "placeholders": {
+            "selectVariant": "Select a product variant",
+            "sku": "Enter SKU code",
+            "barcode": "Enter barcode",
+            "dimensions": "{\"length\":10,\"width\":5,\"height\":2}"
+          },
+          "actions": {
+            "update": "Update SKU",
+            "updating": "Updating...",
+            "cancel": "Cancel",
+            "deleteImage": "Delete Image"
+          },
+          "toast": {
+            "success": "SKU updated successfully",
+            "failed": "Failed to update SKU",
+            "imageDeleted": "Image deleted",
+            "imageDeleteFailed": "Failed to delete image"
+          }
+        }
+      },
+      "stock": {
+        "inStock": "In Stock",
+        "lowStock": "Low Stock",
+        "outOfStock": "Out of Stock"
+      }
+    },
+    "orders": {
+      "title": "Order Management",
+      "description": "Manage customer orders, payments, and shipping information",
+      "components": {
+        "ordersTable": {
+          "title": "Orders List",
+          "table": {
+            "selectRow": "Select this row",
+            "orderNumber": "Order Number",
+            "status": "Status",
+            "paymentStatus": "Payment",
+            "total": "Total",
+            "createdAt": "Created At",
+            "actions": "Actions",
+            "searchPlaceholder": "Search by order number, user, or status...",
+            "empty": "No orders found",
+            "deleteSelected": "Delete {0} selected",
+            "viewInvoice": "View Invoice",
+            "cancelOrder": "Cancel Order"
+          },
+          "dialogs": {
+            "deleteTitle": "Delete Order",
+            "deleteDesc": "Are you sure you want to delete this order? This action cannot be undone.",
+            "bulkDeleteTitle": "Delete Selected Orders",
+            "bulkDeleteDesc": "Are you sure you want to delete {0} selected orders? This action cannot be undone.",
+            "cancel": "Cancel",
+            "delete": "Delete"
+          },
+          "toast": {
+            "success": "Order deleted successfully",
+            "failed": "Failed to delete order",
+            "bulkDeleted": "{0} orders deleted successfully",
+            "bulkDeleteFailed": "Failed to delete selected orders"
+          }
+        }
+      },
+
+      "dialogs": {
+        "orderDetails": {
+          "title": "Order #{orderNumber} Details",
+          "viewDetails": "View Details",
+          "sections": {
+            "generalInfo": "General Info",
+            "customerInfo": "Customer Information",
+            "shippingInfo": "Shipping Info",
+            "billingInfo": "Billing Info",
+            "items": "Order Items",
+            "totals": "Totals",
+            "deliveryLocation": "Delivery Location"
+          },
+          "fields": {
+            "status": "Status",
+            "payment": "Payment",
+            "user": "User",
+            "createdAt": "Created At",
+            "updatedAt": "Updated At",
+            "confirmedBy": "Confirmed By",
+            "confirmedAt": "Confirmed At",
+            "customerName": "Customer Name",
+            "customerPhone": "Phone",
+            "customerEmail": "Email",
+            "customerAddress": "Address",
+            "name": "Name",
+            "email": "Email",
+            "phone": "Phone",
+            "address": "Address",
+            "subtotal": "Subtotal",
+            "tax": "Tax",
+            "shipping": "Shipping",
+            "discount": "Discount",
+            "total": "Total"
+          },
+          "labels": {
+            "qty": "Qty: {qty}"
+          }
+        },
+        "createOrder": {
+          "trigger": "Add Order",
+          "title": "Create New Order",
+          "description": "Add a new order. You can set multiple products and shipping info.",
+          "sections": {
+            "customer": "Customer Information",
+            "user": "User",
+            "orderItems": "Order Items",
+            "delivery": "Delivery Location (Optional)",
+            "shipping": "Shipping Info",
+            "billing": "Billing Info",
+            "notes": "Notes",
+            "trackingNumber": "Tracking Number"
+          },
+          "fields": {
+            "barcode": "Barcode Scanner",
+            "customerName": "Customer Name",
+            "customerPhone": "Customer Phone",
+            "customerEmail": "Customer Email",
+            "sku": "SKU",
+            "quantity": "Quantity",
+            "deliveryLat": "Latitude",
+            "deliveryLng": "Longitude",
+            "deliveryPlace": "Place",
+            "shippingName": "Shipping Name",
+            "shippingEmail": "Shipping Email",
+            "shippingPhone": "Shipping Phone",
+            "shippingAddress": "Shipping Address (JSON)",
+            "billingName": "Billing Name",
+            "billingEmail": "Billing Email",
+            "billingAddress": "Billing Address (JSON)"
+          },
+          "optional": "Optional",
+          "actions": {
+            "addItem": "Add Item",
+            "removeItem": "Remove",
+            "cancel": "Cancel",
+            "create": "Create Order",
+            "creating": "Creating..."
+          },
+          "placeholders": {
+            "customerName": "Enter customer name",
+            "customerPhone": "Enter phone number",
+            "customerEmail": "Enter email address",
+            "selectUser": "Select User",
+            "selectSKU": "Select SKU",
+            "scanBarcode": "Scan or type barcode..."
+          },
+          "hints": {
+            "barcodeScanner": "Scan a product barcode to quickly add it to the order"
+          },
+          "errors": {
+            "customerNameRequired": "Customer name is required",
+            "customerPhoneRequired": "Customer phone is required",
+            "userRequired": "Please select a user",
+            "skuRequired": "Please select a SKU",
+            "quantityMin": "Quantity must be at least 1"
+          },
+          "status": {
+            "detectingLocation": "Detecting location...",
+            "locationError": "Failed to get location"
+          },
+          "toast": {
+            "success": "Order created",
+            "failed": "Failed to create order",
+            "barcodeAdded": "{productName} - {sku} added to order",
+            "barcodeQuantityIncreased": "{productName} - {sku} quantity increased",
+            "barcodeNotFound": "Product with barcode \"{barcode}\" not found"
+          }
+        },
+        "updateOrder": {
+          "trigger": "Edit Order",
+          "title": "Update Order #{orderNumber}",
+          "description": "Edit an existing order. You can change shipping details and items.",
+          "sections": {
+            "shippingInfo": "Shipping Info",
+            "billingInfo": "Billing Info",
+            "delivery": "Delivery Location",
+            "status": "Status",
+            "notes": "Notes",
+            "trackingNumber": "Tracking Number"
+          },
+          "fields": {
+            "status": "Order Status",
+            "paymentStatus": "Payment Status",
+            "shippingName": "Shipping Name",
+            "shippingEmail": "Shipping Email",
+            "shippingPhone": "Shipping Phone",
+            "shippingAddress": "Shipping Address (JSON)",
+            "billingName": "Billing Name",
+            "billingEmail": "Billing Email",
+            "billingAddress": "Billing Address (JSON)",
+            "deliveryLat": "Latitude",
+            "deliveryLng": "Longitude",
+            "deliveryPlace": "Place",
+            "notes": "Notes",
+            "trackingNumber": "Tracking Number",
+            "sku": "SKU",
+            "quantity": "Quantity"
+          },
+          "actions": {
+            "saveChanges": "Save Changes",
+            "cancel": "Cancel",
+            "addItem": "Add Item",
+            "removeItem": "Remove"
+          },
+          "placeholders": {
+            "selectStatus": "Select status",
+            "selectPaymentStatus": "Select payment status",
+            "selectSKU": "Select SKU"
+          },
+          "errors": {
+            "statusRequired": "Order status is required",
+            "paymentStatusRequired": "Payment status is required",
+            "skuRequired": "SKU is required",
+            "quantityMin": "Quantity must be at least 1"
+          },
+          "toast": {
+            "success": "Order updated successfully",
+            "failed": "Failed to update order"
+          },
+          "orderStatus": {
+            "PENDING": "Pending",
+            "CONFIRMED": "Confirmed",
+            "PROCESSING": "Processing",
+            "SHIPPED": "Shipped",
+            "DELIVERED": "Delivered",
+            "CANCELLED": "Cancelled",
+            "REFUNDED": "Refunded"
+          },
+          "paymentStatus": {
+            "PENDING": "Pending",
+            "COMPLETED": "Completed",
+            "FAILED": "Failed",
+            "REFUNDED": "Refunded"
+          }
+        }
+      }
+    },
+    "orderItems": {
+      "title": "Order Items Management",
+      "description": "Manage the details, quantity, and price of items included in an order",
+      "components": {
+        "orderItemsTable": {
+          "title": "Order Items List",
+          "table": {
+            "selectRow": "Select this row",
+            "orderNumber": "Order Number",
+            "sku": "SKU / Product Name",
+            "quantity": "Quantity",
+            "unitPrice": "Unit Price",
+            "totalPrice": "Total",
+            "actions": "Actions",
+            "searchPlaceholder": "Search by SKU or product name...",
+            "empty": "No order items found",
+            "deleteSelected": "Delete {0} selected items"
+          },
+          "dialogs": {
+            "deleteTitle": "Delete Order Item",
+            "deleteDesc": "Are you sure you want to delete this order item? This action cannot be undone.",
+            "bulkDeleteTitle": "Delete Selected Order Items",
+            "bulkDeleteDesc": "Are you sure you want to delete {0} selected order items? This action cannot be undone.",
+            "cancel": "Cancel",
+            "delete": "Delete"
+          },
+          "toast": {
+            "itemDeleted": "Order item deleted",
+            "itemDeleteFailed": "Failed to delete order item",
+            "bulkDeleted": "{0} order items deleted",
+            "bulkDeleteFailed": "Failed to delete order items"
+          }
+        }
+      }
+    },
+    "analytics": {
+      "components": {
+        "sectionCards": {
+          "totalOrders": {
+            "title": "Total Orders",
+            "description": "Orders placed in the last 30 days"
+          },
+          "revenue": {
+            "title": "Revenue",
+            "description": "Revenue generated in the last 30 days"
+          },
+          "activeUsers": {
+            "title": "Active Users",
+            "description": "Users who logged in within the last 30 days"
+          },
+          "productsSold": {
+            "title": "Products Sold",
+            "description": "Total products sold in the last 30 days"
+          }
+        },
+        "chartAreaInteractive": {
+          "title": "Analytics",
+          "description": {
+            "desktop": "Total for the selected period",
+            "mobile": "Selected period"
+          },
+          "periods": {
+            "90d": "Last 3 months",
+            "30d": "Last 30 days",
+            "7d": "Last 7 days"
+          },
+          "chartLabels": {
+            "orders": "Orders",
+            "revenue": "Revenue",
+            "products": "Products"
+          },
+          "selectPeriodPlaceholder": "Select period"
+        },
+        "chartTopProducts": {
+          "title": "Top Products",
+          "description": "View the most popular products by order count",
+          "selectPeriodPlaceholder": "Select period",
+          "periods": {
+            "90d": "90 Days",
+            "30d": "30 Days",
+            "7d": "7 Days"
+          },
+          "labels": {
+            "totalOrdered": "Total Ordered",
+            "orders": "orders"
+          }
+        },
+        "chartTopProductsRadar": {
+          "title": "Top 10 Products",
+          "description": "Most ordered products ",
+          "selectPeriodPlaceholder": "Select period",
+          "periods": {
+            "90d": "Last 3 months",
+            "30d": "Last 30 days",
+            "7d": "Last 7 days"
+          },
+          "labels": {
+            "totalOrdered": "Total Ordered"
+          },
+          "labelSuffix": "period"
+        },
+        "chartCategoryPerformance": {
+          "title": "Category Performance",
+          "description": "Performance metrics by product category for the selected period",
+          "selectPeriodPlaceholder": "Select period",
+          "periods": {
+            "90d": "Last 3 months",
+            "30d": "Last 30 days",
+            "7d": "Last 7 days"
+          },
+          "labels": {
+            "totalOrders": "Total Orders",
+            "totalRevenue": "Total Revenue",
+            "totalProducts": "Total Products"
+          }
+        }
+      }
+    },
+    "logs": {
+      "title": "Activity Logs",
+      "description": "View and monitor system activity logs",
+      "filters": {
+        "search": "Search logs...",
+        "searchPlaceholder": "Search by message, user, or entity",
+        "selectDate": "Select date",
+        "selectType": "Log type",
+        "selectAction": "Action",
+        "selectEntity": "Entity",
+        "allActions": "All Actions",
+        "clearFilters": "Clear filters"
+      },
+      "logTypes": {
+        "activity": "Activity",
+        "error": "Error",
+        "combined": "All Logs"
+      },
+      "actions": {
+        "CREATE": "Create",
+        "UPDATE": "Update",
+        "DELETE": "Delete",
+        "CANCEL": "Cancel",
+        "REFUND": "Refund",
+        "RESTORE": "Restore",
+        "LOGIN": "Login",
+        "LOGOUT": "Logout",
+        "VIEW": "View",
+        "EXPORT": "Export",
+        "IMPORT": "Import"
+      },
+      "table": {
+        "timestamp": "Time",
+        "user": "User",
+        "action": "Action",
+        "entity": "Entity",
+        "description": "Description",
+        "details": "Details",
+        "searchPlaceholder": "Search logs by user, action, entity, or message...",
+        "noLogs": "No logs found",
+        "loading": "Loading logs...",
+        "error": "Failed to load logs"
+      },
+      "stats": {
+        "title": "Log Statistics",
+        "totalLogs": "Total Logs",
+        "activityLogs": "Activity Logs",
+        "errorLogs": "Error Logs",
+        "topActions": "Top Actions",
+        "topEntities": "Top Entities",
+        "topUsers": "Top Users"
+      },
+      "details": {
+        "title": "Log Details",
+        "timestamp": "Timestamp",
+        "user": "User",
+        "userId": "User ID",
+        "userName": "User Name",
+        "userEmail": "User Email",
+        "userRole": "User Role",
+        "action": "Action",
+        "entity": "Entity Type",
+        "entityId": "Entity ID",
+        "description": "Description",
+        "metadata": "Additional Data",
+        "ipAddress": "IP Address",
+        "userAgent": "User Agent",
+        "close": "Close"
+      }
+    },
+    "lots": {
+      "title": "Lots Management",
+      "description": "Manage shipping lots and their details",
+      "createLot": "Create Lot",
+      "editLot": "Edit Lot",
+      "createDetail": "Add Detail",
+      "lotDetails": "Lot Details",
+      "lot": "Lot",
+      "lotId": "Lot ID",
+      "detailId": "Detail ID",
+      "companyName": "Company Name",
+      "companyCity": "Company City",
+      "companyNamePlaceholder": "e.g., DHL Express",
+      "companyCityPlaceholder": "e.g., New York",
+      "totalQuantity": "Total Quantity",
+      "totalPrice": "Total Price",
+      "quantity": "Quantity",
+      "price": "Price",
+      "shippingCompany": "Shipping Company",
+      "shippingCity": "Shipping City",
+      "pieces": "Pieces",
+      "pieceDetails": "Piece Details",
+      "pieceName": "Name",
+      "qty": "Qty",
+      "addPiece": "Add Piece",
+      "notes": "Notes",
+      "notesPlaceholder": "Add any additional notes...",
+      "createdAt": "Created At",
+      "searchPlaceholder": "Search lots by company, city, or lot ID...",
+      "noData": "No lots found",
+      "noDetails": "No details added to this lot",
+      "confirmDelete": "Are you sure you want to delete this lot?",
+      "fetchError": "Failed to fetch lots",
+      "fetchDetailsError": "Failed to fetch lot details",
+      "createSuccess": "Lot created successfully",
+      "createError": "Failed to create lot",
+      "createDetailSuccess": "Lot detail created successfully",
+      "createDetailError": "Failed to create lot detail",
+      "updateSuccess": "Lot updated successfully",
+      "updateError": "Failed to update lot",
+      "deleteSuccess": "Lot deleted successfully",
+      "deleteError": "Failed to delete lot",
+      "minQuantity": "Quantity must be at least 1",
+      "minPrice": "Price must be at least 0",
+      "status": {
+        "label": "Status",
+        "pending": "Pending",
+        "inTransit": "In Transit",
+        "arrived": "Arrived",
+        "verified": "Verified",
+        "completed": "Completed",
+        "cancelled": "Cancelled"
+      },
+      "filters": {
+        "from": "From:",
+        "to": "To:",
+        "pickDate": "Pick date",
+        "clearFilters": "Clear filters"
+      }
+    },
+    "lotArrivals": {
+      "title": "Lot Arrivals",
+      "description": "Verify and manage lot arrivals",
+      "arrivalId": "Arrival ID",
+      "lotDetailId": "Detail ID",
+      "quantity": "Quantity",
+      "price": "Price",
+      "shippingCompany": "Shipping Company",
+      "shippingCity": "Shipping City",
+      "pieceDetails": "Piece Details",
+      "pieceName": "Name",
+      "qty": "Qty",
+      "addPiece": "Add Piece",
+      "notes": "Notes",
+      "notesPlaceholder": "Add notes about discrepancies or issues...",
+      "verifiedAt": "Verified At",
+      "createdAt": "Created At",
+      "verifyArrival": "Verify Arrival",
+      "arrivalDetails": "Arrival Details",
+      "verify": "Verify",
+      "filterByStatus": "Filter by Status",
+      "allStatuses": "All Statuses",
+      "total": "Total",
+      "noData": "No arrivals found",
+      "fetchError": "Failed to fetch lot arrivals",
+      "updateSuccess": "Lot arrival updated successfully",
+      "updateError": "Failed to update lot arrival",
+      "status": {
+        "label": "Status",
+        "pending": "Pending Verification",
+        "verified": "Verified",
+        "damaged": "Damaged",
+        "incomplete": "Incomplete",
+        "excess": "Excess Items"
+      },
+      "filters": {
+        "from": "From:",
+        "to": "To:",
+        "pickDate": "Pick date",
+        "clearFilters": "Clear filters"
+      }
+    },
+    "settings": {
+      "title": "Settings",
+      "description": "Manage your application settings",
+      "auth": {
+        "title": "Authentication",
+        "changePassword": {
+          "currentPassword": "Current Password",
+          "newPassword": "New Password",
+          "save": "Save",
+          "saving": "Saving..."
+        },
+        "logout": {
+          "currentDevice": {
+            "label": "Logout from Current Device",
+            "button": "Logout",
+            "processing": "Processing..."
+          },
+          "allDevices": {
+            "label": "Logout from All Devices",
+            "button": "Logout All",
+            "processing": "Processing..."
+          }
+        },
+        "toast": {
+          "passwordChanged": "Password changed successfully",
+          "passwordChangeFailed": "Failed to change password",
+          "logoutSuccess": "Logged out successfully",
+          "logoutFailed": "Failed to logout",
+          "logoutAllSuccess": "Logged out from all devices successfully",
+          "logoutAllFailed": "Failed to logout from all devices"
+        }
+      }
+    },
+    "variants": {
+      "title": "Product Variants Management",
+      "description": "Manage product variants and their attributes",
+      "components": {
+        "variantTable": {
+          "title": "Variant List",
+          "table": {
+            "selectRow": "Select row",
+            "name": "Name",
+            "attributes": "Attributes",
+            "skus": "SKU",
+            "status": "Status",
+            "created": "Created At",
+            "actions": "Actions",
+            "openMenu": "Open Menu",
+            "edit": "Edit",
+            "delete": "Delete",
+            "searchPlaceholder": "Search by name or product",
+            "active": "Active",
+            "inactive": "Inactive",
+            "addVariant": "Add Product Variant"
+          },
+          "toast": {
+            "deleted": "Variant deleted",
+            "deleteFailed": "Failed to delete variant",
+            "bulkDeleted": "{0} variants deleted",
+            "bulkDeleteFailed": "Failed to delete multiple variants"
+          },
+          "dialogs": {
+            "deleteTitle": "Delete variant?",
+            "deleteDesc": "This action cannot be undone. The variant will be permanently deleted.",
+            "bulkDeleteTitle": "Delete selected variants?",
+            "bulkDeleteDesc": "You are about to delete {0} variants. This action cannot be undone.",
+            "cancel": "Cancel",
+            "delete": "Delete"
+          }
+        },
+        "dialogs": {
+          "createProductVariant": {
+            "title": "Créer une variante de produit",
+            "description": "Ajoutez une nouvelle variante de produit et définissez ses attributs et informations de stock.",
+            "fields": {
+              "product": "Produit",
+              "name": "Nom de la variante",
+              "attributes": "Attributs",
+              "sortOrder": "Ordre d'affichage",
+              "isActive": "Actif"
+            },
+            "placeholders": {
+              "selectProduct": "Sélectionnez un produit",
+              "name": "ex: Rouge / Taille M",
+              "attributeName": "Nom de l'attribut",
+              "attributeValue": "Valeur de l'attribut"
+            },
+            "hints": {
+              "name": "Le nom de la variante est facultatif",
+              "attributes": "Vous pouvez ajouter des attributs facultatifs à la variante",
+              "sortOrder": "Définissez l'ordre d'affichage en nombre",
+              "isActive": "Si désactivé, il ne sera pas visible"
+            },
+            "actions": {
+              "addAttribute": "Ajouter un attribut",
+              "removeAttribute": "Supprimer"
+            },
+            "submit": {
+              "creating": "Création...",
+              "create": "Créer",
+              "cancel": "Annuler"
+            },
+            "toast": {
+              "variantCreated": "Variante créée avec succès",
+              "variantCreateFailed": "Échec de la création de la variante"
+            }
+          },
+          "editProductVariant": {
+            "title": "Edit Product Variant",
+            "description": "Update the product variant information and attributes.",
+            "fields": {
+              "product": "Product",
+              "name": "Name (Optional)",
+              "nameDescription": "A descriptive name for this variant. If not provided, it will be auto-generated.",
+              "attributes": "Attributes",
+              "attributesDescription": "Define attributes like size, color, material, etc.",
+              "sortOrder": "Sort Order",
+              "sortOrderDescription": "Used to control the display order of variants.",
+              "isActive": "Active",
+              "isActiveDescription": "Whether this variant is active and available for use."
+            },
+            "placeholders": {
+              "selectProduct": "Select a product",
+              "name": "e.g., Large - Red",
+              "attributeName": "Attribute name (e.g., size)",
+              "attributeValue": "Value (e.g., Large)"
+            },
+            "actions": {
+              "addAttribute": "Add Attribute",
+              "remove": "Remove",
+              "cancel": "Cancel",
+              "update": "Update Product Variant",
+              "updating": "Updating..."
+            },
+            "toast": {
+              "variantUpdated": "Product variant updated successfully",
+              "variantUpdateFailed": "Failed to update product variant"
+            }
+          }
+        }
+      }
+    },
+    "categories": {
+      "title": "Categories Management",
+      "description": "Manage your product categories and hierarchies",
+      "components": {
+        "categoryTable": {
+          "title": "Category Management",
+          "table": {
+            "select": "Select",
+            "selectRow": "Select category",
+            "name": "Name",
+            "slug": "Slug",
+            "parent": "Parent",
+            "status": "Status",
+            "products": "Products",
+            "subCategories": "Sub-categories",
+            "order": "Order",
+            "created": "Created",
+            "actions": "Actions",
+            "openMenu": "Open menu",
+            "edit": "Edit",
+            "activate": "Activate",
+            "deactivate": "Deactivate",
+            "delete": "Delete",
+            "active": "Active",
+            "inactive": "Inactive",
+            "subCategory": "Sub-category",
+            "rootCategory": "Root Category",
+            "productsCount": "{count} products",
+            "subCategoriesCount": "{count} sub-categories",
+            "searchPlaceholder": "Search categories by name, slug, or description...",
+            "empty": "No categories found",
+            "deleteSelected": "Delete Selected ({0})"
+          },
+          "toast": {
+            "deleted": "Category deleted successfully",
+            "deleteFailed": "Failed to delete category",
+            "statusUpdated": "Category status updated successfully",
+            "statusUpdateFailed": "Failed to update category status",
+            "bulkDeleted": "{0} categories deleted successfully",
+            "bulkDeleteFailed": "Failed to delete categories"
+          },
+          "dialogs": {
+            "deleteTitle": "Are you sure?",
+            "deleteDesc": "This action cannot be undone. This will permanently delete the category and all its subcategories.",
+            "bulkDeleteTitle": "Delete {0} categories?",
+            "bulkDeleteDesc": "This action cannot be undone. This will permanently delete the selected categories and all their subcategories.",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "deleteAll": "Delete All"
+          }
+        }
+      },
+      "dialogs": {
+        "createCategory": {
+          "trigger": "Add Category",
+          "title": "Create New Category",
+          "description": "Add a new product category to organize your products.",
+          "fields": {
+            "name": "Category Name",
+            "slug": "Slug",
+            "slugDescription": "URL-friendly version of the name. Auto-generated if left empty.",
+            "description": "Description",
+            "parent": "Parent Category",
+            "sortOrder": "Sort Order",
+            "sortOrderDescription": "Lower numbers appear first",
+            "isActive": "Active Status",
+            "isActiveDescription": "Active categories are visible to customers"
+          },
+          "placeholders": {
+            "name": "Electronics",
+            "slug": "electronics",
+            "description": "Electronic devices and accessories",
+            "parent": "Select parent category (optional)"
+          },
+          "errors": {
+            "nameRequired": "Category name is required",
+            "nameTooLong": "Name is too long (max 255 characters)",
+            "sortOrderNegative": "Sort order cannot be negative"
+          },
+          "actions": {
+            "cancel": "Cancel",
+            "create": "Create Category",
+            "creating": "Creating..."
+          },
+          "toast": {
+            "success": "Category created successfully",
+            "failed": "Failed to create category"
+          }
+        },
+        "editCategory": {
+          "title": "Edit Category",
+          "description": "Update the category information and settings.",
+          "fields": {
+            "name": "Category Name",
+            "slug": "Slug",
+            "description": "Description",
+            "parent": "Parent Category",
+            "sortOrder": "Sort Order",
+            "sortOrderDescription": "Lower numbers appear first",
+            "isActive": "Active Status",
+            "isActiveDescription": "Active categories are visible to customers"
+          },
+          "placeholders": {
+            "name": "Electronics",
+            "slug": "electronics",
+            "description": "Electronic devices and accessories",
+            "parent": "Select parent category (optional)"
+          },
+          "errors": {
+            "nameRequired": "Category name is required",
+            "nameTooLong": "Name is too long (max 255 characters)",
+            "sortOrderNegative": "Sort order cannot be negative"
+          },
+          "actions": {
+            "cancel": "Cancel",
+            "update": "Update Category",
+            "updating": "Updating..."
+          },
+          "toast": {
+            "success": "Category updated successfully",
+            "failed": "Failed to update category"
+          }
+        }
+      }
+    },
+    "products": {
+      "title": "Products Management",
+      "description": "Manage your product catalog, pricing, and inventory",
+      "components": {
+        "productTable": {
+          "title": "Product Management",
+          "table": {
+            "selectAll": "Select all products",
+            "selectRow": "Select product",
+            "product": "Product",
+            "price": "Price",
+            "stock": "Stock",
+            "variants": "Variants",
+            "variantsLabel": "variants",
+            "status": "Status",
+            "performance": "Performance",
+            "created": "Created",
+            "actions": "Actions",
+            "openMenu": "Open menu",
+            "edit": "Edit",
+            "activate": "Activate",
+            "deactivate": "Deactivate",
+            "feature": "Feature",
+            "unfeature": "Unfeature",
+            "delete": "Delete",
+            "active": "Active",
+            "inactive": "Inactive",
+            "featured": "Featured",
+            "skus": "SKUs",
+            "noPricing": "no pricing",
+            "noStock": "no stock",
+            "units": "units",
+            "searchPlaceholder": "Search products by name, slug, or description...",
+            "empty": "No products found",
+            "deleteSelected": "Delete Selected ({0})"
+          },
+          "toast": {
+            "deleted": "Product deleted successfully",
+            "deleteFailed": "Failed to delete product",
+            "statusUpdated": "Product status updated successfully",
+            "statusUpdateFailed": "Failed to update product status",
+            "featuredUpdated": "Product featured status updated successfully",
+            "featuredUpdateFailed": "Failed to update product featured status",
+            "bulkDeleted": "{0} products deleted successfully",
+            "bulkDeleteFailed": "Failed to delete products"
+          },
+          "dialogs": {
+            "deleteTitle": "Are you sure?",
+            "deleteDesc": "This action cannot be undone. This will permanently delete the product and all its variants and SKUs.",
+            "bulkDeleteTitle": "Delete {0} products?",
+            "bulkDeleteDesc": "This action cannot be undone. This will permanently delete the selected products and all their variants and SKUs.",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "deleteAll": "Delete All"
+          }
+        }
+      },
+      "dialogs": {
+        "createProduct": {
+          "trigger": "Add Product",
+          "title": "Create New Product",
+          "description": "Add a new product to your catalog. You can add variants and pricing later.",
+          "fields": {
+            "name": "Product Name",
+            "slug": "Slug",
+            "slugDescription": "URL-friendly version of the name. Auto-generated if left empty.",
+            "shortDesc": "Short Description",
+            "description": "Description",
+            "coverImage": "Cover Image URL",
+            "metaTitle": "Meta Title (SEO)",
+            "metaDesc": "Meta Description (SEO)",
+            "sortOrder": "Sort Order",
+            "sortOrderDescription": "Lower numbers appear first",
+            "categories": "Categories",
+            "isActive": "Active Status",
+            "isActiveDescription": "Active products are visible to customers",
+            "isFeatured": "Featured Product",
+            "isFeaturedDescription": "Featured products appear prominently"
+          },
+          "placeholders": {
+            "name": "Wireless Bluetooth Headphones",
+            "slug": "wireless-bluetooth-headphones",
+            "shortDesc": "Premium wireless headphones with 30h battery life",
+            "description": "High-quality wireless headphones with noise cancellation...",
+            "coverImage": "https://example.com/images/headphones.jpg",
+            "metaTitle": "Best Wireless Headphones 2024",
+            "metaDesc": "Discover our premium wireless headphones with exceptional sound quality..."
+          },
+          "errors": {
+            "nameRequired": "Product name is required",
+            "nameTooLong": "Name is too long (max 255 characters)",
+            "sortOrderNegative": "Sort order cannot be negative"
+          },
+          "actions": {
+            "cancel": "Cancel",
+            "create": "Create Product",
+            "creating": "Creating..."
+          },
+          "toast": {
+            "success": "Product created successfully",
+            "failed": "Failed to create product"
+          }
+        },
+        "editProduct": {
+          "title": "Edit Product",
+          "description": "Update the product information and settings.",
+          "fields": {
+            "name": "Product Name",
+            "shortDesc": "Short Description",
+            "description": "Description",
+            "coverImage": "Cover Image URL",
+            "metaTitle": "Meta Title (SEO)",
+            "metaDesc": "Meta Description (SEO)",
+            "sortOrder": "Sort Order",
+            "sortOrderDescription": "Lower numbers appear first",
+            "categories": "Categories",
+            "isActive": "Active Status",
+            "isActiveDescription": "Active products are visible to customers",
+            "isFeatured": "Featured Product",
+            "isFeaturedDescription": "Featured products appear prominently"
+          },
+          "placeholders": {
+            "name": "Wireless Bluetooth Headphones",
+            "shortDesc": "Premium wireless headphones with 30h battery life",
+            "description": "High-quality wireless headphones with noise cancellation...",
+            "coverImage": "https://example.com/images/headphones.jpg",
+            "metaTitle": "Best Wireless Headphones 2024",
+            "metaDesc": "Discover our premium wireless headphones with exceptional sound quality..."
+          },
+          "errors": {
+            "nameRequired": "Product name is required",
+            "nameTooLong": "Name is too long (max 255 characters)",
+            "sortOrderNegative": "Sort order cannot be negative"
+          },
+          "actions": {
+            "cancel": "Cancel",
+            "update": "Update Product",
+            "updating": "Updating..."
+          },
+          "toast": {
+            "success": "Product updated successfully",
+            "failed": "Failed to update product"
+          }
+        }
+      },
+      "productDetails": {
+        "header": {
+          "edit": "Edit",
+          "delete": "Delete"
+        },
+        "quickStats": {
+          "startingPrice": "Starting Price",
+          "totalStock": "Total Stock",
+          "avgRating": "Avg Rating",
+          "variants": "Variants",
+          "inStock": "In Stock",
+          "outOfStock": "Out of Stock",
+          "skusTotal": "SKUs total"
+        },
+        "sections": {
+          "productInformation": "Product Information",
+          "variantsAndSkus": "Variants & SKUs",
+          "variantsDescription": "Manage product variants and stock keeping units",
+          "coverImage": "Cover Image",
+          "categories": "Categories",
+          "metadata": "Metadata"
+        },
+        "fields": {
+          "description": "Description",
+          "shortDescription": "Short Description",
+          "metaTitle": "Meta Title",
+          "metaDescription": "Meta Description",
+          "sku": "SKU",
+          "price": "Price",
+          "stock": "Stock",
+          "size": "Size",
+          "units": "units",
+          "more": "more",
+          "created": "Created",
+          "updated": "Updated",
+          "productId": "Product ID"
+        },
+        "errors": {
+          "loadFailed": "Failed to load product details",
+          "notFound": "Product not found"
+        },
+        "skuImageGallery": {
+          "title": "SKU Images",
+          "description": "All product variant images ({count} total)",
+          "pagination": {
+            "previous": "Previous",
+            "next": "Next",
+            "page": "Page {current} of {total}"
+          }
+        }
+      }
+    },
+    "users": {
+      "title": "User Management",
+      "description": "Manage user accounts, roles, and permissions",
+      "components": {
+        "userTable": {
+          "title": "User Management",
+          "table": {
+            "select": "Select",
+            "selectRow": "Select user",
+            "name": "Name",
+            "email": "Email",
+            "role": "Role",
+            "status": "Status",
+            "activity": "Activity",
+            "lastLogin": "Last Login",
+            "created": "Created",
+            "actions": "Actions",
+            "openMenu": "Open menu",
+            "active": "Active",
+            "inactive": "Inactive",
+            "emailVerified": "Email Verified",
+            "emailUnverified": "Email Unverified",
+            "orders": "Orders",
+            "reviews": "Reviews",
+            "never": "Never",
+            "activate": "Activate",
+            "deactivate": "Deactivate",
+            "delete": "Delete",
+            "searchPlaceholder": "Search users by name, email, or role...",
+            "empty": "No users found",
+            "deleteSelected": "Delete Selected ({0})"
+          },
+          "toast": {
+            "deleted": "User deleted successfully",
+            "deleteFailed": "Failed to delete user",
+            "statusUpdated": "User status updated successfully",
+            "statusUpdateFailed": "Failed to update user status",
+            "bulkDeleted": "{0} users deleted successfully",
+            "bulkDeleteFailed": "Failed to delete users"
+          },
+          "dialogs": {
+            "deleteTitle": "Are you sure?",
+            "deleteDesc": "This action cannot be undone. This will permanently delete the user.",
+            "bulkDeleteTitle": "Delete {0} users?",
+            "bulkDeleteDesc": "This action cannot be undone. This will permanently delete the selected users.",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "deleteAll": "Delete All"
+          }
+        }
+      },
+      "dialogs": {
+        "createUser": {
+          "trigger": "Add User",
+          "title": "Add New User",
+          "description": "Create a new user account with the required information.",
+          "fields": {
+            "name": "Name",
+            "email": "Email",
+            "password": "Password",
+            "role": "Role",
+            "isActive": "Active User"
+          },
+          "placeholders": {
+            "name": "Enter full name",
+            "email": "Enter email address",
+            "password": "Enter password (min 6 characters)",
+            "role": "Select role"
+          },
+          "roles": {
+            "user": "User",
+            "moderator": "Moderator",
+            "admin": "Admin"
+          },
+          "errors": {
+            "requiredFields": "Please fill in all required fields",
+            "passwordLength": "Password must be at least 6 characters long"
+          },
+          "actions": {
+            "cancel": "Cancel",
+            "create": "Create User",
+            "creating": "Creating..."
+          },
+          "toast": {
+            "success": "User created successfully"
+          }
+        },
+        "editUser": {
+          "trigger": "Edit",
+          "title": "Edit User",
+          "description": "Update user account information.",
+          "fields": {
+            "name": "Name",
+            "email": "Email",
+            "password": "Password",
+            "role": "Role",
+            "isActive": "Active User"
+          },
+          "placeholders": {
+            "name": "Enter full name",
+            "emailDisabled": "Email cannot be changed",
+            "password": "Leave blank to keep current password",
+            "role": "Select role"
+          },
+          "roles": {
+            "user": "User",
+            "moderator": "Moderator",
+            "admin": "Admin"
+          },
+          "actions": {
+            "cancel": "Cancel",
+            "update": "Update User",
+            "updating": "Updating..."
+          }
+        }
+      }
+    }
+  },
+  "common": {
+    "unknownProduct": "Unknown product",
+    "noAttributes": "No attributes",
+    "loading": "Loading...",
+    "actions": "Actions",
+    "cancel": "Cancel",
+    "create": "Create",
+    "update": "Update",
+    "creating": "Creating...",
+    "updating": "Updating...",
+    "required": "This field is required",
+    "error": "An error occurred. Please try again.",
+    "search": "Search..."
+  },
+  "app": {
+    "title": "Sky's Store - Open Source E-commerce Platform",
+    "description": "Sky's Store is a modern, extensible open source e-commerce platform built with Next.js and Prisma. It offers features like product management, order processing, and user authentication."
+  },
+  "permissions": {
+    "page": {
+      "title": "Roles & Permissions",
+      "description": "Manage user roles and configure permission-based access control",
+      "tabPermissions": "Permissions Matrix",
+      "tabUsers": "User Roles",
+      "comingSoon": "User role assignment coming soon...",
+      "manageFromUsers": "You can manage user roles from the Users page"
+    },
+    "actions": {
+      "refreshCache": "Refresh Cache",
+      "saveChanges": "Save Changes",
+      "reset": "Reset",
+      "unsavedChanges": "Unsaved changes"
+    },
+    "toast": {
+      "permissionsUpdated": "Successfully updated permissions for {role}",
+      "permissionAdded": "Added {permission} to {role}",
+      "permissionRemoved": "Removed {permission} from {role}",
+      "cacheRefreshed": "Permissions cache refreshed"
+    },
+    "roles": {
+      "ADMIN": "Admin",
+      "MODERATOR": "Moderator",
+      "USER": "User"
+    },
+    "categories": {
+      "Products": "Products",
+      "Categories": "Categories",
+      "Orders": "Orders",
+      "Users": "Users",
+      "Payments": "Payments",
+      "Inventory": "Inventory",
+      "Analytics": "Analytics",
+      "Settings": "Settings",
+      "Reviews": "Reviews",
+      "Lots": "Lots & Arrivals"
+    },
+    "labels": {
+      "product:create": "Create Products",
+      "product:read": "View Products",
+      "product:update": "Edit Products",
+      "product:delete": "Delete Products",
+      "category:create": "Create Categories",
+      "category:read": "View Categories",
+      "category:update": "Edit Categories",
+      "category:delete": "Delete Categories",
+      "order:create": "Create Orders",
+      "order:read": "View Orders",
+      "order:read_all": "View All Orders",
+      "order:update": "Edit Orders",
+      "order:delete": "Delete Orders",
+      "order:cancel": "Cancel Orders",
+      "order:confirm": "Confirm Orders",
+      "user:create": "Create Users",
+      "user:read": "View Users",
+      "user:read_all": "View All Users",
+      "user:update": "Edit Users",
+      "user:update_role": "Change User Roles",
+      "user:delete": "Delete Users",
+      "user:toggle_status": "Toggle User Status",
+      "user:manage_from_users": "Manage Users from Users Page",
+      "payment:create": "Create Payments",
+      "payment:read": "View Payments",
+      "payment:process": "Process Payments",
+      "inventory:read": "View Inventory",
+      "inventory:update": "Update Inventory",
+      "inventory:adjust": "Adjust Inventory",
+      "analytics:read": "View Analytics",
+      "analytics:export": "Export Analytics",
+      "settings:read": "View Settings",
+      "settings:update": "Update Settings",
+      "review:create": "Create Reviews",
+      "review:read": "View Reviews",
+      "review:approve": "Approve Reviews",
+      "review:delete": "Delete Reviews",
+      "lot:create": "Create Lots",
+      "lot:read": "View Lots",
+      "lot:update": "Edit Lots",
+      "lot:delete": "Delete Lots",
+      "lot_detail:create": "Create Lot Details",
+      "lot_detail:read": "View Lot Details",
+      "lot_detail:update": "Edit Lot Details",
+      "lot_detail:delete": "Delete Lot Details",
+      "lot_arrival:create": "Create Lot Arrivals",
+      "lot_arrival:read": "View Lot Arrivals",
+      "lot_arrival:update": "Edit Lot Arrivals",
+      "lot_arrival:verify": "Verify Lot Arrivals",
+      "lot_arrival:delete": "Delete Lot Arrivals"
+    }
+  }
+}

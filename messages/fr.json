@@ -1,0 +1,1089 @@
+{
+  "errors": {
+    "permissionDenied": "Vous n'avez pas la permission d'accéder à cette ressource"
+  },
+  "theme": {
+    "selectColor": "Sélectionner le thème de couleur",
+    "colorScheme": "Schéma de Couleur",
+    "toggleMode": "Changer le mode du thème",
+    "colors": {
+      "default": "Orange",
+      "blue": "Bleu",
+      "green": "Vert",
+      "purple": "Violet",
+      "rose": "Rose"
+    }
+  },
+  "sidebar": {
+    "storeManager": "  la boutique Comodo",
+    "user": "Utilisateur",
+    "links": {
+      "dashboard": "Tableau de bord",
+      "users": "Utilisateurs",
+      "roles": "Rôles",
+      "categories": "Catégories",
+      "products": "Produits",
+      "productVariants": "Variantes de produit",
+      "skus": "SKU & Stock",
+      "orders": "Commandes",
+      "orderItems": "Articles de commande",
+      "reviews": "Avis",
+      "analytics": "Analyses",
+      "logs": "Journaux d'activité",
+      "lots": "Gestion des Lots",
+      "lotArrivals": "Arrivées de Lots",
+      "settings": "Paramètres"
+    },
+    "navUser": {
+      "logout": "Déconnexion",
+      "logoutWarningTitle": "Avertissement de déconnexion",
+      "logoutWarningDesc": "Vous vous êtes déconnecté localement, mais la déconnexion côté serveur a peut-être échoué."
+    }
+  },
+  "pagination": {
+    "rowsPerPage": "Lignes par page",
+    "selectRows": "Sélectionner des lignes",
+    "of": "/",
+    "firstPage": "Première page",
+    "prevPage": "Page précédente",
+    "nextPage": "Page suivante",
+    "lastPage": "Dernière page"
+  },
+  "multiImageUploader": {
+    "dropHere": "Déposez vos images ici",
+    "selectImages": "Sélectionner des images",
+    "formats": "SVG, PNG, JPG ou GIF (max. {maxSizeMB} Mo)",
+    "errors": {
+      "maxSize": "{name} dépasse la taille maximale autorisée"
+    }
+  },
+  "pages": {
+    "forgotPassword": {
+      "title": "Réinitialiser le mot de passe",
+      "description": {
+        "initial": "Entrez votre adresse email et nous vous enverrons un lien de réinitialisation",
+        "success": "Vérifiez votre email pour un lien de réinitialisation de mot de passe"
+      },
+      "sending": "Envoi du lien de réinitialisation...",
+      "sent": "Email envoyé !",
+      "sendLink": "Envoyer le lien de réinitialisation",
+      "email": "Email",
+      "toast": {
+        "successTitle": "Lien de réinitialisation envoyé !",
+        "successDescription": "Si un compte avec cet email existe, nous avons envoyé un lien de réinitialisation de mot de passe.",
+        "failedTitle": "Échec de l'envoi du lien de réinitialisation",
+        "failedDescription": "Une erreur est survenue. Veuillez réessayer."
+      },
+      "messages": {
+        "sentTitle": "Lien de réinitialisation envoyé",
+        "sentDescription": "Nous avons envoyé un lien de réinitialisation de mot de passe à {email}. Veuillez vérifier votre email et suivre les instructions."
+      },
+      "actions": {
+        "sendAnotherLink": "Envoyer un autre lien",
+        "rememberPassword": "Vous vous souvenez de votre mot de passe ?",
+        "signIn": "Se connecter"
+      }
+    },
+    "login": {
+      "title": "Connexion",
+      "description": "Entrez votre email et mot de passe pour accéder à votre compte",
+      "loggingIn": "Connexion en cours...",
+      "login": "Se connecter",
+      "email": "Email",
+      "password": "Mot de passe",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Vous n'avez pas de compte ?",
+      "signUp": "S'inscrire",
+      "toast": {
+        "failed": "Échec de la connexion",
+        "invalid": "Email ou mot de passe invalide."
+      }
+    },
+    "unauthorized": {
+      "title": "Accès Refusé",
+      "description": "Vous n'avez pas la permission d'accéder à cette page",
+      "message": "Cette page est réservée aux utilisateurs ayant des rôles spécifiques. Veuillez contacter votre administrateur si vous pensez que vous devriez avoir accès.",
+      "goBack": "Retour",
+      "goToDashboard": "Aller au Tableau de Bord"
+    },
+    "skus": {
+      "title": "Gestion des SKU & Stock",
+      "description": "Gérer les SKU, les prix et les niveaux de stock des produits",
+      "components": {
+        "skuTable": {
+          "title": "Liste des SKU",
+          "table": {
+            "selectRow": "Sélectionner cette ligne",
+            "sku": "SKU",
+            "productVariant": "Produit / Variante",
+            "pricing": "Prix",
+            "cost": "Coût",
+            "stock": "Stock",
+            "units": "Unités",
+            "alert": "Alerte",
+            "details": "Détails",
+            "weight": "Poids",
+            "dimensions": "Dimensions",
+            "status": "Statut",
+            "active": "Actif",
+            "inactive": "Inactif",
+            "searchPlaceholder": "Rechercher un SKU...",
+            "empty": "Aucun SKU trouvé",
+            "deleteSelected": "Supprimer {0} sélectionné(s)",
+            "addSKU": "Ajouter SKU",
+            "edit": "Modifier",
+            "delete": "Supprimer",
+            "openMenu": "Ouvrir le menu d'action",
+            "created": "Créé le",
+            "actions": "Actions"
+          },
+          "dialogs": {
+            "deleteTitle": "Supprimer le SKU",
+            "deleteDesc": "Êtes-vous sûr de vouloir supprimer ce SKU ? Cette action est irréversible.",
+            "bulkDeleteTitle": "Supprimer les SKU sélectionnés",
+            "bulkDeleteDesc": "Êtes-vous sûr de vouloir supprimer les {0} SKU sélectionnés ? Cette action est irréversible.",
+            "cancel": "Annuler",
+            "delete": "Supprimer"
+          },
+          "toast": {
+            "skuDeleted": "SKU supprimé",
+            "skuDeleteFailed": "Échec de la suppression du SKU",
+            "bulkDeleted": "{0} SKU supprimés",
+            "bulkDeleteFailed": "Échec de la suppression des SKU sélectionnés"
+          },
+          "stock": {
+            "inStock": "En stock",
+            "lowStock": "Stock faible",
+            "outOfStock": "Rupture de stock"
+          },
+          "printLabels": {
+            "menuItem": "Imprimer les étiquettes",
+            "dialogTitle": "Imprimer les étiquettes de codes-barres",
+            "dialogDescription": "Générer des étiquettes de codes-barres imprimables pour {sku}",
+            "quantity": "Quantité",
+            "cancel": "Annuler",
+            "printButton": "Imprimer {count} étiquette(s)",
+            "allowPopupsMessage": "Veuillez autoriser les fenêtres contextuelles pour imprimer les étiquettes",
+            "printingMessage": "Impression de {count} étiquette(s) pour {sku}"
+          }
+        }
+      },
+      "dialogs": {
+        "createSKU": {
+          "title": "Créer un SKU",
+          "description": "Ajouter un nouveau SKU à une variante de produit et définir le prix et le stock.",
+          "fields": {
+            "productVariant": "Variante de produit",
+            "sku": "Code SKU (optionnel)",
+            "barcode": "Code-barres (optionnel)",
+            "price": "Prix",
+            "comparePrice": "Prix comparatif (optionnel)",
+            "costPrice": "Coût (optionnel)",
+            "stock": "Quantité en stock",
+            "lowStockAlert": "Alerte stock faible",
+            "weight": "Poids (optionnel)",
+            "dimensions": "Dimensions (optionnel)",
+            "isActive": "Actif",
+            "images": "Images SKU (optionnel)"
+          },
+          "placeholders": {
+            "sku": "ex: TSHIRT-COT-M-BLK",
+            "barcode": "ex: 1234567890123",
+            "dimensions": "{\"length\":10,\"width\":5,\"height\":2}"
+          },
+          "submit": {
+            "creating": "Création...",
+            "create": "Créer SKU",
+            "cancel": "Annuler"
+          }
+        },
+        "editSKU": {
+          "title": "Modifier le SKU",
+          "description": "Mettez à jour les détails du SKU, les prix, le stock et les images.",
+          "fields": {
+            "variant": "Variante de produit",
+            "sku": "Code SKU",
+            "barcode": "Code-barres",
+            "price": "Prix",
+            "comparePrice": "Prix de comparaison",
+            "costPrice": "Prix coûtant",
+            "stock": "Stock",
+            "lowStockAlert": "Alerte de stock faible",
+            "weight": "Poids",
+            "dimensions": "Dimensions",
+            "isActive": "Actif",
+            "images": "Images"
+          },
+          "placeholders": {
+            "selectVariant": "Sélectionnez une variante de produit",
+            "sku": "Entrez le code SKU",
+            "barcode": "Entrez le code-barres",
+            "dimensions": "{\"longueur\":10,\"largeur\":5,\"hauteur\":2}"
+          },
+          "actions": {
+            "update": "Mettre à jour le SKU",
+            "updating": "Mise à jour...",
+            "cancel": "Annuler",
+            "deleteImage": "Supprimer l'image"
+          },
+          "toast": {
+            "success": "SKU mis à jour avec succès",
+            "failed": "Échec de la mise à jour du SKU",
+            "imageDeleted": "Image supprimée",
+            "imageDeleteFailed": "Échec de la suppression de l'image"
+          }
+        }
+      },
+      "stock": {
+        "inStock": "En stock",
+        "lowStock": "Stock faible",
+        "outOfStock": "Rupture de stock"
+      }
+    },
+    "orders": {
+      "title": "Gestion des commandes",
+      "description": "Gérez les commandes des clients, les paiements et les informations de livraison",
+      "components": {
+        "ordersTable": {
+          "title": "Liste des commandes",
+          "table": {
+            "selectRow": "Sélectionner cette ligne",
+            "orderNumber": "Numéro de commande",
+            "status": "Statut",
+            "paymentStatus": "Paiement",
+            "total": "Total",
+            "createdAt": "Créé le",
+            "actions": "Actions",
+            "searchPlaceholder": "Rechercher par numéro de commande, utilisateur ou statut...",
+            "empty": "Aucune commande trouvée",
+            "deleteSelected": "Supprimer {0} sélectionnés",
+            "viewInvoice": "Voir la facture",
+            "cancelOrder": "Annuler la commande"
+          },
+          "dialogs": {
+            "deleteTitle": "Supprimer la commande",
+            "deleteDesc": "Êtes-vous sûr de vouloir supprimer cette commande ? Cette action est irréversible.",
+            "bulkDeleteTitle": "Supprimer les commandes sélectionnées",
+            "bulkDeleteDesc": "Êtes-vous sûr de vouloir supprimer {0} commandes sélectionnées ? Cette action est irréversible.",
+            "cancel": "Annuler",
+            "delete": "Supprimer"
+          },
+          "toast": {
+            "success": "Commande supprimée avec succès",
+            "failed": "Échec de la suppression de la commande",
+            "bulkDeleted": "{0} commandes supprimées avec succès",
+            "bulkDeleteFailed": "Échec de la suppression des commandes sélectionnées"
+          }
+        }
+      },
+
+      "dialogs": {
+        "orderDetails": {
+          "title": "Détails de la commande #{orderNumber}",
+          "viewDetails": "Voir les détails",
+          "sections": {
+            "generalInfo": "Informations générales",
+            "customerInfo": "Informations client",
+            "shippingInfo": "Informations de livraison",
+            "billingInfo": "Informations de facturation",
+            "items": "Articles de la commande",
+            "totals": "Totaux",
+            "deliveryLocation": "Lieu de livraison"
+          },
+          "fields": {
+            "status": "Statut",
+            "payment": "Paiement",
+            "user": "Utilisateur",
+            "createdAt": "Créé le",
+            "updatedAt": "Mis à jour le",
+            "confirmedBy": "Confirmé par",
+            "confirmedAt": "Confirmé le",
+            "customerName": "Nom du client",
+            "customerPhone": "Téléphone",
+            "customerEmail": "Email",
+            "customerAddress": "Adresse",
+            "name": "Nom",
+            "email": "Email",
+            "phone": "Téléphone",
+            "address": "Adresse",
+            "subtotal": "Sous-total",
+            "tax": "Taxe",
+            "shipping": "Livraison",
+            "discount": "Remise",
+            "total": "Total"
+          },
+          "labels": {
+            "qty": "Qté: {qty}"
+          }
+        },
+        "createOrder": {
+          "trigger": "Ajouter une commande",
+          "title": "Créer une nouvelle commande",
+          "description": "Ajoutez une nouvelle commande. Vous pouvez définir plusieurs produits et informations de livraison.",
+          "sections": {
+            "customer": "Informations client",
+            "user": "Utilisateur",
+            "orderItems": "Articles de la commande",
+            "delivery": "Lieu de livraison (Optionnel)",
+            "shipping": "Informations de livraison",
+            "billing": "Informations de facturation",
+            "notes": "Notes",
+            "trackingNumber": "Numéro de suivi"
+          },
+          "fields": {
+            "barcode": "Scanner de codes-barres",
+            "customerName": "Nom du client",
+            "customerPhone": "Téléphone du client",
+            "customerEmail": "Email du client",
+            "sku": "SKU",
+            "quantity": "Quantité",
+            "deliveryLat": "Latitude",
+            "deliveryLng": "Longitude",
+            "deliveryPlace": "Lieu",
+            "shippingName": "Nom du destinataire",
+            "shippingEmail": "Email du destinataire",
+            "shippingPhone": "Téléphone du destinataire",
+            "shippingAddress": "Adresse de livraison (JSON)",
+            "billingName": "Nom de facturation",
+            "billingEmail": "Email de facturation",
+            "billingAddress": "Adresse de facturation (JSON)"
+          },
+          "optional": "Optionnel",
+          "actions": {
+            "addItem": "Ajouter un article",
+            "removeItem": "Supprimer",
+            "cancel": "Annuler",
+            "create": "Créer la commande",
+            "creating": "Création..."
+          },
+          "placeholders": {
+            "customerName": "Entrez le nom du client",
+            "customerPhone": "Entrez le numéro de téléphone",
+            "customerEmail": "Entrez l'adresse email",
+            "selectUser": "Sélectionner un utilisateur",
+            "selectSKU": "Sélectionner un SKU",
+            "scanBarcode": "Prêt à scanner le code-barres..."
+          },
+          "hints": {
+            "barcodeScanner": "Scannez un code-barres de produit pour l'ajouter rapidement à la commande"
+          },
+          "errors": {
+            "customerNameRequired": "Le nom du client est requis",
+            "customerPhoneRequired": "Le téléphone du client est requis",
+            "userRequired": "Veuillez sélectionner un utilisateur",
+            "skuRequired": "Veuillez sélectionner un SKU",
+            "quantityMin": "La quantité doit être au moins de 1"
+          },
+          "status": {
+            "detectingLocation": "Détection de la position...",
+            "locationError": "Échec de la récupération de la position"
+          },
+          "toast": {
+            "success": "Commande créée",
+            "failed": "Échec de la création de la commande",
+            "barcodeAdded": "{productName} - {sku} ajouté à la commande",
+            "barcodeQuantityIncreased": "{productName} - {sku} quantité augmentée",
+            "barcodeNotFound": "Produit avec le code-barres \"{barcode}\" non trouvé"
+          }
+        },
+        "updateOrder": {
+          "trigger": "Modifier la commande",
+          "title": "Mettre à jour la commande #{orderNumber}",
+          "description": "Modifiez une commande existante. Vous pouvez changer les détails de livraison et les articles.",
+          "sections": {
+            "shippingInfo": "Informations de livraison",
+            "billingInfo": "Informations de facturation",
+            "delivery": "Lieu de livraison",
+            "status": "Statut",
+            "notes": "Notes",
+            "trackingNumber": "Numéro de suivi"
+          },
+          "fields": {
+            "status": "Statut de la commande",
+            "paymentStatus": "Statut du paiement",
+            "shippingName": "Nom du destinataire",
+            "shippingEmail": "Email du destinataire",
+            "shippingPhone": "Téléphone du destinataire",
+            "shippingAddress": "Adresse de livraison (JSON)",
+            "billingName": "Nom de facturation",
+            "billingEmail": "Email de facturation",
+            "billingAddress": "Adresse de facturation (JSON)",
+            "deliveryLat": "Latitude",
+            "deliveryLng": "Longitude",
+            "deliveryPlace": "Lieu",
+            "notes": "Notes",
+            "trackingNumber": "Numéro de suivi",
+            "sku": "SKU",
+            "quantity": "Quantité"
+          },
+          "actions": {
+            "saveChanges": "Enregistrer les modifications",
+            "cancel": "Annuler",
+            "addItem": "Ajouter un article",
+            "removeItem": "Supprimer"
+          },
+          "placeholders": {
+            "selectStatus": "Sélectionnez le statut",
+            "selectPaymentStatus": "Sélectionnez le statut de paiement",
+            "selectSKU": "Sélectionnez le SKU"
+          },
+          "errors": {
+            "statusRequired": "Le statut de la commande est requis",
+            "paymentStatusRequired": "Le statut du paiement est requis",
+            "skuRequired": "Le SKU est requis",
+            "quantityMin": "La quantité doit être au moins de 1"
+          },
+          "toast": {
+            "success": "Commande mise à jour avec succès",
+            "failed": "Échec de la mise à jour de la commande"
+          },
+          "orderStatus": {
+            "PENDING": "En attente",
+            "CONFIRMED": "Confirmé",
+            "PROCESSING": "En traitement",
+            "SHIPPED": "Expédié",
+            "DELIVERED": "Livré",
+            "CANCELLED": "Annulé",
+            "REFUNDED": "Remboursé"
+          },
+          "paymentStatus": {
+            "PENDING": "En attente",
+            "COMPLETED": "Terminé",
+            "FAILED": "Échoué",
+            "REFUNDED": "Remboursé"
+          }
+        }
+      }
+    },
+    "orderItems": {
+      "title": "Gestion des articles de commande",
+      "description": "Gérez les détails, la quantité et le prix des articles inclus dans une commande",
+      "components": {
+        "orderItemsTable": {
+          "title": "Liste des articles de commande",
+          "table": {
+            "selectRow": "Sélectionner cette ligne",
+            "orderNumber": "Numéro de commande",
+            "sku": "SKU / Nom du produit",
+            "quantity": "Quantité",
+            "unitPrice": "Prix unitaire",
+            "totalPrice": "Total",
+            "actions": "Actions",
+            "searchPlaceholder": "Rechercher par SKU ou nom du produit...",
+            "empty": "Aucun article de commande trouvé",
+            "deleteSelected": "Supprimer {0} articles sélectionnés"
+          },
+          "dialogs": {
+            "deleteTitle": "Supprimer l'article de commande",
+            "deleteDesc": "Êtes-vous sûr de vouloir supprimer cet article de commande ? Cette action est irréversible.",
+            "bulkDeleteTitle": "Supprimer les articles de commande sélectionnés",
+            "bulkDeleteDesc": "Êtes-vous sûr de vouloir supprimer {0} articles de commande sélectionnés ? Cette action est irréversible.",
+            "cancel": "Annuler",
+            "delete": "Supprimer"
+          },
+          "toast": {
+            "itemDeleted": "Article de commande supprimé",
+            "itemDeleteFailed": "Échec de la suppression de l'article de commande",
+            "bulkDeleted": "{0} articles de commande supprimés",
+            "bulkDeleteFailed": "Échec de la suppression des articles de commande"
+          }
+        }
+      }
+    },
+    "analytics": {
+      "components": {
+        "sectionCards": {
+          "totalOrders": {
+            "title": "Commandes Totales",
+            "description": "Commandes passées au cours des 30 derniers jours"
+          },
+          "revenue": {
+            "title": "Revenu",
+            "description": "Revenu généré au cours des 30 derniers jours"
+          },
+          "activeUsers": {
+            "title": "Utilisateurs Actifs",
+            "description": "Utilisateurs connectés au cours des 30 derniers jours"
+          },
+          "productsSold": {
+            "title": "Produits Vendus",
+            "description": "Nombre total de produits vendus au cours des 30 derniers jours"
+          }
+        },
+        "chartAreaInteractive": {
+          "title": "Analytique",
+          "description": {
+            "desktop": "Total pour la période sélectionnée",
+            "mobile": "Période sélectionnée"
+          },
+          "periods": {
+            "90d": "3 derniers mois",
+            "30d": "30 derniers jours",
+            "7d": "7 derniers jours"
+          },
+          "chartLabels": {
+            "orders": "Commandes",
+            "revenue": "Revenu",
+            "products": "Produits"
+          },
+          "selectPeriodPlaceholder": "Sélectionner une période"
+        },
+        "chartTopProducts": {
+          "title": "Top 10 des produits",
+          "description": "Produits les plus commandés ",
+          "selectPeriodPlaceholder": "Sélectionner la période",
+          "periods": {
+            "90d": "3 derniers mois",
+            "30d": "30 derniers jours",
+            "7d": "7 derniers jours"
+          },
+          "labels": {
+            "totalOrdered": "Total commandé"
+          }
+        },
+        "chartTopProductsRadar": {
+          "title": "Top 10 Produits",
+          "description": "Produits les plus commandés ",
+          "selectPeriodPlaceholder": "Sélectionnez la période",
+          "periods": {
+            "90d": "3 derniers mois",
+            "30d": "30 derniers jours",
+            "7d": "7 derniers jours"
+          },
+          "labels": {
+            "totalOrdered": "Total Commandé"
+          },
+          "labelSuffix": "période"
+        },
+        "chartCategoryPerformance": {
+          "title": "Performance par Catégorie",
+          "description": "Métriques de performance par catégorie de produit pour la période sélectionnée",
+          "selectPeriodPlaceholder": "Sélectionner la période",
+          "periods": {
+            "90d": "3 derniers mois",
+            "30d": "30 derniers jours",
+            "7d": "7 derniers jours"
+          },
+          "labels": {
+            "totalOrders": "Commandes Totales",
+            "totalRevenue": "Chiffre d'Affaires Total",
+            "totalProducts": "Produits Totaux"
+          }
+        }
+      }
+    },
+    "logs": {
+      "title": "Journaux d'activité",
+      "description": "Afficher et surveiller les journaux d'activité du système",
+      "filters": {
+        "search": "Rechercher dans les journaux...",
+        "searchPlaceholder": "Rechercher par message, utilisateur ou entité",
+        "selectDate": "Sélectionner la date",
+        "selectType": "Type de journal",
+        "selectAction": "Action",
+        "selectEntity": "Entité",
+        "allActions": "Toutes les Actions",
+        "clearFilters": "Effacer les filtres"
+      },
+      "logTypes": {
+        "activity": "Activité",
+        "error": "Erreur",
+        "combined": "Tous les journaux"
+      },
+      "actions": {
+        "CREATE": "Créer",
+        "UPDATE": "Mettre à jour",
+        "DELETE": "Supprimer",
+        "CANCEL": "Annuler",
+        "REFUND": "Rembourser",
+        "RESTORE": "Restaurer",
+        "LOGIN": "Connexion",
+        "LOGOUT": "Déconnexion",
+        "VIEW": "Voir",
+        "EXPORT": "Exporter",
+        "IMPORT": "Importer"
+      },
+      "table": {
+        "timestamp": "Heure",
+        "user": "Utilisateur",
+        "action": "Action",
+        "entity": "Entité",
+        "description": "Description",
+        "details": "Détails",
+        "searchPlaceholder": "Rechercher dans les journaux par utilisateur, action, entité ou message...",
+        "noLogs": "Aucun journal trouvé",
+        "loading": "Chargement des journaux...",
+        "error": "Échec du chargement des journaux"
+      },
+      "stats": {
+        "title": "Statistiques des journaux",
+        "totalLogs": "Total des journaux",
+        "activityLogs": "Journaux d'activité",
+        "errorLogs": "Journaux d'erreur",
+        "topActions": "Principales actions",
+        "topEntities": "Principales entités",
+        "topUsers": "Principaux utilisateurs"
+      },
+      "details": {
+        "title": "Détails du journal",
+        "timestamp": "Horodatage",
+        "user": "Utilisateur",
+        "userId": "ID utilisateur",
+        "userName": "Nom d'utilisateur",
+        "userEmail": "E-mail de l'utilisateur",
+        "userRole": "Rôle de l'utilisateur",
+        "action": "Action",
+        "entity": "Type d'entité",
+        "entityId": "ID d'entité",
+        "description": "Description",
+        "metadata": "Données supplémentaires",
+        "ipAddress": "Adresse IP",
+        "userAgent": "Agent utilisateur",
+        "close": "Fermer"
+      }
+    },
+    "lots": {
+      "title": "Gestion des Lots",
+      "description": "Gérer les lots d'expédition et leurs détails",
+      "createLot": "Créer un Lot",
+      "editLot": "Modifier le Lot",
+      "createDetail": "Ajouter un Détail",
+      "lotDetails": "Détails du Lot",
+      "lot": "Lot",
+      "lotId": "ID du Lot",
+      "detailId": "ID du Détail",
+      "companyName": "Nom de l'Entreprise",
+      "companyCity": "Ville de l'Entreprise",
+      "companyNamePlaceholder": "ex: DHL Express",
+      "companyCityPlaceholder": "ex: New York",
+      "totalQuantity": "Quantité Totale",
+      "totalPrice": "Prix Total",
+      "quantity": "Quantité",
+      "price": "Prix",
+      "shippingCompany": "Entreprise d'Expédition",
+      "shippingCity": "Ville d'Expédition",
+      "pieces": "Pièces",
+      "pieceDetails": "Détails des Pièces",
+      "pieceName": "Nom",
+      "qty": "Qté",
+      "addPiece": "Ajouter une Pièce",
+      "notes": "Notes",
+      "notesPlaceholder": "Ajouter des notes supplémentaires...",
+      "createdAt": "Date de Création",
+      "searchPlaceholder": "Rechercher des lots par entreprise, ville ou ID de lot...",
+      "noData": "Aucun lot trouvé",
+      "noDetails": "Aucun détail ajouté à ce lot",
+      "confirmDelete": "Êtes-vous sûr de vouloir supprimer ce lot?",
+      "fetchError": "Échec du chargement des lots",
+      "fetchDetailsError": "Échec du chargement des détails du lot",
+      "createSuccess": "Lot créé avec succès",
+      "createError": "Échec de la création du lot",
+      "createDetailSuccess": "Détail du lot créé avec succès",
+      "createDetailError": "Échec de la création du détail du lot",
+      "updateSuccess": "Lot mis à jour avec succès",
+      "updateError": "Échec de la mise à jour du lot",
+      "deleteSuccess": "Lot supprimé avec succès",
+      "deleteError": "Échec de la suppression du lot",
+      "minQuantity": "La quantité doit être au moins 1",
+      "minPrice": "Le prix doit être au moins 0",
+      "status": {
+        "label": "Statut",
+        "pending": "En Attente",
+        "inTransit": "En Transit",
+        "arrived": "Arrivé",
+        "verified": "Vérifié",
+        "completed": "Terminé",
+        "cancelled": "Annulé"
+      },
+      "filters": {
+        "from": "De:",
+        "to": "À:",
+        "pickDate": "Choisir une date",
+        "clearFilters": "Effacer les filtres"
+      }
+    },
+    "lotArrivals": {
+      "title": "Arrivées de Lots",
+      "description": "Vérifier et gérer les arrivées de lots",
+      "arrivalId": "ID d'Arrivée",
+      "lotDetailId": "ID du Détail",
+      "quantity": "Quantité",
+      "price": "Prix",
+      "shippingCompany": "Entreprise d'Expédition",
+      "shippingCity": "Ville d'Expédition",
+      "pieceDetails": "Détails des Pièces",
+      "pieceName": "Nom",
+      "qty": "Qté",
+      "addPiece": "Ajouter une Pièce",
+      "notes": "Notes",
+      "notesPlaceholder": "Ajouter des notes sur les écarts ou problèmes...",
+      "verifiedAt": "Vérifié le",
+      "createdAt": "Créé le",
+      "verifyArrival": "Vérifier l'Arrivée",
+      "arrivalDetails": "Détails de l'Arrivée",
+      "verify": "Vérifier",
+      "filterByStatus": "Filtrer par Statut",
+      "allStatuses": "Tous les Statuts",
+      "total": "Total",
+      "noData": "Aucune arrivée trouvée",
+      "fetchError": "Échec du chargement des arrivées de lots",
+      "updateSuccess": "Arrivée de lot mise à jour avec succès",
+      "updateError": "Échec de la mise à jour de l'arrivée du lot",
+      "status": {
+        "label": "Statut",
+        "pending": "En Attente de Vérification",
+        "verified": "Vérifié",
+        "damaged": "Endommagé",
+        "incomplete": "Incomplet",
+        "excess": "Articles Excédentaires"
+      },
+      "filters": {
+        "from": "De:",
+        "to": "À:",
+        "pickDate": "Choisir une date",
+        "clearFilters": "Effacer les filtres"
+      }
+    },
+    "settings": {
+      "title": "Paramètres",
+      "description": "Gérez les paramètres de votre application",
+      "auth": {
+        "title": "Authentification",
+        "changePassword": {
+          "currentPassword": "Mot de passe actuel",
+          "newPassword": "Nouveau mot de passe",
+          "save": "Enregistrer",
+          "saving": "Enregistrement..."
+        },
+        "logout": {
+          "currentDevice": {
+            "label": "Se déconnecter de l'appareil actuel",
+            "button": "Se déconnecter",
+            "processing": "Traitement..."
+          },
+          "allDevices": {
+            "label": "Se déconnecter de tous les appareils",
+            "button": "Tout déconnecter",
+            "processing": "Traitement..."
+          }
+        },
+        "toast": {
+          "passwordChanged": "Mot de passe modifié avec succès",
+          "passwordChangeFailed": "Échec de la modification du mot de passe",
+          "logoutSuccess": "Déconnecté avec succès",
+          "logoutFailed": "Échec de la déconnexion",
+          "logoutAllSuccess": "Déconnecté de tous les appareils avec succès",
+          "logoutAllFailed": "Échec de la déconnexion de tous les appareils"
+        }
+      }
+    },
+    "variants": {
+      "components": {
+        "variantTable": {
+          "title": "Liste des variantes",
+          "table": {
+            "selectRow": "Sélectionner la ligne",
+            "name": "Nom",
+            "attributes": "Attributs",
+            "skus": "SKU",
+            "status": "Statut",
+            "created": "Créé le",
+            "actions": "Actions",
+            "openMenu": "Ouvrir le menu",
+            "edit": "Modifier",
+            "delete": "Supprimer",
+            "searchPlaceholder": "Rechercher par nom ou produit",
+            "active": "Actif",
+            "inactive": "Inactif"
+          },
+          "toast": {
+            "deleted": "La variante a été supprimée",
+            "deleteFailed": "Échec de la suppression de la variante",
+            "bulkDeleted": "{0} variantes ont été supprimées",
+            "bulkDeleteFailed": "Échec de la suppression de plusieurs variantes"
+          },
+          "dialogs": {
+            "deleteTitle": "Supprimer la variante ?",
+            "deleteDesc": "Cette action est irréversible. La variante sera définitivement supprimée.",
+            "bulkDeleteTitle": "Supprimer les variantes sélectionnées ?",
+            "bulkDeleteDesc": "Vous êtes sur le point de supprimer {0} variantes. Cette action est irréversible.",
+            "cancel": "Annuler",
+            "delete": "Supprimer"
+          }
+        },
+        "dialogs": {
+          "createProductVariant": {
+            "title": "Create Product Variant",
+            "description": "Add a new product variant and set its attributes and stock information.",
+            "fields": {
+              "product": "Product",
+              "name": "Variant Name",
+              "attributes": "Attributes",
+              "sortOrder": "Sort Order",
+              "isActive": "Active"
+            },
+            "placeholders": {
+              "selectProduct": "Select a product",
+              "name": "e.g., Red / Size M",
+              "attributeName": "Attribute Name",
+              "attributeValue": "Attribute Value"
+            },
+            "hints": {
+              "name": "Variant name is optional",
+              "attributes": "You can add optional attributes to the variant",
+              "sortOrder": "Set display order as a number",
+              "isActive": "If disabled, it will not be visible"
+            },
+            "actions": {
+              "addAttribute": "Add Attribute",
+              "removeAttribute": "Remove"
+            },
+            "submit": {
+              "creating": "Creating...",
+              "create": "Create",
+              "cancel": "Cancel"
+            },
+            "toast": {
+              "variantCreated": "Variant created successfully",
+              "variantCreateFailed": "Failed to create variant"
+            }
+          }
+        }
+      }
+    },
+    "categories": {
+      "title": "Gestion des Catégories",
+      "description": "Gérez vos catégories de produits et hiérarchies",
+      "components": {
+        "categoryTable": {
+          "title": "Gestion des Catégories",
+          "table": {
+            "select": "Sélectionner",
+            "selectRow": "Sélectionner la catégorie",
+            "name": "Nom",
+            "slug": "Slug",
+            "parent": "Parent",
+            "status": "Statut",
+            "products": "Produits",
+            "subCategories": "Sous-catégories",
+            "order": "Ordre",
+            "created": "Créé",
+            "actions": "Actions",
+            "openMenu": "Ouvrir le menu",
+            "edit": "Modifier",
+            "activate": "Activer",
+            "deactivate": "Désactiver",
+            "delete": "Supprimer",
+            "active": "Actif",
+            "inactive": "Inactif",
+            "subCategory": "Sous-catégorie",
+            "rootCategory": "Catégorie racine",
+            "productsCount": "{count} produits",
+            "subCategoriesCount": "{count} sous-catégories",
+            "searchPlaceholder": "Rechercher des catégories par nom, slug ou description...",
+            "empty": "Aucune catégorie trouvée",
+            "deleteSelected": "Supprimer la sélection ({0})"
+          },
+          "toast": {
+            "deleted": "Catégorie supprimée avec succès",
+            "deleteFailed": "Échec de la suppression de la catégorie",
+            "statusUpdated": "Statut de la catégorie mis à jour avec succès",
+            "statusUpdateFailed": "Échec de la mise à jour du statut de la catégorie",
+            "bulkDeleted": "{0} catégories supprimées avec succès",
+            "bulkDeleteFailed": "Échec de la suppression des catégories"
+          },
+          "dialogs": {
+            "deleteTitle": "Êtes-vous sûr ?",
+            "deleteDesc": "Cette action est irréversible. Cela supprimera définitivement la catégorie et toutes ses sous-catégories.",
+            "bulkDeleteTitle": "Supprimer {0} catégories ?",
+            "bulkDeleteDesc": "Cette action est irréversible. Cela supprimera définitivement les catégories sélectionnées et toutes leurs sous-catégories.",
+            "cancel": "Annuler",
+            "delete": "Supprimer",
+            "deleteAll": "Tout supprimer"
+          }
+        }
+      },
+      "dialogs": {
+        "createCategory": {
+          "trigger": "Ajouter une Catégorie",
+          "title": "Créer une Nouvelle Catégorie",
+          "description": "Ajoutez une nouvelle catégorie de produit pour organiser vos produits.",
+          "fields": {
+            "name": "Nom de la Catégorie",
+            "slug": "Slug",
+            "slugDescription": "Version conviviale pour les URL du nom. Généré automatiquement si laissé vide.",
+            "description": "Description",
+            "parent": "Catégorie Parente",
+            "sortOrder": "Ordre de Tri",
+            "sortOrderDescription": "Les nombres plus bas apparaissent en premier",
+            "isActive": "Statut Actif",
+            "isActiveDescription": "Les catégories actives sont visibles pour les clients"
+          },
+          "placeholders": {
+            "name": "Électronique",
+            "slug": "electronique",
+            "description": "Appareils électroniques et accessoires",
+            "parent": "Sélectionner une catégorie parente (optionnel)"
+          },
+          "errors": {
+            "nameRequired": "Le nom de la catégorie est requis",
+            "nameTooLong": "Le nom est trop long (max 255 caractères)",
+            "sortOrderNegative": "L'ordre de tri ne peut pas être négatif"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "create": "Créer la Catégorie",
+            "creating": "Création..."
+          },
+          "toast": {
+            "success": "Catégorie créée avec succès",
+            "failed": "Échec de la création de la catégorie"
+          }
+        },
+        "editCategory": {
+          "title": "Modifier la Catégorie",
+          "description": "Mettez à jour les informations et paramètres de la catégorie.",
+          "fields": {
+            "name": "Nom de la Catégorie",
+            "slug": "Slug",
+            "description": "Description",
+            "parent": "Catégorie Parente",
+            "sortOrder": "Ordre de Tri",
+            "sortOrderDescription": "Les nombres plus bas apparaissent en premier",
+            "isActive": "Statut Actif",
+            "isActiveDescription": "Les catégories actives sont visibles pour les clients"
+          },
+          "placeholders": {
+            "name": "Électronique",
+            "slug": "electronique",
+            "description": "Appareils électroniques et accessoires",
+            "parent": "Sélectionner une catégorie parente (optionnel)"
+          },
+          "errors": {
+            "nameRequired": "Le nom de la catégorie est requis",
+            "nameTooLong": "Le nom est trop long (max 255 caractères)",
+            "sortOrderNegative": "L'ordre de tri ne peut pas être négatif"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "update": "Mettre à Jour la Catégorie",
+            "updating": "Mise à jour..."
+          },
+          "toast": {
+            "success": "Catégorie mise à jour avec succès",
+            "failed": "Échec de la mise à jour de la catégorie"
+          }
+        }
+      }
+    }
+  },
+  "common": {
+    "unknownProduct": "Produit inconnu",
+    "noAttributes": "Aucun attribut",
+    "loading": "Chargement...",
+    "actions": "Actions",
+    "cancel": "Annuler",
+    "create": "Créer",
+    "update": "Mettre à jour",
+    "creating": "Création...",
+    "updating": "Mise à jour...",
+    "required": "Ce champ est obligatoire",
+    "error": "Une erreur s'est produite. Veuillez réessayer.",
+    "search": "Rechercher..."
+  },
+  "app": {
+    "title": "Sky's Store - Plateforme e-commerce open source",
+    "description": "Sky's Store est une plateforme e-commerce moderne et extensible, open source, construite avec Next.js et Prisma. Elle offre des fonctionnalités telles que la gestion des produits, le traitement des commandes et l'authentification des utilisateurs."
+  },
+  "permissions": {
+    "page": {
+      "title": "Rôles et Permissions",
+      "description": "Gérer les rôles utilisateurs et configurer le contrôle d'accès",
+      "tabPermissions": "Matrice des Permissions",
+      "tabUsers": "Rôles des Utilisateurs",
+      "comingSoon": "Attribution des rôles utilisateurs bientôt disponible...",
+      "manageFromUsers": "Vous pouvez gérer les rôles depuis la page Utilisateurs"
+    },
+    "actions": {
+      "refreshCache": "Actualiser le Cache",
+      "saveChanges": "Enregistrer les Modifications",
+      "reset": "Réinitialiser",
+      "unsavedChanges": "Modifications non enregistrées"
+    },
+    "toast": {
+      "permissionsUpdated": "Permissions mises à jour avec succès pour {role}",
+      "permissionAdded": "{permission} ajouté à {role}",
+      "permissionRemoved": "{permission} supprimé de {role}",
+      "cacheRefreshed": "Cache des permissions actualisé"
+    },
+    "roles": {
+      "ADMIN": "Administrateur",
+      "MODERATOR": "Modérateur",
+      "USER": "Utilisateur"
+    },
+    "categories": {
+      "Products": "Produits",
+      "Categories": "Catégories",
+      "Orders": "Commandes",
+      "Users": "Utilisateurs",
+      "Payments": "Paiements",
+      "Inventory": "Inventaire",
+      "Analytics": "Analytiques",
+      "Settings": "Paramètres",
+      "Reviews": "Avis",
+      "Lots": "Lots et Arrivages"
+    },
+    "labels": {
+      "product:create": "Créer des Produits",
+      "product:read": "Voir les Produits",
+      "product:update": "Modifier les Produits",
+      "product:delete": "Supprimer les Produits",
+      "category:create": "Créer des Catégories",
+      "category:read": "Voir les Catégories",
+      "category:update": "Modifier les Catégories",
+      "category:delete": "Supprimer les Catégories",
+      "order:create": "Créer des Commandes",
+      "order:read": "Voir les Commandes",
+      "order:read_all": "Voir Toutes les Commandes",
+      "order:update": "Modifier les Commandes",
+      "order:delete": "Supprimer les Commandes",
+      "order:cancel": "Annuler les Commandes",
+      "order:confirm": "Confirmer les Commandes",
+      "user:create": "Créer des Utilisateurs",
+      "user:read": "Voir les Utilisateurs",
+      "user:read_all": "Voir Tous les Utilisateurs",
+      "user:update": "Modifier les Utilisateurs",
+      "user:update_role": "Changer les Rôles",
+      "user:delete": "Supprimer les Utilisateurs",
+      "user:toggle_status": "Basculer le Statut",
+      "user:manage_from_users": "Gérer les Utilisateurs depuis la Page Utilisateurs",
+      "payment:create": "Créer des Paiements",
+      "payment:read": "Voir les Paiements",
+      "payment:process": "Traiter les Paiements",
+      "inventory:read": "Voir l'Inventaire",
+      "inventory:update": "Mettre à jour l'Inventaire",
+      "inventory:adjust": "Ajuster l'Inventaire",
+      "analytics:read": "Voir les Analytiques",
+      "analytics:export": "Exporter les Analytiques",
+      "settings:read": "Voir les Paramètres",
+      "settings:update": "Mettre à jour les Paramètres",
+      "review:create": "Créer des Avis",
+      "review:read": "Voir les Avis",
+      "review:approve": "Approuver les Avis",
+      "review:delete": "Supprimer les Avis",
+      "lot:create": "Créer des Lots",
+      "lot:read": "Voir les Lots",
+      "lot:update": "Modifier les Lots",
+      "lot:delete": "Supprimer les Lots",
+      "lot_detail:create": "Créer des Détails de Lot",
+      "lot_detail:read": "Voir les Détails de Lot",
+      "lot_detail:update": "Modifier les Détails de Lot",
+      "lot_detail:delete": "Supprimer les Détails de Lot",
+      "lot_arrival:create": "Créer des Arrivages",
+      "lot_arrival:read": "Voir les Arrivages",
+      "lot_arrival:update": "Modifier les Arrivages",
+      "lot_arrival:verify": "Vérifier les Arrivages",
+      "lot_arrival:delete": "Supprimer les Arrivages"
+    }
+  }
+}
