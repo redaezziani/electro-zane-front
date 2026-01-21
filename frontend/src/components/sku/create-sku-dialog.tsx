@@ -1,0 +1,400 @@
+'use client';
+
+import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+  FormDescription,
+} from '@/components/ui/form';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import { Switch } from '@/components/ui/switch';
+import useProductVariantsStore from '@/stores/product-variants-store';
+import { toast } from 'sonner';
+import { useLocale } from '@/components/local-lang-swither';
+import { getMessages } from '@/lib/locale';
+import { ScanBarcode } from 'lucide-react';
+import { MultiImageUploader } from '../multy-image-file';
+
+const createSKUSchema = z.object({
+  variantId: z.string().min(1),
+  sku: z.string().optional(),
+  barcode: z.string().optional(),
+  price: z.number().min(0),
+  stock: z.number().min(0),
+  lowStockAlert: z.number().min(0),
+  weight: z.number().optional(),
+  dimensions: z.string().optional(),
+  isActive: z.boolean(),
+  images: z.any().optional(),
+});
+
+type CreateSKUFormData = z.infer<typeof createSKUSchema>;
+
+interface CreateSKUDialogProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+}
+
+export function CreateSKUDialog({ open, onOpenChange }: CreateSKUDialogProps) {
+  const { createSKU, loading, products } = useProductVariantsStore();
+  const [selectedImages, setSelectedImages] = useState<File[]>([]);
+  const { locale } = useLocale();
+  const lang = getMessages(locale);
+  const t = lang.pages?.skus?.dialogs?.createSKU || {};
+
+  const form = useForm<CreateSKUFormData>({
+    resolver: zodResolver(createSKUSchema),
+    defaultValues: {
+      variantId: '',
+      sku: '',
+      barcode: '',
+      price: 0,
+      stock: 0,
+      lowStockAlert: 5,
+      weight: undefined,
+      dimensions: '',
+      isActive: true,
+      images: undefined,
+    },
+  });
+
+  const allVariants = products.flatMap(
+    (product) =>
+      product.variants?.map((variant) => ({
+        id: variant.id,
+        name: variant.name || `Variant ${variant.id.slice(-8)}`,
+        productName: product.name,
+      })) || [],
+  );
+
+  const onSubmit = async (data: CreateSKUFormData) => {
+    try {
+      const formData = new FormData();
+      if (data.sku) formData.append('sku', data.sku);
+      if (data.barcode) formData.append('barcode', data.barcode);
+      formData.append('price', String(data.price));
+      formData.append('stock', String(data.stock));
+      formData.append('lowStockAlert', String(data.lowStockAlert));
+      if (data.weight !== undefined)
+        formData.append('weight', String(data.weight));
+      if (data.dimensions) formData.append('dimensions', data.dimensions);
+      formData.append('isActive', data.isActive ? 'true' : 'false');
+      selectedImages.forEach((file) => formData.append('images', file));
+
+      await createSKU(data.variantId, formData);
+      toast.success(t.toast?.skuCreated || 'SKU created');
+      onOpenChange(false);
+      form.reset();
+      setSelectedImages([]);
+    } catch {
+      toast.error(t.toast?.skuCreateFailed || 'Failed to create SKU');
+    }
+  };
+
+  const handleOpenChange = (newOpen: boolean) => {
+    if (!newOpen) form.reset();
+    onOpenChange(newOpen);
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={handleOpenChange}>
+      <DialogContent className="sm:max-w-[700px] max-h-[90vh] overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle>{t.title}</DialogTitle>
+          <DialogDescription>{t.description}</DialogDescription>
+        </DialogHeader>
+
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+            {/* Variant */}
+            <FormField
+              control={form.control}
+              name="variantId"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t.fields?.productVariant}</FormLabel>
+                  <FormControl>
+                    <Controller
+                      name="variantId"
+                      control={form.control}
+                      render={({ field: controllerField }) => (
+                        <Select
+                          value={controllerField.value}
+                          onValueChange={controllerField.onChange}
+                        >
+                          <SelectTrigger>
+                            <SelectValue
+                              // @ts-expect-error - Type mismatch handled at runtime
+                              placeholder={t.placeholders?.selectVariant}
+                            />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {allVariants.map((variant) => (
+                              <SelectItem key={variant.id} value={variant.id}>
+                                {variant.productName} - {variant.name}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      )}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            {/* SKU & Barcode */}
+            <div className="grid grid-cols-2 gap-4">
+              {['sku', 'barcode'].map((name) => (
+                <FormField
+                  key={name}
+                  control={form.control}
+                  name={name as keyof CreateSKUFormData}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        <ScanBarcode className="inline-block mb-1" size={16} />
+                        {
+                          // @ts-expect-error - Type mismatch handled at runtime
+                          t.fields?.[name]
+                        }{' '}
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder={
+                            // @ts-expect-error - Type mismatch handled at runtime
+                            t.placeholders?.[name]
+                          }
+                          {...field}
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {
+                          // @ts-expect-error - Type mismatch handled at runtime
+                          t.fields?.[name]
+                        }
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Price */}
+            <div className="grid grid-cols-1 gap-4">
+              {['price'].map((name) => (
+                <FormField
+                  key={name}
+                  control={form.control}
+                  name={name as keyof CreateSKUFormData}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        {
+                          // @ts-expect-error - Type mismatch handled at runtime
+                          t.fields?.[name]
+                        }
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min="0"
+                          step="0.01"
+                          value={field.value ?? ''}
+                          onChange={(e) =>
+                            field.onChange(
+                              e.target.value === ''
+                                ? undefined
+                                : parseFloat(e.target.value),
+                            )
+                          }
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {
+                          // @ts-expect-error - Type mismatch handled at runtime
+                          t.fields?.[name]
+                        }
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Stock & Alerts */}
+            <div className="grid grid-cols-2 gap-4">
+              {['stock', 'lowStockAlert'].map((name) => (
+                <FormField
+                  key={name}
+                  control={form.control}
+                  name={name as keyof CreateSKUFormData}
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>
+                        {
+                          // @ts-expect-error - Type mismatch handled at runtime
+                          t.fields?.[name]
+                        }
+                      </FormLabel>
+                      <FormControl>
+                        <Input
+                          type="number"
+                          min="0"
+                          value={field.value ?? 0}
+                          onChange={(e) =>
+                            field.onChange(parseInt(e.target.value) || 0)
+                          }
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        {
+                          // @ts-expect-error - Type mismatch handled at runtime
+                          t.fields?.[name]
+                        }
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              ))}
+            </div>
+
+            {/* Weight & Dimensions */}
+            <div className="grid grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="weight"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t.fields?.weight}</FormLabel>
+                    <FormControl>
+                      <Input
+                        type="number"
+                        step="0.1"
+                        min="0"
+                        value={field.value ?? ''}
+                        onChange={(e) =>
+                          field.onChange(
+                            e.target.value === ''
+                              ? undefined
+                              : parseFloat(e.target.value),
+                          )
+                        }
+                      />
+                    </FormControl>
+                    <FormDescription>{t.fields?.weight}</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="dimensions"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t.fields?.dimensions}</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder={t.placeholders?.dimensions}
+                        value={field.value ?? ''}
+                        onChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormDescription>{t.fields?.dimensions}</FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
+
+            {/* Active */}
+            <FormField
+              control={form.control}
+              name="isActive"
+              render={({ field }) => (
+                <FormItem className="flex flex-row items-center justify-between rounded-lg border p-4">
+                  <div className="space-y-0.5">
+                    <FormLabel className="text-base">
+                      {t.fields?.isActive}
+                    </FormLabel>
+                    <FormDescription>
+                      {
+                        // @ts-expect-error - Type mismatch handled at runtime
+                        t.fields?.isActiveDescription
+                      }
+                    </FormDescription>
+                  </div>
+                  <FormControl>
+                    <Switch
+                      checked={field.value}
+                      onCheckedChange={field.onChange}
+                    />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+
+            <FormItem>
+              <FormLabel>{t.fields?.images}</FormLabel>
+              <FormControl>
+                <MultiImageUploader
+                  value={selectedImages}
+                  onChange={setSelectedImages}
+                  maxSizeMB={5}
+                  maxFiles={10}
+                />
+              </FormControl>
+              <FormDescription>
+                {
+                  // @ts-expect-error - Type mismatch handled at runtime
+                  t.fields?.imagesDescription
+                }
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+
+            <DialogFooter>
+              <Button
+                type="button"
+                variant="outline"
+                onClick={() => handleOpenChange(false)}
+              >
+                {t.submit?.cancel}
+              </Button>
+              <Button type="submit" disabled={loading}>
+                {loading ? t.submit?.creating : t.submit?.create}
+              </Button>
+            </DialogFooter>
+          </form>
+        </Form>
+      </DialogContent>
+    </Dialog>
+  );
+}
