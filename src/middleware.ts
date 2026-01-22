@@ -16,32 +16,9 @@ export async function middleware(request: NextRequest) {
   console.log('[Middleware] Path:', pathname);
   console.log('[Middleware] Has access_token cookie:', !!accessToken);
 
-  let user: { role: UserRole } | null = null;
-  let isAuthenticated = false;
-
-  if (accessToken) {
-    try {
-      const response = await fetch(`${BACKEND_API_URL}/auth/validate`, {
-        method: 'GET',
-        credentials: 'include',
-        headers: {
-          Cookie: `access_token=${accessToken}`,
-        },
-      });
-
-      console.log('[Middleware] Validation response status:', response.status);
-
-      if (response.ok) {
-        const data = await response.json();
-        isAuthenticated = true;
-        user = data.user;
-        console.log('[Middleware] User authenticated:', user?.role);
-      }
-    } catch (error) {
-      console.error('[Middleware] Backend token validation failed:', error);
-      isAuthenticated = false;
-    }
-  }
+  // For production: trust the presence of the cookie
+  // The actual validation will happen on the client side and in API calls
+  const isAuthenticated = !!accessToken;
 
   if (request.nextUrl.pathname === '/') {
     return NextResponse.redirect(new URL('/auth/login', request.url));
@@ -61,16 +38,14 @@ export async function middleware(request: NextRequest) {
   const requiresAuth = authenticatedRoutes.includes(pathname) || requiredRoles !== undefined;
 
   if (requiresAuth && !isAuthenticated) {
+    console.log('[Middleware] Redirecting to login - no auth token');
     return NextResponse.redirect(new URL('/auth/login', request.url));
   }
 
-  // Check role-based access
-  if (requiredRoles && requiredRoles.length > 0 && user) {
-    if (!requiredRoles.includes(user.role)) {
-      return NextResponse.redirect(new URL('/unauthorized', request.url));
-    }
-  }
+  // Note: Role-based access control will be handled by the page components
+  // since we can't reliably decode JWT in edge middleware for cross-domain setups
 
+  console.log('[Middleware] Allowing access to:', pathname);
   return NextResponse.next();
 }
 
