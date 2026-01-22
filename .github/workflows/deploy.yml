@@ -47,6 +47,9 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_APP_URL=${{ secrets.NEXT_PUBLIC_APP_URL }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
@@ -65,7 +68,6 @@ jobs:
           key: ${{ secrets.VPS_SSH_KEY }}
           port: ${{ secrets.VPS_SSH_PORT || 22 }}
           script: |
-            # Navigate to app directory
             cd ${{ secrets.APP_DIRECTORY || '/opt/app' }}
 
             # Login to GitHub Container Registry
@@ -78,7 +80,7 @@ jobs:
             docker stop frontend || true
             docker rm frontend || true
 
-            # Run new container
+            # Run new container with DOMAIN env
             docker run -d \
               --name frontend \
               --restart unless-stopped \
@@ -90,7 +92,6 @@ jobs:
             # Clean up old images
             docker image prune -af --filter "until=24h"
 
-            # Verify container is running
             sleep 5
             docker ps | grep frontend
 
