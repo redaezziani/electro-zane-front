@@ -12,6 +12,10 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const accessToken = request.cookies.get('access_token')?.value;
 
+  // Debug logging for production troubleshooting
+  console.log('[Middleware] Path:', pathname);
+  console.log('[Middleware] Has access_token cookie:', !!accessToken);
+
   let user: { role: UserRole } | null = null;
   let isAuthenticated = false;
 
@@ -19,18 +23,22 @@ export async function middleware(request: NextRequest) {
     try {
       const response = await fetch(`${BACKEND_API_URL}/auth/validate`, {
         method: 'GET',
+        credentials: 'include',
         headers: {
           Cookie: `access_token=${accessToken}`,
         },
       });
 
+      console.log('[Middleware] Validation response status:', response.status);
+
       if (response.ok) {
         const data = await response.json();
         isAuthenticated = true;
         user = data.user;
+        console.log('[Middleware] User authenticated:', user?.role);
       }
     } catch (error) {
-      console.error('Backend token validation failed:', error);
+      console.error('[Middleware] Backend token validation failed:', error);
       isAuthenticated = false;
     }
   }
@@ -49,13 +57,15 @@ export async function middleware(request: NextRequest) {
   const requiredRoles: UserRole[] | undefined =
     roleProtectedRoutes[pathname as keyof typeof roleProtectedRoutes];
 
-  if (authenticatedRoutes.includes(pathname) || requiredRoles) {
-    if (!isAuthenticated) {
-      return NextResponse.redirect(new URL('/auth/login', request.url));
-    }
+  // Check if route requires authentication
+  const requiresAuth = authenticatedRoutes.includes(pathname) || requiredRoles !== undefined;
+
+  if (requiresAuth && !isAuthenticated) {
+    return NextResponse.redirect(new URL('/auth/login', request.url));
   }
 
-  if (requiredRoles && user) {
+  // Check role-based access
+  if (requiredRoles && requiredRoles.length > 0 && user) {
     if (!requiredRoles.includes(user.role)) {
       return NextResponse.redirect(new URL('/unauthorized', request.url));
     }
@@ -65,5 +75,7 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico).*)'],
+  matcher: [
+    '/((?!api|_next/static|_next/image|favicon.ico|.*\\..*|svgs).*)',
+  ],
 };
