@@ -52,14 +52,25 @@ export function AppSidebar({
 
   const isRouteAccessible = (url: string) => {
     if (!user) return false;
+
+    // Routes accessible to any authenticated user
     if (authenticatedRoutes.includes(url)) {
       return true;
     }
-    const allowedRoles =
-      roleProtectedRoutes[url as keyof typeof roleProtectedRoutes];
-    if (!allowedRoles) {
+
+    const allowedRoles = roleProtectedRoutes[url as keyof typeof roleProtectedRoutes];
+
+    // Route not defined in roleProtectedRoutes - deny access by default
+    if (allowedRoles === undefined) {
+      return false;
+    }
+
+    // Empty array means accessible to all authenticated users
+    if (allowedRoles.length === 0) {
       return true;
     }
+
+    // Check if user's role is in the allowed roles
     // @ts-expect-error - Role type mismatch between User.role and UserRole enum
     return allowedRoles.includes(user.role as UserRole);
   };
