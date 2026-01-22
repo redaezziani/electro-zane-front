@@ -64,7 +64,7 @@ export function getTranslation(
 }
 
 const instance = axios.create({
-  baseURL: 'http://localhost:8085/api',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
   withCredentials: true,
 });
@@ -161,7 +161,12 @@ instance.interceptors.response.use(
         return instance(originalRequest);
       } catch (refreshError) {
         isRefreshing = false;
-        processQueue(refreshError instanceof Error ? refreshError : new Error(String(refreshError)), null);
+        processQueue(
+          refreshError instanceof Error
+            ? refreshError
+            : new Error(String(refreshError)),
+          null,
+        );
 
         if (typeof window !== 'undefined') {
           localStorage.clear();
