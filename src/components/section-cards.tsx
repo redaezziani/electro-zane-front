@@ -28,10 +28,10 @@ const CARD_KEYS = ['totalOrders', 'revenue', 'activeUsers', 'productsSold'];
 
 // Solid background colors for each card using CSS variables
 const CARD_COLORS = [
-  'bg-[var(--chart-1)]/20', // Blue
-  'bg-[var(--chart-2)]/20', // Purple
-  'bg-[var(--chart-3)]/20', // Green
-  'bg-[var(--chart-4)]/20', // Orange
+  'bg-[var(--chart-1)]', // Blue
+  'bg-[var(--chart-2)]', // Purple
+  'bg-[var(--chart-3)]', // Green
+  'bg-[var(--chart-4)]', // Orange
 ];
 
 export function SectionCards() {
