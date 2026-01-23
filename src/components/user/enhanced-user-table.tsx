@@ -218,7 +218,7 @@ export function EnhancedUserTable({}: EnhancedUserTableProps) {
           <DropdownMenuContent align="end">
             <DropdownMenuItem asChild>
              <EditUserDialog
-                user={editingUser}
+                user={user}
               />
             </DropdownMenuItem>
             <DropdownMenuItem onClick={() => handleToggleStatus(user.id)}>

@@ -52,11 +52,11 @@ export function EditUserDialog({ user }: EditUserDialogProps) {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!user || !name) return;
+    if (!user) return;
 
     try {
       await updateUser(user.id, {
-        name,
+        name: name || undefined, // update only if filled
         password: password || undefined, // update only if filled
         role,
         isActive,
@@ -99,13 +99,12 @@ export function EditUserDialog({ user }: EditUserDialogProps) {
           <div className="grid gap-4 py-4">
             {/* Name */}
             <div className="grid gap-2">
-              <Label htmlFor="edit-name">{t.fields?.name || "Name"} *</Label>
+              <Label htmlFor="edit-name">{t.fields?.name || "Name"}</Label>
               <Input
                 id="edit-name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder={t.placeholders?.name || "Enter full name"}
-                required
               />
             </div>
 
