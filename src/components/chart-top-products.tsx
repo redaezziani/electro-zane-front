@@ -239,7 +239,6 @@ export function ChartTopProducts() {
                   {item.productName}
                 </span>
               </div>
-              {/* Order count for the product */}
               <span className="font-medium shrink-0 ml-4">
                 {item.totalOrdered.toLocaleString()}{' '}
                 {t.labels?.orders || 'orders'}
