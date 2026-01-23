@@ -26,12 +26,12 @@ interface CardType {
 // Hardcoded card keys
 const CARD_KEYS = ['totalOrders', 'revenue', 'activeUsers', 'productsSold'];
 
-// Gradient colors for each card using CSS variables
-const CARD_GRADIENTS = [
-  'from-[var(--chart-1)]/20 to-[var(--chart-1)]/5', // Blue/Purple
-  'from-[var(--chart-2)]/20 to-[var(--chart-2)]/5', // Dark
-  'from-[var(--chart-3)]/20 to-[var(--chart-3)]/5', // Green
-  'from-[var(--chart-4)]/20 to-[var(--chart-4)]/5', // Yellow
+// Solid background colors for each card using CSS variables
+const CARD_COLORS = [
+  'bg-[var(--chart-1)]/10', // Blue/Purple
+  'bg-[var(--chart-2)]/10', // Dark
+  'bg-[var(--chart-3)]/10', // Green
+  'bg-[var(--chart-4)]/10', // Yellow
 ];
 
 export function SectionCards() {
@@ -105,7 +105,7 @@ export function SectionCards() {
               }}
               whileTap={{ cursor: 'grabbing' }}
             >
-              <Card className={`@container/card bg-gradient-to-br ${CARD_GRADIENTS[index]}`}>
+              <Card className={`@container/card ${CARD_COLORS[index]}`}>
                 <CardHeader>
                   <CardDescription>{t(`${key}.title`)}</CardDescription>
                   <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
@@ -145,7 +145,7 @@ export function SectionCards() {
           }${card.growth.toFixed(2)}%`;
 
           return (
-            <Card key={key} className={`@container/card bg-gradient-to-br ${CARD_GRADIENTS[index]}`}>
+            <Card key={key} className={`@container/card ${CARD_COLORS[index]}`}>
               <CardHeader>
                 <CardDescription>{t(`${key}.title`)}</CardDescription>
                 <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
