@@ -1,5 +1,3 @@
-// frontend/src/components/app-sidebar.tsx
-
 'use client';
 
 import type * as React from 'react';
@@ -10,21 +8,25 @@ import {
   IconCategory,
   IconPackage,
   IconShoppingCart,
-  IconStar,
-  IconChartLine,
   IconTag,
   IconBoxSeam,
   IconClipboardList,
-  IconSettings,
   IconFileText,
 } from '@tabler/icons-react';
 
-const SpainIcon = () => <img src="/svgs/spain.webp" alt="Spain flag" className="w-7 aspect-video" />;
-const MoroccoIcon = () => <img src="/svgs/morocco.webp" alt="Morocco flag" className="w-7 aspect-video" />;
+const SpainIcon = () => (
+  <img src="/svgs/spain.webp" alt="Spain flag" className="w-7 aspect-video" />
+);
+const MoroccoIcon = () => (
+  <img
+    src="/svgs/morocco.webp"
+    alt="Morocco flag"
+    className="w-7 aspect-video"
+  />
+);
 
 import { NavMain } from '@/components/nav-main';
 import { NavUser } from '@/components/nav-user';
-import { ThemeSwitcher } from '@/components/theme/theme-switcher';
 import {
   Sidebar,
   SidebarContent,
@@ -37,10 +39,7 @@ import {
 
 import { useTranslations } from 'next-intl';
 import { useLocale } from '@/components/local-lang-swither';
-import {
-  authenticatedRoutes,
-  roleProtectedRoutes,
-} from '@/lib/routes';
+import { authenticatedRoutes, roleProtectedRoutes } from '@/lib/routes';
 import { UserRole, User } from '@/types/auth.types';
 
 export function AppSidebar({
@@ -58,7 +57,8 @@ export function AppSidebar({
       return true;
     }
 
-    const allowedRoles = roleProtectedRoutes[url as keyof typeof roleProtectedRoutes];
+    const allowedRoles =
+      roleProtectedRoutes[url as keyof typeof roleProtectedRoutes];
 
     // Route not defined in roleProtectedRoutes - deny access by default
     if (allowedRoles === undefined) {
@@ -74,7 +74,9 @@ export function AppSidebar({
     // Check if user's role is in the allowed roles
     // @ts-expect-error - Role type mismatch between User.role and UserRole enum
     const hasAccess = allowedRoles.includes(user.role as UserRole);
-    console.log(`[Sidebar] Route ${url}, Required roles: ${allowedRoles.join(',')}, User role: ${user.role}, Access: ${hasAccess}`);
+    console.log(
+      `[Sidebar] Route ${url}, Required roles: ${allowedRoles.join(',')}, User role: ${user.role}, Access: ${hasAccess}`,
+    );
     return hasAccess;
   };
 
@@ -133,18 +135,7 @@ export function AppSidebar({
       icon: IconClipboardList,
       active: isRouteAccessible('/dashboard/order-items'),
     },
-    {
-      title: t('links.reviews'),
-      url: '/dashboard/reviews',
-      icon: IconStar,
-      active: false,
-    },
-    {
-      title: t('links.analytics'),
-      url: '/dashboard/analytics',
-      icon: IconChartLine,
-      active: isRouteAccessible('/dashboard/analytics'),
-    },
+
     {
       title: t('links.logs'),
       url: '/dashboard/logs',
@@ -162,12 +153,6 @@ export function AppSidebar({
       url: '/dashboard/lot-arrivals',
       icon: MoroccoIcon,
       active: isRouteAccessible('/dashboard/lot-arrivals'),
-    },
-    {
-      title: t('links.settings'),
-      url: '/dashboard/settings',
-      icon: IconSettings,
-      active: isRouteAccessible('/dashboard/settings'),
     },
   ];
 
@@ -213,13 +198,10 @@ export function AppSidebar({
       </SidebarHeader>
 
       <SidebarContent>
-        <NavMain items={navMainData.filter(item => item.active)} />
+        <NavMain items={navMainData.filter((item) => item.active)} />
       </SidebarContent>
 
       <SidebarFooter>
-        <div className="flex items-center justify-between px-2 py-2">
-          <ThemeSwitcher />
-        </div>
         <NavUser
           user={
             user

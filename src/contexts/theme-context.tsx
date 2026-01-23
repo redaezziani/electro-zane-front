@@ -1,33 +1,27 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Theme, ThemeColor, ThemeMode, defaultTheme, themeColors } from '@/lib/theme-config';
+import { ThemeMode } from '@/lib/theme-config';
 
 interface ThemeContextType {
-  theme: Theme;
-  setThemeColor: (color: ThemeColor) => void;
+  mode: ThemeMode;
   setThemeMode: (mode: ThemeMode) => void;
   toggleThemeMode: () => void;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-const THEME_STORAGE_KEY = 'app-theme';
+const THEME_STORAGE_KEY = 'app-theme-mode';
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
-  const [theme, setTheme] = useState<Theme>(defaultTheme);
+  const [mode, setMode] = useState<ThemeMode>('light');
   const [mounted, setMounted] = useState(false);
 
   // Load theme from localStorage on mount
   useEffect(() => {
     const stored = localStorage.getItem(THEME_STORAGE_KEY);
-    if (stored) {
-      try {
-        const parsedTheme = JSON.parse(stored) as Theme;
-        setTheme(parsedTheme);
-      } catch (error) {
-        console.error('Failed to parse stored theme:', error);
-      }
+    if (stored && (stored === 'light' || stored === 'dark')) {
+      setMode(stored as ThemeMode);
     }
     setMounted(true);
   }, []);
@@ -39,45 +33,28 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     const root = document.documentElement;
 
     // Apply dark/light mode
-    if (theme.mode === 'dark') {
+    if (mode === 'dark') {
       root.classList.add('dark');
     } else {
       root.classList.remove('dark');
     }
 
-    // Apply color theme
-    const primaryColor = themeColors[theme.color].primary;
-    root.style.setProperty('--primary', primaryColor);
-
     // Save to localStorage
-    localStorage.setItem(THEME_STORAGE_KEY, JSON.stringify(theme));
-  }, [theme, mounted]);
+    localStorage.setItem(THEME_STORAGE_KEY, mode);
+  }, [mode, mounted]);
 
-  const setThemeColor = (color: ThemeColor) => {
-    setTheme((prev) => ({
-      ...prev,
-      color,
-      name: `${color}-${prev.mode}`,
-    }));
-  };
-
-  const setThemeMode = (mode: ThemeMode) => {
-    setTheme((prev) => ({
-      ...prev,
-      mode,
-      name: `${prev.color}-${mode}`,
-    }));
+  const setThemeMode = (newMode: ThemeMode) => {
+    setMode(newMode);
   };
 
   const toggleThemeMode = () => {
-    setThemeMode(theme.mode === 'light' ? 'dark' : 'light');
+    setThemeMode(mode === 'light' ? 'dark' : 'light');
   };
 
   return (
     <ThemeContext.Provider
       value={{
-        theme,
-        setThemeColor,
+        mode,
         setThemeMode,
         toggleThemeMode,
       }}

@@ -26,6 +26,14 @@ interface CardType {
 // Hardcoded card keys
 const CARD_KEYS = ['totalOrders', 'revenue', 'activeUsers', 'productsSold'];
 
+// Gradient colors for each card using CSS variables
+const CARD_GRADIENTS = [
+  'from-[var(--chart-1)]/20 to-[var(--chart-1)]/5', // Blue/Purple
+  'from-[var(--chart-2)]/20 to-[var(--chart-2)]/5', // Dark
+  'from-[var(--chart-3)]/20 to-[var(--chart-3)]/5', // Green
+  'from-[var(--chart-4)]/20 to-[var(--chart-4)]/5', // Yellow
+];
+
 export function SectionCards() {
   const [period, setPeriod] = React.useState(30);
   const [currentIndex, setCurrentIndex] = React.useState(0);
@@ -97,7 +105,7 @@ export function SectionCards() {
               }}
               whileTap={{ cursor: 'grabbing' }}
             >
-              <Card className="@container/card">
+              <Card className={`@container/card bg-gradient-to-br ${CARD_GRADIENTS[index]}`}>
                 <CardHeader>
                   <CardDescription>{t(`${key}.title`)}</CardDescription>
                   <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
@@ -137,7 +145,7 @@ export function SectionCards() {
           }${card.growth.toFixed(2)}%`;
 
           return (
-            <Card key={key} className="@container/card">
+            <Card key={key} className={`@container/card bg-gradient-to-br ${CARD_GRADIENTS[index]}`}>
               <CardHeader>
                 <CardDescription>{t(`${key}.title`)}</CardDescription>
                 <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">

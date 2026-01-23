@@ -51,7 +51,7 @@ interface ProductProgressBarProps {
  */
 function ProductProgressBar({ data, totalOrders }: ProductProgressBarProps) {
   if (totalOrders === 0 || data.length === 0) {
-    return <div className="h-3 w-full rounded-full bg-gray-200"></div>;
+    return <div className="h-2 w-full rounded-full bg-gray-200"></div>;
   }
 
   const gridColumns = data
@@ -63,7 +63,7 @@ function ProductProgressBar({ data, totalOrders }: ProductProgressBarProps) {
 
   return (
     <div
-      className="grid w-full rounded h-3 overflow-hidden bg-gray-200 shadow-inner"
+      className="grid w-full rounded h-2 overflow-hidden bg-gray-200 shadow-inner"
       style={{
         gridTemplateColumns: gridColumns,
       }}
@@ -117,17 +117,29 @@ export function ChartTopProducts() {
 
     // Sort by totalOrdered (highest first) and take top 5
     const sortedData = [...topProductsMetrics].sort(
-      (a: {totalOrdered: number}, b: {totalOrdered: number}) => b.totalOrdered - a.totalOrdered,
+      (a: { totalOrdered: number }, b: { totalOrdered: number }) =>
+        b.totalOrdered - a.totalOrdered,
     );
 
-    return sortedData.slice(0, 5).map((item: {id: string; name: string; label?: string; totalOrdered: number; totalRevenue: number}, index: number) => ({
-      label: item.label || item.name || '',
-      productName: truncateText(item.label || item.name || '', 30),
-      totalOrdered: item.totalOrdered,
-      totalRevenue: item.totalRevenue,
-      color: chartColors[index % chartColors.length],
-      id: `product-${index}`,
-    }));
+    return sortedData.slice(0, 5).map(
+      (
+        item: {
+          id: string;
+          name: string;
+          label?: string;
+          totalOrdered: number;
+          totalRevenue: number;
+        },
+        index: number,
+      ) => ({
+        label: item.label || item.name || '',
+        productName: truncateText(item.label || item.name || '', 30),
+        totalOrdered: item.totalOrdered,
+        totalRevenue: item.totalRevenue,
+        color: chartColors[index % chartColors.length],
+        id: `product-${index}`,
+      }),
+    );
   }, [topProductsMetrics]);
 
   // Calculate the total orders for the displayed top 5 products
@@ -216,9 +228,8 @@ export function ChartTopProducts() {
               className="flex items-center justify-between text-sm"
             >
               <div className="flex items-center space-x-2">
-                {/* Colored dot for the legend */}
                 <span
-                  className="w-3 h-3 rounded-full shrink-0"
+                  className="w-2 h-2 rounded-md shrink-0"
                   style={{ backgroundColor: item.color }}
                 ></span>
                 <span
