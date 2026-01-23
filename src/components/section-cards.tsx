@@ -105,10 +105,10 @@ export function SectionCards() {
               }}
               whileTap={{ cursor: 'grabbing' }}
             >
-              <Card className={`@container/card ${CARD_COLORS[index]}`}>
+              <Card className={`@container/card ${CARD_COLORS[index]} text-white`}>
                 <CardHeader>
-                  <CardDescription>{t(`${key}.title`)}</CardDescription>
-                  <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+                  <CardDescription className="text-white/90">{t(`${key}.title`)}</CardDescription>
+                  <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl text-white">
                     {typeof card.count === 'number'
                       ? card.count.toLocaleString(undefined, {
                           minimumFractionDigits: 0,
@@ -117,14 +117,14 @@ export function SectionCards() {
                       : card.count}
                   </CardTitle>
                   <CardAction>
-                    <Badge variant="outline">
+                    <Badge variant="outline" className="text-white border-white/30 bg-white/10">
                       <TrendIcon />
                       {trendValue}
                     </Badge>
                   </CardAction>
                 </CardHeader>
                 <CardFooter className="flex-col items-start gap-1.5 text-sm">
-                  <div className="text-muted-foreground">
+                  <div className="text-white/80">
                     {t(`${key}.description`)}
                   </div>
                 </CardFooter>
@@ -145,10 +145,10 @@ export function SectionCards() {
           }${card.growth.toFixed(2)}%`;
 
           return (
-            <Card key={key} className={`@container/card ${CARD_COLORS[index]}`}>
+            <Card key={key} className={`@container/card ${CARD_COLORS[index]} text-white`}>
               <CardHeader>
-                <CardDescription>{t(`${key}.title`)}</CardDescription>
-                <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl">
+                <CardDescription className="text-white/90">{t(`${key}.title`)}</CardDescription>
+                <CardTitle className="text-2xl font-semibold tabular-nums @[250px]/card:text-3xl text-white">
                   {typeof card.count === 'number'
                     ? card.count.toLocaleString(undefined, {
                         minimumFractionDigits: 0,
@@ -157,14 +157,14 @@ export function SectionCards() {
                     : card.count}
                 </CardTitle>
                 <CardAction>
-                  <Badge variant="outline">
+                  <Badge variant="outline" className="text-white border-white/30 bg-white/10">
                     <TrendIcon />
                     {trendValue}
                   </Badge>
                 </CardAction>
               </CardHeader>
               <CardFooter className="flex-col items-start gap-1.5 text-sm">
-                <div className="text-muted-foreground">
+                <div className="text-white/80">
                   {t(`${key}.description`)}
                 </div>
               </CardFooter>
