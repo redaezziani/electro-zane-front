@@ -28,10 +28,10 @@ const CARD_KEYS = ['totalOrders', 'revenue', 'activeUsers', 'productsSold'];
 
 // Solid background colors for each card using CSS variables
 const CARD_COLORS = [
-  'bg-[var(--chart-1)]/10', // Blue/Purple
-  'bg-[var(--chart-2)]/10', // Dark
-  'bg-[var(--chart-3)]/10', // Green
-  'bg-[var(--chart-4)]/10', // Yellow
+  'bg-[var(--chart-1)]/20', // Blue
+  'bg-[var(--chart-2)]/20', // Purple
+  'bg-[var(--chart-3)]/20', // Green
+  'bg-[var(--chart-4)]/20', // Orange
 ];
 
 export function SectionCards() {
@@ -90,7 +90,7 @@ export function SectionCards() {
                 x: offset * 20,
                 scale: 1 - absOffset * 0.05,
                 rotateZ: offset * 2,
-                opacity: absOffset > 2 ? 0 : 1 - absOffset * 0.2,
+                opacity: 1,
                 zIndex: CARD_KEYS.length - absOffset,
               }}
               transition={{
