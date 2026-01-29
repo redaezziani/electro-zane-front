@@ -78,6 +78,18 @@ export enum Permission {
   LOT_ARRIVAL_UPDATE = "lot_arrival:update",
   LOT_ARRIVAL_VERIFY = "lot_arrival:verify",
   LOT_ARRIVAL_DELETE = "lot_arrival:delete",
+
+  // Log permissions
+  LOG_READ = "log:read",
+  LOG_READ_ALL = "log:read_all",
+
+  // Upload permissions
+  UPLOAD_IMAGE = "upload:image",
+  UPLOAD_DELETE = "upload:delete",
+
+  // Permission management permissions
+  PERMISSION_READ = "permission:read",
+  PERMISSION_MANAGE = "permission:manage",
 }
 
 export type RolePermissions = Record<UserRole, string[]>;
@@ -170,6 +182,12 @@ export const PERMISSION_CATEGORIES = {
     Permission.LOT_ARRIVAL_UPDATE,
     Permission.LOT_ARRIVAL_VERIFY,
     Permission.LOT_ARRIVAL_DELETE,
+  ],
+  Logs: [Permission.LOG_READ, Permission.LOG_READ_ALL],
+  Uploads: [Permission.UPLOAD_IMAGE, Permission.UPLOAD_DELETE],
+  "Permission Management": [
+    Permission.PERMISSION_READ,
+    Permission.PERMISSION_MANAGE,
   ],
 };
 

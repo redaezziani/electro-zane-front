@@ -84,8 +84,6 @@ export function CreateOrderDialog({
   });
 
   const [errors, setErrors] = useState({
-    customerName: '',
-    customerPhone: '',
     items: [{ skuId: '', quantity: '' }],
   });
 
@@ -243,17 +241,8 @@ export function CreateOrderDialog({
     e.preventDefault();
 
     const newErrors = {
-      customerName: '',
-      customerPhone: '',
       items: formData.items.map(() => ({ skuId: '', quantity: '' })),
     };
-
-    if (!formData.customerName)
-      newErrors.customerName =
-        t.errors?.customerNameRequired || 'Customer name is required';
-    if (!formData.customerPhone)
-      newErrors.customerPhone =
-        t.errors?.customerPhoneRequired || 'Customer phone is required';
 
     formData.items.forEach((item, idx) => {
       if (!item.skuId) newErrors.items[idx].skuId = t.errors?.skuRequired;
@@ -264,16 +253,14 @@ export function CreateOrderDialog({
     setErrors(newErrors);
 
     if (
-      newErrors.customerName ||
-      newErrors.customerPhone ||
       newErrors.items.some((itemErr) => itemErr.skuId || itemErr.quantity)
     )
       return;
 
     try {
       const payload = {
-        customerName: formData.customerName,
-        customerPhone: formData.customerPhone,
+        customerName: formData.customerName || undefined,
+        customerPhone: formData.customerPhone || undefined,
         customerEmail: formData.customerEmail || undefined,
         customerAddress:
           Object.keys(formData.customerAddress).length > 0
@@ -307,8 +294,6 @@ export function CreateOrderDialog({
         trackingNumber: '',
       });
       setErrors({
-        customerName: '',
-        customerPhone: '',
         items: [{ skuId: '', quantity: '' }],
       });
       setIsDialogOpen(false);
@@ -346,7 +331,8 @@ export function CreateOrderDialog({
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="customerName">
-                  {t.fields?.customerName || 'Customer Name'} *
+                  {t.fields?.customerName || 'Customer Name'} (
+                  {t.optional || 'Optional'})
                 </Label>
                 <Input
                   id="customerName"
@@ -361,16 +347,12 @@ export function CreateOrderDialog({
                     t.placeholders?.customerName || 'Enter customer name'
                   }
                 />
-                {errors.customerName && (
-                  <p className="text-sm text-destructive">
-                    {errors.customerName}
-                  </p>
-                )}
               </div>
 
               <div className="space-y-2">
                 <Label htmlFor="customerPhone">
-                  {t.fields?.customerPhone || 'Customer Phone'} *
+                  {t.fields?.customerPhone || 'Customer Phone'} (
+                  {t.optional || 'Optional'})
                 </Label>
                 <Input
                   id="customerPhone"
@@ -385,11 +367,6 @@ export function CreateOrderDialog({
                     t.placeholders?.customerPhone || 'Enter phone number'
                   }
                 />
-                {errors.customerPhone && (
-                  <p className="text-sm text-destructive">
-                    {errors.customerPhone}
-                  </p>
-                )}
               </div>
             </div>
 

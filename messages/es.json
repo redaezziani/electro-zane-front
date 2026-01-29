@@ -1521,7 +1521,10 @@
       "Analytics": "Analíticas",
       "Settings": "Configuración",
       "Reviews": "Reseñas",
-      "Lots": "Lotes y Llegadas"
+      "Lots": "Lotes y Llegadas",
+      "Logs": "Registros de Actividad",
+      "Uploads": "Cargas de Archivos",
+      "Permission Management": "Gestión de Permisos"
     },
     "labels": {
       "product:create": "Crear Productos",
@@ -1573,7 +1576,13 @@
       "lot_arrival:read": "Ver Llegadas de Lote",
       "lot_arrival:update": "Editar Llegadas de Lote",
       "lot_arrival:verify": "Verificar Llegadas de Lote",
-      "lot_arrival:delete": "Eliminar Llegadas de Lote"
+      "lot_arrival:delete": "Eliminar Llegadas de Lote",
+      "log:read": "Ver Registros",
+      "log:read_all": "Ver Todos los Registros",
+      "upload:image": "Subir Imágenes",
+      "upload:delete": "Eliminar Cargas",
+      "permission:read": "Ver Permisos",
+      "permission:manage": "Gestionar Permisos"
     }
   }
 }

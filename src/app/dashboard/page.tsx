@@ -1,15 +1,15 @@
-"use client";
-import { ChartAreaInteractive } from "@/components/chart-area-interactive";
-import { SectionCards } from "@/components/section-cards";
-import { ChartTopProducts } from "@/components/chart-top-products";
-import { ChartTopProductsRadar } from "@/components/radar-chat";
-import { ChartCategoryPerformance } from "@/components/category-performance";
-import { DailyOverview } from "@/components/daily-overview";
-import { ProfitTrackingChart } from "@/components/profit-tracking-chart";
-import { BestSellingProducts } from "@/components/best-selling-products";
-import { HourlyPatternChart } from "@/components/hourly-pattern-chart";
-import { WeeklyTrendsChart } from "@/components/weekly-trends-chart";
-import { StockValueSummary } from "@/components/stock-value-summary";
+'use client';
+import { ChartAreaInteractive } from '@/components/chart-area-interactive';
+import { SectionCards } from '@/components/section-cards';
+import { ChartTopProducts } from '@/components/chart-top-products';
+import { ChartTopProductsRadar } from '@/components/radar-chat';
+import { ChartCategoryPerformance } from '@/components/category-performance';
+import { DailyOverview } from '@/components/daily-overview';
+import { ProfitTrackingChart } from '@/components/profit-tracking-chart';
+import { BestSellingProducts } from '@/components/best-selling-products';
+import { HourlyPatternChart } from '@/components/hourly-pattern-chart';
+import { WeeklyTrendsChart } from '@/components/weekly-trends-chart';
+import { StockValueSummary } from '@/components/stock-value-summary';
 
 export default function Page() {
   return (
@@ -31,8 +31,9 @@ export default function Page() {
           </div>
 
           {/* Profit Tracking */}
-          <div className="px-4 lg:px-6">
+          <div className="px-4 lg:px-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
             <ProfitTrackingChart />
+            <StockValueSummary />
           </div>
 
           {/* Product Performance */}
@@ -46,11 +47,6 @@ export default function Page() {
           <div className="px-4 lg:px-6 grid grid-cols-1 gap-4 lg:grid-cols-2">
             <BestSellingProducts />
             <HourlyPatternChart />
-          </div>
-
-          {/* Stock Value Summary */}
-          <div className="px-4 lg:px-6">
-            <StockValueSummary />
           </div>
         </div>
       </div>

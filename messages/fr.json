@@ -1498,7 +1498,10 @@
       "Analytics": "Analytiques",
       "Settings": "Paramètres",
       "Reviews": "Avis",
-      "Lots": "Lots et Arrivages"
+      "Lots": "Lots et Arrivages",
+      "Logs": "Journaux d'Activité",
+      "Uploads": "Téléchargements de Fichiers",
+      "Permission Management": "Gestion des Permissions"
     },
     "labels": {
       "product:create": "Créer des Produits",
@@ -1550,7 +1553,13 @@
       "lot_arrival:read": "Voir les Arrivages",
       "lot_arrival:update": "Modifier les Arrivages",
       "lot_arrival:verify": "Vérifier les Arrivages",
-      "lot_arrival:delete": "Supprimer les Arrivages"
+      "lot_arrival:delete": "Supprimer les Arrivages",
+      "log:read": "Voir les Journaux",
+      "log:read_all": "Voir Tous les Journaux",
+      "upload:image": "Télécharger des Images",
+      "upload:delete": "Supprimer des Téléchargements",
+      "permission:read": "Voir les Permissions",
+      "permission:manage": "Gérer les Permissions"
     }
   }
 }

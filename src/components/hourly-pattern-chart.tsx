@@ -2,7 +2,13 @@
 
 import * as React from 'react';
 import useSWR from 'swr';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { fetcher } from '@/lib/utils';
 import { HourlyPatternSummaryDto } from '@/types/analytics';
@@ -25,7 +31,7 @@ export function HourlyPatternChart() {
   const { data } = useSWR<HourlyPatternSummaryDto>(
     '/analytics/hourly-pattern?period=30',
     fetcher,
-    { refreshInterval: 60000 }
+    { refreshInterval: 60000 },
   );
 
   if (!data) return null;
@@ -45,7 +51,6 @@ export function HourlyPatternChart() {
     <Card className="@container/card">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <IconClock className="h-5 w-5" style={{ color: 'var(--chart-2)' }} />
           {t.title || 'Hourly Sales Pattern'}
         </CardTitle>
         <CardDescription>
@@ -57,8 +62,13 @@ export function HourlyPatternChart() {
       <CardContent className="px-2 pt-4 sm:px-6 sm:pt-6 space-y-4">
         <div className="grid grid-cols-2 gap-3 px-4 sm:px-0">
           <div className="p-3 rounded-lg border">
-            <p className="text-xs text-muted-foreground">{t.labels?.busiestHour || 'Busiest Hour'}</p>
-            <p className="font-bold text-sm mt-1" style={{ color: 'var(--chart-1)' }}>
+            <p className="text-xs text-muted-foreground">
+              {t.labels?.busiestHour || 'Busiest Hour'}
+            </p>
+            <p
+              className="font-bold text-sm mt-1"
+              style={{ color: 'var(--chart-1)' }}
+            >
               {data.busiestHour.hourLabel}
             </p>
             <p className="text-xs tabular-nums mt-1">
@@ -66,8 +76,12 @@ export function HourlyPatternChart() {
             </p>
           </div>
           <div className="p-3 rounded-lg border">
-            <p className="text-xs text-muted-foreground">{t.labels?.slowestHour || 'Slowest Hour'}</p>
-            <p className="font-bold text-sm mt-1">{data.slowestHour.hourLabel}</p>
+            <p className="text-xs text-muted-foreground">
+              {t.labels?.slowestHour || 'Slowest Hour'}
+            </p>
+            <p className="font-bold text-sm mt-1">
+              {data.slowestHour.hourLabel}
+            </p>
             <p className="text-xs tabular-nums mt-1">
               {data.slowestHour.totalOrders} {t.labels?.orders || 'orders'}
             </p>
@@ -75,15 +89,24 @@ export function HourlyPatternChart() {
         </div>
 
         <div className="flex flex-wrap gap-2 px-4 sm:px-0">
-          <span className="text-xs text-muted-foreground">{t.labels?.peakHours || 'Peak Hours'}:</span>
+          <span className="text-xs text-muted-foreground">
+            {t.labels?.peakHours || 'Peak Hours'}:
+          </span>
           {data.peakHours.map((hour) => (
-            <Badge key={hour.hour} variant="secondary" className="text-xs tabular-nums">
+            <Badge
+              key={hour.hour}
+              variant="secondary"
+              className="text-xs tabular-nums"
+            >
               {hour.hourLabel}
             </Badge>
           ))}
         </div>
 
-        <ChartContainer config={chartConfig} className="aspect-auto h-62.5 w-full">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-62.5 w-full"
+        >
           <BarChart data={data.hourlyData} margin={{ left: 12, right: 12 }}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -107,7 +130,10 @@ export function HourlyPatternChart() {
                 fontSize: 12,
               }}
             />
-            <ChartTooltip cursor={false} content={<ChartTooltipContent indicator="dot" />} />
+            <ChartTooltip
+              cursor={false}
+              content={<ChartTooltipContent indicator="dot" />}
+            />
             <Bar
               dataKey="totalOrders"
               fill={chartConfig.totalOrders.color}

@@ -1503,7 +1503,10 @@
       "Analytics": "Analytics",
       "Settings": "Settings",
       "Reviews": "Reviews",
-      "Lots": "Lots & Arrivals"
+      "Lots": "Lots & Arrivals",
+      "Logs": "Activity Logs",
+      "Uploads": "File Uploads",
+      "Permission Management": "Permission Management"
     },
     "labels": {
       "product:create": "Create Products",
@@ -1555,7 +1558,13 @@
       "lot_arrival:read": "View Lot Arrivals",
       "lot_arrival:update": "Edit Lot Arrivals",
       "lot_arrival:verify": "Verify Lot Arrivals",
-      "lot_arrival:delete": "Delete Lot Arrivals"
+      "lot_arrival:delete": "Delete Lot Arrivals",
+      "log:read": "View Logs",
+      "log:read_all": "View All Logs",
+      "upload:image": "Upload Images",
+      "upload:delete": "Delete Uploads",
+      "permission:read": "View Permissions",
+      "permission:manage": "Manage Permissions"
     }
   }
 }

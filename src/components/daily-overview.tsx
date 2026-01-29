@@ -14,10 +14,7 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { Separator } from '@/components/ui/separator';
 import { fetcher } from '@/lib/utils';
 import { DailyCashSummaryDto, LowStockAlertDto } from '@/types/analytics';
-import {
-  IconCash,
-  IconAlertTriangle,
-} from '@tabler/icons-react';
+import { IconCash, IconAlertTriangle } from '@tabler/icons-react';
 import { useLocale } from '@/components/local-lang-swither';
 import { getMessages } from '@/lib/locale';
 import { formatCurrency } from '@/lib/format-currency';
@@ -53,7 +50,6 @@ export function DailyOverview() {
       {/* Daily Cash Summary Section */}
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <IconCash className="h-5 w-5" style={{ color: 'var(--chart-1)' }} />
           {tCash.title || 'Daily Cash Summary'}
         </CardTitle>
         <CardDescription>{cashData.date}</CardDescription>
@@ -120,15 +116,15 @@ export function DailyOverview() {
       {/* Low Stock Alerts Section */}
       <CardHeader className="pt-0">
         <CardTitle className="flex items-center gap-2">
-          <IconAlertTriangle className="h-5 w-5" style={{ color: 'var(--chart-4)' }} />
           {tStock.title || 'Low Stock Alerts'}
         </CardTitle>
         <CardDescription>
-          {stockData.length} {tStock.productsNeedAttention || 'products need attention'}
+          {stockData.length}{' '}
+          {tStock.productsNeedAttention || 'products need attention'}
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-75 pr-4">
+        <ScrollArea className="h-40 pr-4">
           <div className="space-y-3">
             {stockData.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-8">
@@ -148,8 +144,12 @@ export function DailyOverview() {
                     />
                   )}
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-sm truncate">{item.productName}</p>
-                    <p className="text-xs text-muted-foreground">{item.variantName}</p>
+                    <p className="font-medium text-sm truncate">
+                      {item.productName}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {item.variantName}
+                    </p>
                     <div className="flex items-center gap-2 mt-1">
                       <Badge variant="outline" className="text-xs">
                         {tStock.labels?.stock || 'Stock'}: {item.currentStock}
@@ -160,7 +160,9 @@ export function DailyOverview() {
                     </div>
                   </div>
                   <div className="flex flex-col items-end gap-1">
-                    <Badge className={`${getSeverityColor(item.alertSeverity)} text-white tabular-nums`}>
+                    <Badge
+                      className={`${getSeverityColor(item.alertSeverity)} text-white tabular-nums`}
+                    >
                       {item.alertSeverity}%
                     </Badge>
                     <span className="text-xs text-muted-foreground tabular-nums">

@@ -153,10 +153,7 @@ export function StockValueSummary() {
                       </p>
                     </div>
                     <div className="flex flex-col items-end">
-                      <span
-                        className="text-sm font-bold tabular-nums"
-                        style={{ color: 'var(--chart-5)' }}
-                      >
+                      <span className="text-sm font-bold tabular-nums">
                         {formatCurrency(product.stockValue, locale)}
                       </span>
                     </div>

@@ -15,7 +15,7 @@
     }
   },
   "sidebar": {
-    "storeManager": "إلكتروزين",
+    "storeManager": "إلكتروزان",
     "user": "المستخدم",
     "links": {
       "dashboard": "لوحة التحكم",
@@ -1503,7 +1503,10 @@
       "Analytics": "التحليلات",
       "Settings": "الإعدادات",
       "Reviews": "التقييمات",
-      "Lots": "الشحنات والوصول"
+      "Lots": "الشحنات والوصول",
+      "Logs": "سجلات النشاط",
+      "Uploads": "رفع الملفات",
+      "Permission Management": "إدارة الصلاحيات"
     },
     "labels": {
       "product:create": "إنشاء المنتجات",
@@ -1555,7 +1558,13 @@
       "lot_arrival:read": "عرض وصول الشحنة",
       "lot_arrival:update": "تعديل وصول الشحنة",
       "lot_arrival:verify": "التحقق من وصول الشحنة",
-      "lot_arrival:delete": "حذف وصول الشحنة"
+      "lot_arrival:delete": "حذف وصول الشحنة",
+      "log:read": "عرض السجلات",
+      "log:read_all": "عرض جميع السجلات",
+      "upload:image": "رفع الصور",
+      "upload:delete": "حذف الملفات المرفوعة",
+      "permission:read": "عرض الصلاحيات",
+      "permission:manage": "إدارة الصلاحيات"
     }
   }
 }

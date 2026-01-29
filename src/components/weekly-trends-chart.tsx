@@ -27,7 +27,11 @@ import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Line, LineChart, CartesianGrid, XAxis } from 'recharts';
 import { fetcher } from '@/lib/utils';
 import { WeeklyTrendsSummaryDto } from '@/types/analytics';
-import { IconTrendingUp, IconTrendingDown, IconMinus } from '@tabler/icons-react';
+import {
+  IconTrendingUp,
+  IconTrendingDown,
+  IconMinus,
+} from '@tabler/icons-react';
 import { useLocale } from '@/components/local-lang-swither';
 import { getMessages } from '@/lib/locale';
 import { formatCurrency } from '@/lib/format-currency';
@@ -69,9 +73,19 @@ export function WeeklyTrendsChart() {
 
   const getTrendIcon = () => {
     if (data.trendDirection === 'GROWING')
-      return <IconTrendingUp className="h-5 w-5" style={{ color: 'var(--chart-3)' }} />;
+      return (
+        <IconTrendingUp
+          className="h-5 w-5"
+          style={{ color: 'var(--chart-3)' }}
+        />
+      );
     if (data.trendDirection === 'DECLINING')
-      return <IconTrendingDown className="h-5 w-5" style={{ color: 'var(--chart-5)' }} />;
+      return (
+        <IconTrendingDown
+          className="h-5 w-5"
+          style={{ color: 'var(--chart-5)' }}
+        />
+      );
     return <IconMinus className="h-5 w-5 text-muted-foreground" />;
   };
 
@@ -82,8 +96,10 @@ export function WeeklyTrendsChart() {
   };
 
   const getTrendLabel = () => {
-    if (data.trendDirection === 'GROWING') return t.labels?.growing || 'GROWING';
-    if (data.trendDirection === 'DECLINING') return t.labels?.declining || 'DECLINING';
+    if (data.trendDirection === 'GROWING')
+      return t.labels?.growing || 'GROWING';
+    if (data.trendDirection === 'DECLINING')
+      return t.labels?.declining || 'DECLINING';
     return t.labels?.stable || 'STABLE';
   };
 
@@ -91,7 +107,6 @@ export function WeeklyTrendsChart() {
     <Card className="@container/card">
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          {getTrendIcon()}
           {t.title || 'Weekly Trends'}
         </CardTitle>
         <CardDescription>
@@ -144,8 +159,13 @@ export function WeeklyTrendsChart() {
         {/* Stats Grid */}
         <div className="grid grid-cols-3 gap-3 px-4 sm:px-0">
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">{t.labels?.trend || 'Trend'}</p>
-            <p className="text-base font-bold tabular-nums" style={{ color: getTrendColor() }}>
+            <p className="text-xs text-muted-foreground">
+              {t.labels?.trend || 'Trend'}
+            </p>
+            <p
+              className="text-base font-bold tabular-nums"
+              style={{ color: getTrendColor() }}
+            >
               {getTrendLabel()}
             </p>
             <p className="text-xs text-muted-foreground tabular-nums">
@@ -154,19 +174,28 @@ export function WeeklyTrendsChart() {
             </p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">{t.labels?.avgRevenue || 'Avg Revenue'}</p>
+            <p className="text-xs text-muted-foreground">
+              {t.labels?.avgRevenue || 'Avg Revenue'}
+            </p>
             <p className="text-base font-bold tabular-nums">
               {formatCurrency(data.averageWeeklyRevenue, locale)}
             </p>
           </div>
           <div className="space-y-1">
-            <p className="text-xs text-muted-foreground">{t.labels?.avgOrders || 'Avg Orders'}</p>
-            <p className="text-base font-bold tabular-nums">{Math.round(data.averageWeeklyOrders)}</p>
+            <p className="text-xs text-muted-foreground">
+              {t.labels?.avgOrders || 'Avg Orders'}
+            </p>
+            <p className="text-base font-bold tabular-nums">
+              {Math.round(data.averageWeeklyOrders)}
+            </p>
           </div>
         </div>
 
         {/* Chart */}
-        <ChartContainer config={chartConfig} className="aspect-auto h-[250px] w-full">
+        <ChartContainer
+          config={chartConfig}
+          className="aspect-auto h-[250px] w-full"
+        >
           <LineChart data={data.weeklyData} margin={{ left: 12, right: 12 }}>
             <CartesianGrid vertical={false} />
             <XAxis
@@ -204,16 +233,30 @@ export function WeeklyTrendsChart() {
         {/* Best/Worst Week */}
         <div className="grid grid-cols-2 gap-3 px-4 sm:px-0">
           <div className="p-3 rounded-lg border">
-            <p className="text-xs text-muted-foreground">{t.labels?.bestWeek || 'Best Week'}</p>
-            <p className="font-semibold text-sm mt-1">{data.bestWeek.weekLabel}</p>
-            <p className="font-bold tabular-nums mt-1" style={{ color: 'var(--chart-3)' }}>
+            <p className="text-xs text-muted-foreground">
+              {t.labels?.bestWeek || 'Best Week'}
+            </p>
+            <p className="font-semibold text-sm mt-1">
+              {data.bestWeek.weekLabel}
+            </p>
+            <p
+              className="font-bold tabular-nums mt-1"
+              style={{ color: 'var(--chart-3)' }}
+            >
               {formatCurrency(data.bestWeek.revenue, locale)}
             </p>
           </div>
           <div className="p-3 rounded-lg border">
-            <p className="text-xs text-muted-foreground">{t.labels?.worstWeek || 'Worst Week'}</p>
-            <p className="font-semibold text-sm mt-1">{data.worstWeek.weekLabel}</p>
-            <p className="font-bold tabular-nums mt-1" style={{ color: 'var(--chart-5)' }}>
+            <p className="text-xs text-muted-foreground">
+              {t.labels?.worstWeek || 'Worst Week'}
+            </p>
+            <p className="font-semibold text-sm mt-1">
+              {data.worstWeek.weekLabel}
+            </p>
+            <p
+              className="font-bold tabular-nums mt-1"
+              style={{ color: 'var(--chart-5)' }}
+            >
               {formatCurrency(data.worstWeek.revenue, locale)}
             </p>
           </div>
