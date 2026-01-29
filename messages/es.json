@@ -573,6 +573,125 @@
             "totalRevenue": "Ingresos totales",
             "totalProducts": "Total de productos"
           }
+        },
+        "dailyCashSummary": {
+          "title": "Resumen Diario",
+          "loading": "Cargando...",
+          "labels": {
+            "totalCash": "Total",
+            "orders": "Pedidos",
+            "avgOrderValue": "Valor Prom.",
+            "itemsSold": "Artículos Vendidos",
+            "completedPayments": "Pagos Completados",
+            "pendingPayments": "Pagos Pendientes"
+          }
+        },
+        "lowStockAlerts": {
+          "title": "Alertas de Stock Bajo",
+          "loading": "Cargando...",
+          "productsNeedAttention": "productos necesitan atención",
+          "allWellStocked": "¡Todos los productos están bien abastecidos!",
+          "labels": {
+            "stock": "Stock",
+            "alert": "Alerta"
+          }
+        },
+        "profitTracking": {
+          "title": "Seguimiento de Beneficios",
+          "loading": "Cargando...",
+          "description": "análisis de beneficios",
+          "labels": {
+            "totalRevenue": "Ingresos Totales",
+            "totalCost": "Costo Total",
+            "totalProfit": "Beneficio Total",
+            "avgProfitMargin": "Margen de Beneficio Promedio",
+            "bestDay": "Mejor Día",
+            "worstDay": "Peor Día",
+            "lastDays": "Últimos {days} días"
+          },
+          "selectPeriodPlaceholder": "Seleccionar período",
+          "periods": {
+            "90d": "90 Días",
+            "30d": "30 Días",
+            "7d": "7 Días"
+          },
+          "chartLabels": {
+            "revenue": "Ingresos",
+            "grossProfit": "Beneficio Bruto",
+            "cost": "Costo"
+          }
+        },
+        "bestSellingProducts": {
+          "title": "Productos Más Vendidos",
+          "loading": "Cargando...",
+          "description": "Top 10 productos por volumen de ventas",
+          "labels": {
+            "unitsSold": "unidades vendidas",
+            "orders": "pedidos",
+            "stock": "Stock",
+            "avg": "prom",
+            "outOfStock": "Sin Stock",
+            "low": "Bajo",
+            "daysLeft": "d restantes",
+            "ok": "OK"
+          }
+        },
+        "hourlyPattern": {
+          "title": "Patrón de Ventas por Hora",
+          "loading": "Cargando...",
+          "description": "Promedio de los últimos {days} días",
+          "labels": {
+            "busiestHour": "Hora Más Ocupada",
+            "slowestHour": "Hora Más Tranquila",
+            "peakHours": "Horas Pico",
+            "orders": "pedidos"
+          },
+          "chartLabels": {
+            "orders": "Pedidos",
+            "revenue": "Ingresos"
+          }
+        },
+        "weeklyTrends": {
+          "title": "Tendencias Semanales",
+          "loading": "Cargando...",
+          "description": "rendimiento de semanas",
+          "labels": {
+            "trend": "Tendencia",
+            "avgRevenue": "Ingresos Prom.",
+            "avgOrders": "Pedidos Prom.",
+            "bestWeek": "Mejor Semana",
+            "worstWeek": "Peor Semana",
+            "growing": "CRECIENDO",
+            "stable": "ESTABLE",
+            "declining": "DECLINANDO",
+            "lastWeeks": "Últimas {weeks} semanas"
+          },
+          "selectPeriodPlaceholder": "Seleccionar período",
+          "periods": {
+            "12w": "12 Semanas",
+            "8w": "8 Semanas",
+            "4w": "4 Semanas"
+          },
+          "chartLabels": {
+            "revenue": "Ingresos",
+            "orders": "Pedidos"
+          }
+        },
+        "stockValue": {
+          "title": "Valor del Inventario",
+          "loading": "Cargando...",
+          "description": "Valor total del inventario en estantería",
+          "labels": {
+            "totalValue": "Valor Total",
+            "totalUnits": "Unidades Totales",
+            "products": "Productos",
+            "skus": "SKUs",
+            "byCategory": "Por Categoría",
+            "topProducts": "Mejores Productos",
+            "units": "unidades",
+            "variants": "variantes",
+            "avg": "prom"
+          }
         }
       }
     },
@@ -800,6 +919,8 @@
       }
     },
     "variants": {
+      "title": "Gestión de Variantes de Productos",
+      "description": "Administrar variantes de productos y sus atributos",
       "components": {
         "variantTable": {
           "title": "Lista de variantes",
@@ -816,7 +937,8 @@
             "delete": "Eliminar",
             "searchPlaceholder": "Buscar por nombre o producto",
             "active": "Activo",
-            "inactive": "Inactivo"
+            "inactive": "Inactivo",
+            "addVariant": "Agregar Variante de Producto"
           },
           "toast": {
             "deleted": "Variante eliminada",
@@ -869,6 +991,352 @@
               "variantCreated": "Variante creada",
               "variantCreateFailed": "No se pudo crear la variante"
             }
+          },
+          "editProductVariant": {
+            "title": "Editar Variante de Producto",
+            "description": "Actualiza la información y atributos de la variante de producto.",
+            "fields": {
+              "product": "Producto",
+              "name": "Nombre (Opcional)",
+              "nameDescription": "Un nombre descriptivo para esta variante. Si no se proporciona, se generará automáticamente.",
+              "attributes": "Atributos",
+              "attributesDescription": "Defina atributos como tamaño, color, material, etc.",
+              "sortOrder": "Orden de Clasificación",
+              "sortOrderDescription": "Usado para controlar el orden de visualización de las variantes.",
+              "isActive": "Activo",
+              "isActiveDescription": "Si esta variante está activa y disponible para usar."
+            },
+            "placeholders": {
+              "selectProduct": "Seleccionar un producto",
+              "name": "ej: Grande - Rojo",
+              "attributeName": "Nombre del atributo (ej: tamaño)",
+              "attributeValue": "Valor (ej: Grande)"
+            },
+            "actions": {
+              "addAttribute": "Agregar Atributo",
+              "remove": "Eliminar",
+              "cancel": "Cancelar",
+              "update": "Actualizar Variante de Producto",
+              "updating": "Actualizando..."
+            },
+            "toast": {
+              "variantUpdated": "Variante de producto actualizada exitosamente",
+              "variantUpdateFailed": "Error al actualizar la variante de producto"
+            }
+          }
+        }
+      }
+    },
+    "products": {
+      "title": "Gestión de Productos",
+      "description": "Administre su catálogo de productos, precios e inventario",
+      "components": {
+        "productTable": {
+          "title": "Gestión de Productos",
+          "table": {
+            "selectAll": "Seleccionar todos los productos",
+            "selectRow": "Seleccionar producto",
+            "product": "Producto",
+            "price": "Precio",
+            "stock": "Inventario",
+            "variants": "Variantes",
+            "variantsLabel": "variantes",
+            "status": "Estado",
+            "performance": "Rendimiento",
+            "created": "Creado",
+            "actions": "Acciones",
+            "openMenu": "Abrir menú",
+            "edit": "Editar",
+            "activate": "Activar",
+            "deactivate": "Desactivar",
+            "feature": "Destacar",
+            "unfeature": "Quitar Destacado",
+            "delete": "Eliminar",
+            "active": "Activo",
+            "inactive": "Inactivo",
+            "featured": "Destacado",
+            "skus": "SKUs",
+            "noPricing": "sin precio",
+            "noStock": "sin stock",
+            "units": "unidades",
+            "searchPlaceholder": "Buscar productos por nombre, slug o descripción...",
+            "empty": "No se encontraron productos",
+            "deleteSelected": "Eliminar Seleccionados ({0})"
+          },
+          "toast": {
+            "deleted": "Producto eliminado exitosamente",
+            "deleteFailed": "Error al eliminar el producto",
+            "statusUpdated": "Estado del producto actualizado exitosamente",
+            "statusUpdateFailed": "Error al actualizar el estado del producto",
+            "featuredUpdated": "Estado destacado del producto actualizado exitosamente",
+            "featuredUpdateFailed": "Error al actualizar el estado destacado del producto",
+            "bulkDeleted": "{0} productos eliminados exitosamente",
+            "bulkDeleteFailed": "Error al eliminar los productos"
+          },
+          "dialogs": {
+            "deleteTitle": "¿Está seguro?",
+            "deleteDesc": "Esta acción no se puede deshacer. Esto eliminará permanentemente el producto y todas sus variantes y SKUs.",
+            "bulkDeleteTitle": "¿Eliminar {0} productos?",
+            "bulkDeleteDesc": "Esta acción no se puede deshacer. Esto eliminará permanentemente los productos seleccionados y todas sus variantes y SKUs.",
+            "cancel": "Cancelar",
+            "delete": "Eliminar",
+            "deleteAll": "Eliminar Todos"
+          }
+        }
+      },
+      "dialogs": {
+        "createProduct": {
+          "trigger": "Agregar Producto",
+          "title": "Crear Nuevo Producto",
+          "description": "Agregue un nuevo producto a su catálogo. Puede agregar variantes y precios más tarde.",
+          "fields": {
+            "name": "Nombre del Producto",
+            "slug": "Slug",
+            "slugDescription": "Versión amigable para URL del nombre. Se genera automáticamente si se deja vacío.",
+            "shortDesc": "Descripción Corta",
+            "description": "Descripción",
+            "coverImage": "URL de la Imagen de Portada",
+            "metaTitle": "Meta Título (SEO)",
+            "metaDesc": "Meta Descripción (SEO)",
+            "sortOrder": "Orden de Clasificación",
+            "sortOrderDescription": "Los números más bajos aparecen primero",
+            "categories": "Categorías",
+            "isActive": "Estado Activo",
+            "isActiveDescription": "Los productos activos son visibles para los clientes",
+            "isFeatured": "Producto Destacado",
+            "isFeaturedDescription": "Los productos destacados aparecen de manera prominente"
+          },
+          "placeholders": {
+            "name": "Auriculares Bluetooth Inalámbricos",
+            "slug": "auriculares-bluetooth-inalambricos",
+            "shortDesc": "Auriculares inalámbricos premium con 30h de batería",
+            "description": "Auriculares inalámbricos de alta calidad con cancelación de ruido...",
+            "coverImage": "https://example.com/images/auriculares.jpg",
+            "metaTitle": "Mejores Auriculares Inalámbricos 2024",
+            "metaDesc": "Descubra nuestros auriculares inalámbricos premium con calidad de sonido excepcional..."
+          },
+          "errors": {
+            "nameRequired": "El nombre del producto es obligatorio",
+            "nameTooLong": "El nombre es demasiado largo (máx. 255 caracteres)",
+            "sortOrderNegative": "El orden de clasificación no puede ser negativo"
+          },
+          "actions": {
+            "cancel": "Cancelar",
+            "create": "Crear Producto",
+            "creating": "Creando..."
+          },
+          "toast": {
+            "success": "Producto creado exitosamente",
+            "failed": "Error al crear el producto"
+          }
+        },
+        "editProduct": {
+          "title": "Editar Producto",
+          "description": "Actualice la información y configuración del producto.",
+          "fields": {
+            "name": "Nombre del Producto",
+            "shortDesc": "Descripción Corta",
+            "description": "Descripción",
+            "coverImage": "URL de la Imagen de Portada",
+            "metaTitle": "Meta Título (SEO)",
+            "metaDesc": "Meta Descripción (SEO)",
+            "sortOrder": "Orden de Clasificación",
+            "sortOrderDescription": "Los números más bajos aparecen primero",
+            "categories": "Categorías",
+            "isActive": "Estado Activo",
+            "isActiveDescription": "Los productos activos son visibles para los clientes",
+            "isFeatured": "Producto Destacado",
+            "isFeaturedDescription": "Los productos destacados aparecen de manera prominente"
+          },
+          "placeholders": {
+            "name": "Auriculares Bluetooth Inalámbricos",
+            "shortDesc": "Auriculares inalámbricos premium con 30h de batería",
+            "description": "Auriculares inalámbricos de alta calidad con cancelación de ruido...",
+            "coverImage": "https://example.com/images/auriculares.jpg",
+            "metaTitle": "Mejores Auriculares Inalámbricos 2024",
+            "metaDesc": "Descubra nuestros auriculares inalámbricos premium con calidad de sonido excepcional..."
+          },
+          "errors": {
+            "nameRequired": "El nombre del producto es obligatorio",
+            "nameTooLong": "El nombre es demasiado largo (máx. 255 caracteres)",
+            "sortOrderNegative": "El orden de clasificación no puede ser negativo"
+          },
+          "actions": {
+            "cancel": "Cancelar",
+            "update": "Actualizar Producto",
+            "updating": "Actualizando..."
+          },
+          "toast": {
+            "success": "Producto actualizado exitosamente",
+            "failed": "Error al actualizar el producto"
+          }
+        }
+      },
+      "productDetails": {
+        "header": {
+          "edit": "Editar",
+          "delete": "Eliminar"
+        },
+        "quickStats": {
+          "startingPrice": "Precio Inicial",
+          "totalStock": "Stock Total",
+          "avgRating": "Calificación Promedio",
+          "variants": "Variantes",
+          "inStock": "En Stock",
+          "outOfStock": "Sin Stock",
+          "skusTotal": "SKUs en total"
+        },
+        "sections": {
+          "productInformation": "Información del Producto",
+          "variantsAndSkus": "Variantes y SKUs",
+          "variantsDescription": "Administrar variantes de productos y unidades de gestión de stock",
+          "coverImage": "Imagen de Portada",
+          "categories": "Categorías",
+          "metadata": "Metadatos"
+        },
+        "fields": {
+          "description": "Descripción",
+          "shortDescription": "Descripción Corta",
+          "metaTitle": "Meta Título",
+          "metaDescription": "Meta Descripción",
+          "sku": "SKU",
+          "price": "Precio",
+          "stock": "Stock",
+          "size": "Tamaño",
+          "units": "unidades",
+          "more": "más",
+          "created": "Creado",
+          "updated": "Actualizado",
+          "productId": "ID del Producto"
+        },
+        "errors": {
+          "loadFailed": "Error al cargar los detalles del producto",
+          "notFound": "Producto no encontrado"
+        },
+        "skuImageGallery": {
+          "title": "Imágenes de SKUs",
+          "description": "Todas las imágenes de variantes de productos ({count} en total)",
+          "pagination": {
+            "previous": "Anterior",
+            "next": "Siguiente",
+            "page": "Página {current} de {total}"
+          }
+        }
+      }
+    },
+    "users": {
+      "title": "Gestión de Usuarios",
+      "description": "Administre cuentas de usuarios, roles y permisos",
+      "components": {
+        "userTable": {
+          "title": "Gestión de Usuarios",
+          "table": {
+            "select": "Seleccionar",
+            "selectRow": "Seleccionar usuario",
+            "name": "Nombre",
+            "email": "Correo",
+            "role": "Rol",
+            "status": "Estado",
+            "activity": "Actividad",
+            "lastLogin": "Último Inicio de Sesión",
+            "created": "Creado",
+            "actions": "Acciones",
+            "openMenu": "Abrir menú",
+            "active": "Activo",
+            "inactive": "Inactivo",
+            "emailVerified": "Correo Verificado",
+            "emailUnverified": "Correo Sin Verificar",
+            "orders": "Pedidos",
+            "reviews": "Reseñas",
+            "never": "Nunca",
+            "activate": "Activar",
+            "deactivate": "Desactivar",
+            "delete": "Eliminar",
+            "searchPlaceholder": "Buscar usuarios por nombre, correo o rol...",
+            "empty": "No se encontraron usuarios",
+            "deleteSelected": "Eliminar Seleccionados ({0})"
+          },
+          "toast": {
+            "deleted": "Usuario eliminado exitosamente",
+            "deleteFailed": "Error al eliminar el usuario",
+            "statusUpdated": "Estado del usuario actualizado exitosamente",
+            "statusUpdateFailed": "Error al actualizar el estado del usuario",
+            "bulkDeleted": "{0} usuarios eliminados exitosamente",
+            "bulkDeleteFailed": "Error al eliminar los usuarios"
+          },
+          "dialogs": {
+            "deleteTitle": "¿Está seguro?",
+            "deleteDesc": "Esta acción no se puede deshacer. Esto eliminará permanentemente el usuario.",
+            "bulkDeleteTitle": "¿Eliminar {0} usuarios?",
+            "bulkDeleteDesc": "Esta acción no se puede deshacer. Esto eliminará permanentemente los usuarios seleccionados.",
+            "cancel": "Cancelar",
+            "delete": "Eliminar",
+            "deleteAll": "Eliminar Todos"
+          }
+        }
+      },
+      "dialogs": {
+        "createUser": {
+          "trigger": "Agregar Usuario",
+          "title": "Agregar Nuevo Usuario",
+          "description": "Cree una nueva cuenta de usuario con la información requerida.",
+          "fields": {
+            "name": "Nombre",
+            "email": "Correo",
+            "password": "Contraseña",
+            "role": "Rol",
+            "isActive": "Usuario Activo"
+          },
+          "placeholders": {
+            "name": "Ingrese el nombre completo",
+            "email": "Ingrese la dirección de correo",
+            "password": "Ingrese la contraseña (mín 6 caracteres)",
+            "role": "Seleccione el rol"
+          },
+          "roles": {
+            "user": "Usuario",
+            "moderator": "Moderador",
+            "admin": "Administrador"
+          },
+          "errors": {
+            "requiredFields": "Por favor, complete todos los campos requeridos",
+            "passwordLength": "La contraseña debe tener al menos 6 caracteres"
+          },
+          "actions": {
+            "cancel": "Cancelar",
+            "create": "Crear Usuario",
+            "creating": "Creando..."
+          },
+          "toast": {
+            "success": "Usuario creado exitosamente"
+          }
+        },
+        "editUser": {
+          "trigger": "Editar",
+          "title": "Editar Usuario",
+          "description": "Actualice la información de la cuenta de usuario.",
+          "fields": {
+            "name": "Nombre",
+            "email": "Correo",
+            "password": "Contraseña",
+            "role": "Rol",
+            "isActive": "Usuario Activo"
+          },
+          "placeholders": {
+            "name": "Ingrese el nombre completo",
+            "emailDisabled": "El correo no se puede cambiar",
+            "password": "Dejar en blanco para mantener la contraseña actual",
+            "role": "Seleccione el rol"
+          },
+          "roles": {
+            "user": "Usuario",
+            "moderator": "Moderador",
+            "admin": "Administrador"
+          },
+          "actions": {
+            "cancel": "Cancelar",
+            "update": "Actualizar Usuario",
+            "updating": "Actualizando..."
           }
         }
       }

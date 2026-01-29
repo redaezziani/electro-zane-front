@@ -569,6 +569,125 @@
             "totalRevenue": "Chiffre d'Affaires Total",
             "totalProducts": "Produits Totaux"
           }
+        },
+        "dailyCashSummary": {
+          "title": "Résumé Quotidien",
+          "loading": "Chargement...",
+          "labels": {
+            "totalCash": "Total",
+            "orders": "Commandes",
+            "avgOrderValue": "Valeur Moy.",
+            "itemsSold": "Articles Vendus",
+            "completedPayments": "Paiements Complétés",
+            "pendingPayments": "Paiements En Attente"
+          }
+        },
+        "lowStockAlerts": {
+          "title": "Alertes de Stock Faible",
+          "loading": "Chargement...",
+          "productsNeedAttention": "produits nécessitent une attention",
+          "allWellStocked": "Tous les produits sont bien approvisionnés !",
+          "labels": {
+            "stock": "Stock",
+            "alert": "Alerte"
+          }
+        },
+        "profitTracking": {
+          "title": "Suivi des Bénéfices",
+          "loading": "Chargement...",
+          "description": "analyse des bénéfices",
+          "labels": {
+            "totalRevenue": "Chiffre d'Affaires Total",
+            "totalCost": "Coût Total",
+            "totalProfit": "Bénéfice Total",
+            "avgProfitMargin": "Marge Bénéficiaire Moyenne",
+            "bestDay": "Meilleur Jour",
+            "worstDay": "Pire Jour",
+            "lastDays": "{days} derniers jours"
+          },
+          "selectPeriodPlaceholder": "Sélectionner une période",
+          "periods": {
+            "90d": "90 Jours",
+            "30d": "30 Jours",
+            "7d": "7 Jours"
+          },
+          "chartLabels": {
+            "revenue": "Chiffre d'Affaires",
+            "grossProfit": "Bénéfice Brut",
+            "cost": "Coût"
+          }
+        },
+        "bestSellingProducts": {
+          "title": "Produits les Plus Vendus",
+          "loading": "Chargement...",
+          "description": "Top 10 des produits par volume de ventes",
+          "labels": {
+            "unitsSold": "unités vendues",
+            "orders": "commandes",
+            "stock": "Stock",
+            "avg": "moy",
+            "outOfStock": "Rupture de Stock",
+            "low": "Faible",
+            "daysLeft": "j restants",
+            "ok": "OK"
+          }
+        },
+        "hourlyPattern": {
+          "title": "Modèle de Ventes Horaires",
+          "loading": "Chargement...",
+          "description": "Moyenne des {days} derniers jours",
+          "labels": {
+            "busiestHour": "Heure la Plus Chargée",
+            "slowestHour": "Heure la Plus Calme",
+            "peakHours": "Heures de Pointe",
+            "orders": "commandes"
+          },
+          "chartLabels": {
+            "orders": "Commandes",
+            "revenue": "Chiffre d'Affaires"
+          }
+        },
+        "weeklyTrends": {
+          "title": "Tendances Hebdomadaires",
+          "loading": "Chargement...",
+          "description": "performance des semaines",
+          "labels": {
+            "trend": "Tendance",
+            "avgRevenue": "Chiffre d'Affaires Moy.",
+            "avgOrders": "Commandes Moy.",
+            "bestWeek": "Meilleure Semaine",
+            "worstWeek": "Pire Semaine",
+            "growing": "EN CROISSANCE",
+            "stable": "STABLE",
+            "declining": "EN DÉCLIN",
+            "lastWeeks": "{weeks} dernières semaines"
+          },
+          "selectPeriodPlaceholder": "Sélectionner une période",
+          "periods": {
+            "12w": "12 Semaines",
+            "8w": "8 Semaines",
+            "4w": "4 Semaines"
+          },
+          "chartLabels": {
+            "revenue": "Chiffre d'Affaires",
+            "orders": "Commandes"
+          }
+        },
+        "stockValue": {
+          "title": "Valeur du Stock",
+          "loading": "Chargement...",
+          "description": "Valeur totale de l'inventaire en rayon",
+          "labels": {
+            "totalValue": "Valeur Totale",
+            "totalUnits": "Unités Totales",
+            "products": "Produits",
+            "skus": "SKUs",
+            "byCategory": "Par Catégorie",
+            "topProducts": "Meilleurs Produits",
+            "units": "unités",
+            "variants": "variantes",
+            "avg": "moy"
+          }
         }
       }
     },
@@ -778,6 +897,8 @@
       }
     },
     "variants": {
+      "title": "Gestion des Variantes de Produits",
+      "description": "Gérer les variantes de produits et leurs attributs",
       "components": {
         "variantTable": {
           "title": "Liste des variantes",
@@ -813,40 +934,386 @@
         },
         "dialogs": {
           "createProductVariant": {
-            "title": "Create Product Variant",
-            "description": "Add a new product variant and set its attributes and stock information.",
+            "title": "Créer une Variante de Produit",
+            "description": "Ajoutez une nouvelle variante de produit et définissez ses attributs et informations de stock.",
             "fields": {
-              "product": "Product",
-              "name": "Variant Name",
-              "attributes": "Attributes",
-              "sortOrder": "Sort Order",
-              "isActive": "Active"
+              "product": "Produit",
+              "name": "Nom de la Variante",
+              "attributes": "Attributs",
+              "sortOrder": "Ordre d'Affichage",
+              "isActive": "Actif"
             },
             "placeholders": {
-              "selectProduct": "Select a product",
-              "name": "e.g., Red / Size M",
-              "attributeName": "Attribute Name",
-              "attributeValue": "Attribute Value"
+              "selectProduct": "Sélectionnez un produit",
+              "name": "ex: Rouge / Taille M",
+              "attributeName": "Nom de l'Attribut",
+              "attributeValue": "Valeur de l'Attribut"
             },
             "hints": {
-              "name": "Variant name is optional",
-              "attributes": "You can add optional attributes to the variant",
-              "sortOrder": "Set display order as a number",
-              "isActive": "If disabled, it will not be visible"
+              "name": "Le nom de la variante est facultatif",
+              "attributes": "Vous pouvez ajouter des attributs facultatifs à la variante",
+              "sortOrder": "Définissez l'ordre d'affichage en nombre",
+              "isActive": "Si désactivé, il ne sera pas visible"
             },
             "actions": {
-              "addAttribute": "Add Attribute",
-              "removeAttribute": "Remove"
+              "addAttribute": "Ajouter un Attribut",
+              "removeAttribute": "Supprimer"
             },
             "submit": {
-              "creating": "Creating...",
-              "create": "Create",
-              "cancel": "Cancel"
+              "creating": "Création...",
+              "create": "Créer",
+              "cancel": "Annuler"
             },
             "toast": {
-              "variantCreated": "Variant created successfully",
-              "variantCreateFailed": "Failed to create variant"
+              "variantCreated": "Variante créée avec succès",
+              "variantCreateFailed": "Échec de la création de la variante"
             }
+          },
+          "editProductVariant": {
+            "title": "Modifier la Variante de Produit",
+            "description": "Mettez à jour les informations et attributs de la variante de produit.",
+            "fields": {
+              "product": "Produit",
+              "name": "Nom (Facultatif)",
+              "nameDescription": "Un nom descriptif pour cette variante. S'il n'est pas fourni, il sera généré automatiquement.",
+              "attributes": "Attributs",
+              "attributesDescription": "Définissez des attributs comme la taille, la couleur, le matériau, etc.",
+              "sortOrder": "Ordre de Tri",
+              "sortOrderDescription": "Utilisé pour contrôler l'ordre d'affichage des variantes.",
+              "isActive": "Actif",
+              "isActiveDescription": "Si cette variante est active et disponible à l'utilisation."
+            },
+            "placeholders": {
+              "selectProduct": "Sélectionnez un produit",
+              "name": "ex: Large - Rouge",
+              "attributeName": "Nom de l'attribut (ex: taille)",
+              "attributeValue": "Valeur (ex: Large)"
+            },
+            "actions": {
+              "addAttribute": "Ajouter un Attribut",
+              "remove": "Supprimer",
+              "cancel": "Annuler",
+              "update": "Mettre à Jour la Variante",
+              "updating": "Mise à jour..."
+            },
+            "toast": {
+              "variantUpdated": "Variante de produit mise à jour avec succès",
+              "variantUpdateFailed": "Échec de la mise à jour de la variante de produit"
+            }
+          }
+        }
+      }
+    },
+    "products": {
+      "title": "Gestion des Produits",
+      "description": "Gérez votre catalogue de produits, prix et inventaire",
+      "components": {
+        "productTable": {
+          "title": "Gestion des Produits",
+          "table": {
+            "selectAll": "Sélectionner tous les produits",
+            "selectRow": "Sélectionner le produit",
+            "product": "Produit",
+            "price": "Prix",
+            "stock": "Stock",
+            "variants": "Variantes",
+            "variantsLabel": "variantes",
+            "status": "Statut",
+            "performance": "Performance",
+            "created": "Créé",
+            "actions": "Actions",
+            "openMenu": "Ouvrir le menu",
+            "edit": "Modifier",
+            "activate": "Activer",
+            "deactivate": "Désactiver",
+            "feature": "Mettre en Avant",
+            "unfeature": "Retirer de la Mise en Avant",
+            "delete": "Supprimer",
+            "active": "Actif",
+            "inactive": "Inactif",
+            "featured": "Mis en Avant",
+            "skus": "SKUs",
+            "noPricing": "pas de prix",
+            "noStock": "pas de stock",
+            "units": "unités",
+            "searchPlaceholder": "Rechercher des produits par nom, slug ou description...",
+            "empty": "Aucun produit trouvé",
+            "deleteSelected": "Supprimer la Sélection ({0})"
+          },
+          "toast": {
+            "deleted": "Produit supprimé avec succès",
+            "deleteFailed": "Échec de la suppression du produit",
+            "statusUpdated": "Statut du produit mis à jour avec succès",
+            "statusUpdateFailed": "Échec de la mise à jour du statut du produit",
+            "featuredUpdated": "Statut de mise en avant du produit mis à jour avec succès",
+            "featuredUpdateFailed": "Échec de la mise à jour du statut de mise en avant du produit",
+            "bulkDeleted": "{0} produits supprimés avec succès",
+            "bulkDeleteFailed": "Échec de la suppression des produits"
+          },
+          "dialogs": {
+            "deleteTitle": "Êtes-vous sûr ?",
+            "deleteDesc": "Cette action est irréversible. Cela supprimera définitivement le produit et toutes ses variantes et SKUs.",
+            "bulkDeleteTitle": "Supprimer {0} produits ?",
+            "bulkDeleteDesc": "Cette action est irréversible. Cela supprimera définitivement les produits sélectionnés et toutes leurs variantes et SKUs.",
+            "cancel": "Annuler",
+            "delete": "Supprimer",
+            "deleteAll": "Tout Supprimer"
+          }
+        }
+      },
+      "dialogs": {
+        "createProduct": {
+          "trigger": "Ajouter un Produit",
+          "title": "Créer un Nouveau Produit",
+          "description": "Ajoutez un nouveau produit à votre catalogue. Vous pouvez ajouter des variantes et des prix plus tard.",
+          "fields": {
+            "name": "Nom du Produit",
+            "slug": "Slug",
+            "slugDescription": "Version conviviale pour les URL du nom. Généré automatiquement si laissé vide.",
+            "shortDesc": "Description Courte",
+            "description": "Description",
+            "coverImage": "URL de l'Image de Couverture",
+            "metaTitle": "Meta Titre (SEO)",
+            "metaDesc": "Meta Description (SEO)",
+            "sortOrder": "Ordre de Tri",
+            "sortOrderDescription": "Les nombres plus bas apparaissent en premier",
+            "categories": "Catégories",
+            "isActive": "Statut Actif",
+            "isActiveDescription": "Les produits actifs sont visibles pour les clients",
+            "isFeatured": "Produit Mis en Avant",
+            "isFeaturedDescription": "Les produits mis en avant apparaissent en évidence"
+          },
+          "placeholders": {
+            "name": "Écouteurs Bluetooth Sans Fil",
+            "slug": "ecouteurs-bluetooth-sans-fil",
+            "shortDesc": "Écouteurs sans fil premium avec 30h d'autonomie",
+            "description": "Écouteurs sans fil de haute qualité avec réduction de bruit...",
+            "coverImage": "https://example.com/images/ecouteurs.jpg",
+            "metaTitle": "Meilleurs Écouteurs Sans Fil 2024",
+            "metaDesc": "Découvrez nos écouteurs sans fil premium avec une qualité sonore exceptionnelle..."
+          },
+          "errors": {
+            "nameRequired": "Le nom du produit est requis",
+            "nameTooLong": "Le nom est trop long (max 255 caractères)",
+            "sortOrderNegative": "L'ordre de tri ne peut pas être négatif"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "create": "Créer le Produit",
+            "creating": "Création..."
+          },
+          "toast": {
+            "success": "Produit créé avec succès",
+            "failed": "Échec de la création du produit"
+          }
+        },
+        "editProduct": {
+          "title": "Modifier le Produit",
+          "description": "Mettez à jour les informations et paramètres du produit.",
+          "fields": {
+            "name": "Nom du Produit",
+            "shortDesc": "Description Courte",
+            "description": "Description",
+            "coverImage": "URL de l'Image de Couverture",
+            "metaTitle": "Meta Titre (SEO)",
+            "metaDesc": "Meta Description (SEO)",
+            "sortOrder": "Ordre de Tri",
+            "sortOrderDescription": "Les nombres plus bas apparaissent en premier",
+            "categories": "Catégories",
+            "isActive": "Statut Actif",
+            "isActiveDescription": "Les produits actifs sont visibles pour les clients",
+            "isFeatured": "Produit Mis en Avant",
+            "isFeaturedDescription": "Les produits mis en avant apparaissent en évidence"
+          },
+          "placeholders": {
+            "name": "Écouteurs Bluetooth Sans Fil",
+            "shortDesc": "Écouteurs sans fil premium avec 30h d'autonomie",
+            "description": "Écouteurs sans fil de haute qualité avec réduction de bruit...",
+            "coverImage": "https://example.com/images/ecouteurs.jpg",
+            "metaTitle": "Meilleurs Écouteurs Sans Fil 2024",
+            "metaDesc": "Découvrez nos écouteurs sans fil premium avec une qualité sonore exceptionnelle..."
+          },
+          "errors": {
+            "nameRequired": "Le nom du produit est requis",
+            "nameTooLong": "Le nom est trop long (max 255 caractères)",
+            "sortOrderNegative": "L'ordre de tri ne peut pas être négatif"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "update": "Mettre à Jour le Produit",
+            "updating": "Mise à jour..."
+          },
+          "toast": {
+            "success": "Produit mis à jour avec succès",
+            "failed": "Échec de la mise à jour du produit"
+          }
+        }
+      },
+      "productDetails": {
+        "header": {
+          "edit": "Modifier",
+          "delete": "Supprimer"
+        },
+        "quickStats": {
+          "startingPrice": "Prix de Départ",
+          "totalStock": "Stock Total",
+          "avgRating": "Note Moyenne",
+          "variants": "Variantes",
+          "inStock": "En Stock",
+          "outOfStock": "Rupture de Stock",
+          "skusTotal": "SKUs au total"
+        },
+        "sections": {
+          "productInformation": "Informations sur le Produit",
+          "variantsAndSkus": "Variantes & SKUs",
+          "variantsDescription": "Gérer les variantes de produits et les unités de gestion de stock",
+          "coverImage": "Image de Couverture",
+          "categories": "Catégories",
+          "metadata": "Métadonnées"
+        },
+        "fields": {
+          "description": "Description",
+          "shortDescription": "Description Courte",
+          "metaTitle": "Meta Titre",
+          "metaDescription": "Meta Description",
+          "sku": "SKU",
+          "price": "Prix",
+          "stock": "Stock",
+          "size": "Taille",
+          "units": "unités",
+          "more": "plus",
+          "created": "Créé",
+          "updated": "Mis à jour",
+          "productId": "ID du Produit"
+        },
+        "errors": {
+          "loadFailed": "Échec du chargement des détails du produit",
+          "notFound": "Produit non trouvé"
+        },
+        "skuImageGallery": {
+          "title": "Images des SKUs",
+          "description": "Toutes les images des variantes de produits ({count} au total)",
+          "pagination": {
+            "previous": "Précédent",
+            "next": "Suivant",
+            "page": "Page {current} sur {total}"
+          }
+        }
+      }
+    },
+    "users": {
+      "title": "Gestion des Utilisateurs",
+      "description": "Gérez les comptes utilisateurs, les rôles et les permissions",
+      "components": {
+        "userTable": {
+          "title": "Gestion des Utilisateurs",
+          "table": {
+            "select": "Sélectionner",
+            "selectRow": "Sélectionner l'utilisateur",
+            "name": "Nom",
+            "email": "Email",
+            "role": "Rôle",
+            "status": "Statut",
+            "activity": "Activité",
+            "lastLogin": "Dernière Connexion",
+            "created": "Créé",
+            "actions": "Actions",
+            "openMenu": "Ouvrir le menu",
+            "active": "Actif",
+            "inactive": "Inactif",
+            "emailVerified": "Email Vérifié",
+            "emailUnverified": "Email Non Vérifié",
+            "orders": "Commandes",
+            "reviews": "Avis",
+            "never": "Jamais",
+            "activate": "Activer",
+            "deactivate": "Désactiver",
+            "delete": "Supprimer",
+            "searchPlaceholder": "Rechercher des utilisateurs par nom, email ou rôle...",
+            "empty": "Aucun utilisateur trouvé",
+            "deleteSelected": "Supprimer la Sélection ({0})"
+          },
+          "toast": {
+            "deleted": "Utilisateur supprimé avec succès",
+            "deleteFailed": "Échec de la suppression de l'utilisateur",
+            "statusUpdated": "Statut de l'utilisateur mis à jour avec succès",
+            "statusUpdateFailed": "Échec de la mise à jour du statut de l'utilisateur",
+            "bulkDeleted": "{0} utilisateurs supprimés avec succès",
+            "bulkDeleteFailed": "Échec de la suppression des utilisateurs"
+          },
+          "dialogs": {
+            "deleteTitle": "Êtes-vous sûr ?",
+            "deleteDesc": "Cette action est irréversible. Cela supprimera définitivement l'utilisateur.",
+            "bulkDeleteTitle": "Supprimer {0} utilisateurs ?",
+            "bulkDeleteDesc": "Cette action est irréversible. Cela supprimera définitivement les utilisateurs sélectionnés.",
+            "cancel": "Annuler",
+            "delete": "Supprimer",
+            "deleteAll": "Tout Supprimer"
+          }
+        }
+      },
+      "dialogs": {
+        "createUser": {
+          "trigger": "Ajouter un Utilisateur",
+          "title": "Ajouter un Nouvel Utilisateur",
+          "description": "Créez un nouveau compte utilisateur avec les informations requises.",
+          "fields": {
+            "name": "Nom",
+            "email": "Email",
+            "password": "Mot de passe",
+            "role": "Rôle",
+            "isActive": "Utilisateur Actif"
+          },
+          "placeholders": {
+            "name": "Entrez le nom complet",
+            "email": "Entrez l'adresse email",
+            "password": "Entrez le mot de passe (min 6 caractères)",
+            "role": "Sélectionnez le rôle"
+          },
+          "roles": {
+            "user": "Utilisateur",
+            "moderator": "Modérateur",
+            "admin": "Administrateur"
+          },
+          "errors": {
+            "requiredFields": "Veuillez remplir tous les champs requis",
+            "passwordLength": "Le mot de passe doit contenir au moins 6 caractères"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "create": "Créer l'Utilisateur",
+            "creating": "Création..."
+          },
+          "toast": {
+            "success": "Utilisateur créé avec succès"
+          }
+        },
+        "editUser": {
+          "trigger": "Modifier",
+          "title": "Modifier l'Utilisateur",
+          "description": "Mettez à jour les informations du compte utilisateur.",
+          "fields": {
+            "name": "Nom",
+            "email": "Email",
+            "password": "Mot de passe",
+            "role": "Rôle",
+            "isActive": "Utilisateur Actif"
+          },
+          "placeholders": {
+            "name": "Entrez le nom complet",
+            "emailDisabled": "L'email ne peut pas être modifié",
+            "password": "Laisser vide pour conserver le mot de passe actuel",
+            "role": "Sélectionnez le rôle"
+          },
+          "roles": {
+            "user": "Utilisateur",
+            "moderator": "Modérateur",
+            "admin": "Administrateur"
+          },
+          "actions": {
+            "cancel": "Annuler",
+            "update": "Mettre à Jour l'Utilisateur",
+            "updating": "Mise à jour..."
           }
         }
       }
