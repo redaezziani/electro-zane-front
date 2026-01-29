@@ -52,6 +52,13 @@ export function VerifyArrivalDialog({
     name: "pieceDetails",
   });
 
+  // Watch color changes
+  const quantityColor = watch("quantityColor");
+  const priceColor = watch("priceColor");
+  const shippingCompanyColor = watch("shippingCompanyColor");
+  const shippingCityColor = watch("shippingCityColor");
+  const pieceDetails = watch("pieceDetails");
+
   useEffect(() => {
     if (arrival) {
       reset({
@@ -62,6 +69,10 @@ export function VerifyArrivalDialog({
         pieceDetails: arrival.pieceDetails || [],
         status: arrival.status,
         notes: arrival.notes || "",
+        quantityColor: arrival.quantityColor || "#3b82f6",
+        priceColor: arrival.priceColor || "#10b981",
+        shippingCompanyColor: arrival.shippingCompanyColor || "#f59e0b",
+        shippingCityColor: arrival.shippingCityColor || "#8b5cf6",
       });
     }
   }, [arrival, reset]);
@@ -94,32 +105,78 @@ export function VerifyArrivalDialog({
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="quantity">{t.pages.lotArrivals.quantity}</Label>
-              <Input
-                id="quantity"
-                type="number"
-                {...register("quantity", { valueAsNumber: true })}
-              />
+              <div className="flex gap-2">
+                <Input
+                  id="quantity"
+                  type="number"
+                  className="flex-1"
+                  style={{ borderColor: quantityColor, borderWidth: '2px' }}
+                  {...register("quantity", { valueAsNumber: true })}
+                />
+                <Input
+                  type="color"
+                  className="w-16 h-10 cursor-pointer"
+                  {...register("quantityColor")}
+                  title="Pick a color"
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
               <Label htmlFor="price">{t.pages.lotArrivals.price}</Label>
-              <Input
-                id="price"
-                type="number"
-                step="0.01"
-                {...register("price", { valueAsNumber: true })}
-              />
+              <div className="flex gap-2">
+                <Input
+                  id="price"
+                  type="number"
+                  step="0.01"
+                  className="flex-1"
+                  style={{ borderColor: priceColor, borderWidth: '2px' }}
+                  {...register("price", { valueAsNumber: true })}
+                />
+                <Input
+                  type="color"
+                  className="w-16 h-10 cursor-pointer"
+                  {...register("priceColor")}
+                  title="Pick a color"
+                />
+              </div>
             </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="shippingCompany">{t.pages.lotArrivals.shippingCompany}</Label>
-            <Input id="shippingCompany" {...register("shippingCompany")} />
+            <div className="flex gap-2">
+              <Input
+                id="shippingCompany"
+                className="flex-1"
+                style={{ borderColor: shippingCompanyColor, borderWidth: '2px' }}
+                {...register("shippingCompany")}
+              />
+              <Input
+                type="color"
+                className="w-16 h-10 cursor-pointer"
+                {...register("shippingCompanyColor")}
+                title="Pick a color"
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
             <Label htmlFor="shippingCompanyCity">{t.pages.lotArrivals.shippingCity}</Label>
-            <Input id="shippingCompanyCity" {...register("shippingCompanyCity")} />
+            <div className="flex gap-2">
+              <Input
+                id="shippingCompanyCity"
+                className="flex-1"
+                style={{ borderColor: shippingCityColor, borderWidth: '2px' }}
+                {...register("shippingCompanyCity")}
+              />
+              <Input
+                type="color"
+                className="w-16 h-10 cursor-pointer"
+                {...register("shippingCityColor")}
+                title="Pick a color"
+              />
+            </div>
           </div>
 
           <div className="space-y-2">
@@ -148,7 +205,7 @@ export function VerifyArrivalDialog({
                 type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => append({ name: "", quantity: 0, status: "" })}
+                onClick={() => append({ name: "", quantity: 0, status: "", color: "#6366f1" })}
               >
                 <Plus className="h-4 w-4 mr-1" />
                 {t.pages.lotArrivals.addPiece}
@@ -156,37 +213,50 @@ export function VerifyArrivalDialog({
             </div>
 
             <div className="space-y-2 border rounded-lg p-3 max-h-[200px] overflow-y-auto">
-              {fields.map((field, index) => (
-                <div key={field.id} className="flex gap-2 items-start">
-                  <div className="flex-1">
-                    <Input
-                      {...register(`pieceDetails.${index}.name`)}
-                      placeholder={t.pages.lotArrivals.pieceName}
-                    />
-                  </div>
-                  <div className="w-24">
-                    <Input
-                      type="number"
-                      {...register(`pieceDetails.${index}.quantity`, { valueAsNumber: true })}
-                      placeholder={t.pages.lotArrivals.qty}
-                    />
-                  </div>
-                  <div className="w-32">
-                    <Input
-                      {...register(`pieceDetails.${index}.status`)}
-                      placeholder={t.pages.lotArrivals.status.label}
-                    />
-                  </div>
-                  <Button
-                    type="button"
-                    variant="ghost"
-                    size="icon"
-                    onClick={() => remove(index)}
+              {fields.map((field, index) => {
+                const pieceColor = pieceDetails?.[index]?.color || "#6366f1";
+                return (
+                  <div
+                    key={field.id}
+                    className="flex gap-2 items-start p-2 rounded border-2"
+                    style={{ borderColor: pieceColor }}
                   >
-                    <Trash2 className="h-4 w-4" />
-                  </Button>
-                </div>
-              ))}
+                    <div className="flex-1">
+                      <Input
+                        {...register(`pieceDetails.${index}.name`)}
+                        placeholder={t.pages.lotArrivals.pieceName}
+                      />
+                    </div>
+                    <div className="w-24">
+                      <Input
+                        type="number"
+                        {...register(`pieceDetails.${index}.quantity`, { valueAsNumber: true })}
+                        placeholder={t.pages.lotArrivals.qty}
+                      />
+                    </div>
+                    <div className="w-32">
+                      <Input
+                        {...register(`pieceDetails.${index}.status`)}
+                        placeholder={t.pages.lotArrivals.status.label}
+                      />
+                    </div>
+                    <Input
+                      type="color"
+                      className="w-12 h-10 cursor-pointer"
+                      {...register(`pieceDetails.${index}.color`)}
+                      title="Pick a color"
+                    />
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      onClick={() => remove(index)}
+                    >
+                      <Trash2 className="h-4 w-4" />
+                    </Button>
+                  </div>
+                );
+              })}
             </div>
           </div>
 

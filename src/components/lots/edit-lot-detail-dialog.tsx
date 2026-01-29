@@ -1,10 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
-import { lotsApi, CreateLotDetailDto, Lot } from "@/services/api/lots";
+import { lotsApi, UpdateLotDetailDto, LotDetail } from "@/services/api/lots";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,19 +13,19 @@ import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { Plus, Trash2 } from "lucide-react";
 
-interface CreateLotDetailDialogProps {
+interface EditLotDetailDialogProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  lot: Lot;
+  lotDetail: LotDetail;
   onSuccess: () => void;
 }
 
-export function CreateLotDetailDialog({
+export function EditLotDetailDialog({
   open,
   onOpenChange,
-  lot,
+  lotDetail,
   onSuccess,
-}: CreateLotDetailDialogProps) {
+}: EditLotDetailDialogProps) {
   const { locale } = useLocale();
   const t = getMessages(locale);
   const [loading, setLoading] = useState(false);
@@ -37,14 +37,18 @@ export function CreateLotDetailDialog({
     reset,
     control,
     watch,
-  } = useForm<CreateLotDetailDto>({
+  } = useForm<UpdateLotDetailDto>({
     defaultValues: {
-      lotId: lot.id,
-      pieceDetails: [{ name: "", quantity: 1, status: "new", color: "#6366f1" }],
-      quantityColor: "#3b82f6",
-      priceColor: "#10b981",
-      shippingCompanyColor: "#f59e0b",
-      shippingCityColor: "#8b5cf6",
+      quantity: lotDetail.quantity,
+      price: lotDetail.price,
+      shippingCompany: lotDetail.shippingCompany,
+      shippingCompanyCity: lotDetail.shippingCompanyCity,
+      pieceDetails: lotDetail.pieceDetails || [{ name: "", quantity: 1, status: "new" }],
+      notes: lotDetail.notes || "",
+      quantityColor: lotDetail.quantityColor || "#3b82f6",
+      priceColor: lotDetail.priceColor || "#10b981",
+      shippingCompanyColor: lotDetail.shippingCompanyColor || "#f59e0b",
+      shippingCityColor: lotDetail.shippingCityColor || "#8b5cf6",
     },
   });
 
@@ -60,17 +64,32 @@ export function CreateLotDetailDialog({
     name: "pieceDetails",
   });
 
-  const onSubmit = async (data: CreateLotDetailDto) => {
+  // Reset form when lotDetail changes
+  useEffect(() => {
+    reset({
+      quantity: lotDetail.quantity,
+      price: lotDetail.price,
+      shippingCompany: lotDetail.shippingCompany,
+      shippingCompanyCity: lotDetail.shippingCompanyCity,
+      pieceDetails: lotDetail.pieceDetails || [{ name: "", quantity: 1, status: "new" }],
+      notes: "", // Always start with empty note field for new input
+      quantityColor: lotDetail.quantityColor || "#3b82f6",
+      priceColor: lotDetail.priceColor || "#10b981",
+      shippingCompanyColor: lotDetail.shippingCompanyColor || "#f59e0b",
+      shippingCityColor: lotDetail.shippingCityColor || "#8b5cf6",
+    });
+  }, [lotDetail, reset]);
+
+  const onSubmit = async (data: UpdateLotDetailDto) => {
     try {
       setLoading(true);
-      await lotsApi.createLotDetail({ ...data, lotId: lot.id });
-      toast.success(t.pages.lots.createDetailSuccess);
-      reset();
+      await lotsApi.updateLotDetail(lotDetail.id, data);
+      toast.success(t.pages.lots.updateDetailSuccess || "Lot detail updated successfully");
       onOpenChange(false);
       onSuccess();
     } catch (error) {
-      console.error("Failed to create lot detail:", error);
-      toast.error(t.pages.lots.createDetailError);
+      console.error("Failed to update lot detail:", error);
+      toast.error(t.pages.lots.updateDetailError || "Failed to update lot detail");
     } finally {
       setLoading(false);
     }
@@ -81,7 +100,7 @@ export function CreateLotDetailDialog({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {t.pages.lots.createDetail} - {t.pages.lots.lot} #{lot.lotId}
+            {t.pages.lots.editDetail || "Edit Detail"} #{lotDetail.detailId}
           </DialogTitle>
         </DialogHeader>
 
@@ -274,7 +293,7 @@ export function CreateLotDetailDialog({
               {t.common.cancel}
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? t.common.creating : t.common.create}
+              {loading ? t.common.updating || "Updating..." : t.common.update || "Update"}
             </Button>
           </div>
         </form>

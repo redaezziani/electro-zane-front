@@ -12,6 +12,7 @@ import { toast } from 'sonner';
 import { CreateLotDialog } from './create-lot-dialog';
 import { CreateLotDetailDialog } from './create-lot-detail-dialog';
 import { EditLotDialog } from './edit-lot-dialog';
+import { EditLotDetailDialog } from './edit-lot-detail-dialog';
 
 interface EnhancedLotsTableProps {
   startDate?: Date;
@@ -30,7 +31,9 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
   const [createDetailDialogOpen, setCreateDetailDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
+  const [editDetailDialogOpen, setEditDetailDialogOpen] = useState(false);
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
+  const [selectedLotDetail, setSelectedLotDetail] = useState<LotDetail | null>(null);
   const [search, setSearch] = useState(initialSearch || '');
 
   const fetchLots = async () => {
@@ -155,6 +158,31 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
     setCreateDetailDialogOpen(true);
   };
 
+  const handleEditDetail = (lot: Lot, detail: LotDetail) => {
+    setSelectedLot(lot);
+    setSelectedLotDetail(detail);
+    setEditDetailDialogOpen(true);
+  };
+
+  const handleDeleteDetail = async (lotId: string, detailId: string) => {
+    if (!confirm(t.pages.lots.confirmDeleteDetail || 'Are you sure you want to delete this lot detail?')) return;
+
+    try {
+      await lotsApi.deleteLotDetail(detailId);
+      toast.success(t.pages.lots.deleteDetailSuccess || 'Lot detail deleted successfully');
+
+      // Refresh lot details
+      const details = await lotsApi.getLotDetailsByLotId(lotId);
+      setLotDetails((prev) => ({
+        ...prev,
+        [lotId]: details,
+      }));
+    } catch (error) {
+      console.error('Failed to delete lot detail:', error);
+      toast.error(t.pages.lots.deleteDetailError || 'Failed to delete lot detail');
+    }
+  };
+
   const handleRowExpand = async (lot: Lot) => {
     if (!lotDetails[lot.id]) {
       try {
@@ -235,36 +263,54 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
                 key={detail.id}
                 className="border rounded p-3 bg-background"
               >
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm">
-                  <div>
-                    <span className="font-medium">
-                      {t.pages.lots.detailId}:
-                    </span>{' '}
-                    #{detail.detailId}
+                <div className="flex justify-between items-start mb-2">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm flex-1">
+                    <div>
+                      <span className="font-medium">
+                        {t.pages.lots.detailId}:
+                      </span>{' '}
+                      #{detail.detailId}
+                    </div>
+                    <div>
+                      <span className="font-medium">
+                        {t.pages.lots.quantity}:
+                      </span>{' '}
+                      {detail.quantity}
+                    </div>
+                    <div>
+                      <span className="font-medium">
+                        {t.pages.lots.price}:
+                      </span>{' '}
+                      {Number(detail.price).toFixed(2)} MAD
+                    </div>
+                    <div>
+                      <span className="font-medium">
+                        {t.pages.lots.shippingCompany}:
+                      </span>{' '}
+                      {detail.shippingCompany}
+                    </div>
+                    <div>
+                      <span className="font-medium">
+                        {t.pages.lotArrivals.status.label}:
+                      </span>{' '}
+                      {getDetailStatusBadge(getDetailStatus(detail))}
+                    </div>
                   </div>
-                  <div>
-                    <span className="font-medium">
-                      {t.pages.lots.quantity}:
-                    </span>{' '}
-                    {detail.quantity}
-                  </div>
-                  <div>
-                    <span className="font-medium">
-                      {t.pages.lots.price}:
-                    </span>{' '}
-                    {Number(detail.price).toFixed(2)} MAD
-                  </div>
-                  <div>
-                    <span className="font-medium">
-                      {t.pages.lots.shippingCompany}:
-                    </span>{' '}
-                    {detail.shippingCompany}
-                  </div>
-                  <div>
-                    <span className="font-medium">
-                      {t.pages.lotArrivals.status.label}:
-                    </span>{' '}
-                    {getDetailStatusBadge(getDetailStatus(detail))}
+                  <div className="flex gap-1 ml-2">
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleEditDetail(lot, detail)}
+                    >
+                      <Edit className="h-4 w-4" />
+                    </Button>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDeleteDetail(lot.id, detail.id)}
+                    >
+                      <Trash2 className="h-4 w-4 text-destructive" />
+                    </Button>
                   </div>
                 </div>
                 {detail.pieceDetails && detail.pieceDetails.length > 0 && (
@@ -428,6 +474,23 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
             onSuccess={fetchLots}
           />
         </>
+      )}
+
+      {selectedLotDetail && selectedLot && (
+        <EditLotDetailDialog
+          open={editDetailDialogOpen}
+          onOpenChange={setEditDetailDialogOpen}
+          lotDetail={selectedLotDetail}
+          onSuccess={() => {
+            // Refresh lot details
+            lotsApi.getLotDetailsByLotId(selectedLot.id).then((details) => {
+              setLotDetails((prev) => ({
+                ...prev,
+                [selectedLot.id]: details,
+              }));
+            });
+          }}
+        />
       )}
     </>
   );

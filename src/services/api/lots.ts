@@ -21,6 +21,7 @@ export interface PieceDetail {
   name: string;
   quantity: number;
   status: string;
+  color?: string;
 }
 
 export interface Lot {
@@ -48,6 +49,10 @@ export interface LotDetail {
   shippingCompanyCity: string;
   pieceDetails: PieceDetail[];
   notes?: string;
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
   createdAt: string;
   updatedAt: string;
   arrivals?: LotArrival[];
@@ -65,6 +70,10 @@ export interface LotArrival {
   pieceDetails: PieceDetail[];
   status: ArrivalStatus;
   notes?: string;
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
   verifiedAt?: string;
   createdAt: string;
   updatedAt: string;
@@ -97,6 +106,10 @@ export interface CreateLotDetailDto {
   shippingCompanyCity: string;
   pieceDetails: PieceDetail[];
   notes?: string;
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
 }
 
 export interface UpdateLotDetailDto {
@@ -106,6 +119,10 @@ export interface UpdateLotDetailDto {
   shippingCompanyCity?: string;
   pieceDetails?: PieceDetail[];
   notes?: string;
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
 }
 
 export interface UpdateLotArrivalDto {
@@ -116,6 +133,10 @@ export interface UpdateLotArrivalDto {
   pieceDetails?: PieceDetail[];
   status?: ArrivalStatus;
   notes?: string;
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
 }
 
 export interface PaginatedLotsResponse {
