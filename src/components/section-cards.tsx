@@ -65,9 +65,9 @@ export function SectionCards() {
   };
 
   return (
-    <div className="px-4  lg:px-6">
+    <div className="px-4 lg:px-6">
       {/* Mobile: Stacked cards */}
-      <div className="relative md:h-70 h-40 md:hidden">
+      <div className="relative md:h-70 h-40 md:hidden overflow-hidden">
         {CARD_KEYS.map((key, index) => {
           const card: CardType = apiData[index];
           const TrendIcon =

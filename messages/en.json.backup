@@ -280,6 +280,7 @@
           }
         }
       },
+
       "dialogs": {
         "orderDetails": {
           "title": "Order #{orderNumber} Details",
@@ -572,125 +573,6 @@
             "totalOrders": "Total Orders",
             "totalRevenue": "Total Revenue",
             "totalProducts": "Total Products"
-          }
-        },
-        "dailyCashSummary": {
-          "title": "Daily Cash Summary",
-          "loading": "Loading...",
-          "labels": {
-            "totalCash": "Total Cash",
-            "orders": "Orders",
-            "avgOrderValue": "Avg Order Value",
-            "itemsSold": "Items Sold",
-            "completedPayments": "Completed Payments",
-            "pendingPayments": "Pending Payments"
-          }
-        },
-        "lowStockAlerts": {
-          "title": "Low Stock Alerts",
-          "loading": "Loading...",
-          "productsNeedAttention": "products need attention",
-          "allWellStocked": "All products are well-stocked!",
-          "labels": {
-            "stock": "Stock",
-            "alert": "Alert"
-          }
-        },
-        "profitTracking": {
-          "title": "Profit Tracking",
-          "loading": "Loading...",
-          "description": "profit analysis",
-          "labels": {
-            "totalRevenue": "Total Revenue",
-            "totalCost": "Total Cost",
-            "totalProfit": "Total Profit",
-            "avgProfitMargin": "Average Profit Margin",
-            "bestDay": "Best Day",
-            "worstDay": "Worst Day",
-            "lastDays": "Last {days} days"
-          },
-          "selectPeriodPlaceholder": "Select period",
-          "periods": {
-            "90d": "90 Days",
-            "30d": "30 Days",
-            "7d": "7 Days"
-          },
-          "chartLabels": {
-            "revenue": "Revenue",
-            "grossProfit": "Gross Profit",
-            "cost": "Cost"
-          }
-        },
-        "bestSellingProducts": {
-          "title": "Best Selling Products",
-          "loading": "Loading...",
-          "description": "Top 10 products by sales volume",
-          "labels": {
-            "unitsSold": "units sold",
-            "orders": "orders",
-            "stock": "Stock",
-            "avg": "avg",
-            "outOfStock": "Out of Stock",
-            "low": "Low",
-            "daysLeft": "d left",
-            "ok": "OK"
-          }
-        },
-        "hourlyPattern": {
-          "title": "Hourly Sales Pattern",
-          "loading": "Loading...",
-          "description": "Last {days} days average",
-          "labels": {
-            "busiestHour": "Busiest Hour",
-            "slowestHour": "Slowest Hour",
-            "peakHours": "Peak Hours",
-            "orders": "orders"
-          },
-          "chartLabels": {
-            "orders": "Orders",
-            "revenue": "Revenue"
-          }
-        },
-        "weeklyTrends": {
-          "title": "Weekly Trends",
-          "loading": "Loading...",
-          "description": "weeks performance",
-          "labels": {
-            "trend": "Trend",
-            "avgRevenue": "Avg Revenue",
-            "avgOrders": "Avg Orders",
-            "bestWeek": "Best Week",
-            "worstWeek": "Worst Week",
-            "growing": "GROWING",
-            "stable": "STABLE",
-            "declining": "DECLINING",
-            "lastWeeks": "Last {weeks} weeks"
-          },
-          "selectPeriodPlaceholder": "Select period",
-          "periods": {
-            "12w": "12 Weeks",
-            "8w": "8 Weeks",
-            "4w": "4 Weeks"
-          },
-          "chartLabels": {
-            "revenue": "Revenue",
-            "orders": "Orders"
-          }
-        },
-        "stockValue": {
-          "title": "Stock Value Summary",
-          "loading": "Loading...",
-          "description": "Total inventory worth on shelf",
-          "labels": {
-            "totalValue": "Total Value",
-            "totalUnits": "Total Units",
-            "products": "Products",
-            "skus": "SKUs",
-            "byCategory": "By Category",
-            "topProducts": "Top Products",
-            "units": "units",
-            "variants": "variants",
-            "avg": "avg"
           }
         }
       }
