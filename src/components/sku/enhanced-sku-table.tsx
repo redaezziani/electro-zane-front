@@ -79,6 +79,7 @@ export function EnhancedSKUTable({}: EnhancedSKUTableProps) {
   const [printLabelsDialogOpen, setPrintLabelsDialogOpen] = useState(false);
   const [skuToPrint, setSKUToPrint] = useState<ProductSKU | null>(null);
   const [labelCount, setLabelCount] = useState(1);
+  const [imeiNumber, setImeiNumber] = useState("");
 
   const { locale } = useLocale();
   const t = getMessages(locale);
@@ -173,6 +174,7 @@ export function EnhancedSKUTable({}: EnhancedSKUTableProps) {
   const handlePrintLabels = (sku: ProductSKU) => {
     setSKUToPrint(sku);
     setLabelCount(1);
+    setImeiNumber(""); // Reset IMEI for each print
     setPrintLabelsDialogOpen(true);
   };
 
@@ -186,41 +188,71 @@ export function EnhancedSKUTable({}: EnhancedSKUTableProps) {
       return;
     }
 
+    // Get product and variant info from the flattened SKU data
+    const skuData = allSKUs.find(s => s.id === skuToPrint.id);
+    const productName = skuData?.productName || '';
+    const variantName = skuData?.variantName || '';
+
+    // Check if IMEI was entered (indicates this is a phone)
+    const isPhone = imeiNumber.trim().length > 0;
+
     // Create single label template for thermal printer (XP-360B - 80mm width, 203 dpi)
-    // The printer will handle multiple copies based on user's print settings
     const labelTemplate = `
       <div class="label" style="
         width: 80mm;
-        padding: 8mm 4mm;
+        padding: 2mm 3mm;
         page-break-inside: avoid;
         display: block;
         box-sizing: border-box;
       ">
-        <div style="
-          text-align: center;
-          font-size: 14px;
-          font-weight: bold;
-          font-family: 'Courier New', monospace;
-          margin-bottom: 4mm;
-          letter-spacing: 1px;
-        ">
-          ${skuToPrint.sku}
-        </div>
-        <div style="
-          text-align: center;
-          margin: 3mm 0;
-        ">
-          <svg id="barcode"></svg>
-        </div>
+        <!-- Product Name -->
         <div style="
           text-align: center;
           font-size: 11px;
-          font-family: 'Courier New', monospace;
-          color: #333;
-          margin-top: 2mm;
+          font-weight: bold;
+          font-family: Arial, sans-serif;
+          margin-bottom: 1mm;
+          line-height: 1.1;
+          max-height: 6mm;
+          overflow: hidden;
+          word-wrap: break-word;
         ">
-          ${skuToPrint.barcode || skuToPrint.sku}
+          ${productName}
         </div>
+
+        <!-- Variant Name -->
+        ${variantName ? `<div style="
+          text-align: center;
+          font-size: 8px;
+          font-family: Arial, sans-serif;
+          color: #555;
+          margin-bottom: 1mm;
+          line-height: 1;
+        ">
+          ${variantName}
+        </div>` : ''}
+
+        <!-- Barcode -->
+        <div style="
+          text-align: center;
+          margin: 1mm 0;
+          overflow: hidden;
+        ">
+          <svg id="barcode"></svg>
+        </div>
+
+        <!-- IMEI (if phone) -->
+        ${isPhone ? `<div style="
+          text-align: center;
+          font-size: 9px;
+          font-family: 'Courier New', monospace;
+          color: #000;
+          margin-top: 1mm;
+          font-weight: bold;
+          letter-spacing: 0.2px;
+        ">
+          IMEI: ${imeiNumber}
+        </div>` : ''}
       </div>
     `;
 
@@ -228,7 +260,7 @@ export function EnhancedSKUTable({}: EnhancedSKUTableProps) {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>Print Labels - ${skuToPrint.sku}</title>
+          <title>Print Label - ${skuToPrint.sku}</title>
           <meta charset="UTF-8">
           <script src="https://cdn.jsdelivr.net/npm/jsbarcode@3.11.5/dist/JsBarcode.all.min.js"></script>
           <style>
@@ -262,17 +294,18 @@ export function EnhancedSKUTable({}: EnhancedSKUTableProps) {
           ${labelTemplate}
           <script>
             window.onload = function() {
-              // Generate barcode
+              // Generate barcode - always uses the original barcode/SKU number
+              // Smaller width (1.5) and height (30) to fit within 80mm sticker
               JsBarcode("#barcode", "${skuToPrint.barcode || skuToPrint.sku}", {
                 format: "CODE128",
-                width: 2,
-                height: 50,
+                width: 1.5,
+                height: 30,
                 displayValue: false,
                 margin: 0,
-                fontSize: 14
+                fontSize: 0
               });
 
-              // Open print dialog - user will set number of copies to ${labelCount}
+              // Open print dialog
               setTimeout(() => {
                 window.print();
               }, 500);
@@ -650,9 +683,30 @@ export function EnhancedSKUTable({}: EnhancedSKUTableProps) {
                 className="col-span-3"
               />
             </div>
+
+            <div className="grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="imei" className="text-right">
+                IMEI
+              </Label>
+              <Input
+                id="imei"
+                type="text"
+                placeholder="Enter IMEI (optional, for phones)"
+                value={imeiNumber}
+                onChange={(e) => setImeiNumber(e.target.value)}
+                className="col-span-3"
+                maxLength={15}
+              />
+            </div>
+
             <div className="text-sm text-muted-foreground">
               <div className="font-medium mb-1">SKU: {skuToPrint?.sku}</div>
               <div>Barcode: {skuToPrint?.barcode || skuToPrint?.sku}</div>
+              {imeiNumber && (
+                <div className="mt-2 text-blue-600 font-medium">
+                  ✓ IMEI will be printed on label
+                </div>
+              )}
             </div>
           </div>
           <DialogFooter>

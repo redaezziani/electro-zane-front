@@ -187,7 +187,7 @@ export function AppSidebar({
                     d="M 15.00,157.32 C 9.54,157.33 4.58,157.33 -1.22,157.33 C 9.28,138.97 19.04,121.87 29.59,103.42 C 40.12,121.82 50.84,138.85 62.40,157.32 C 49.61,157.32 38.56,157.32 15.00,157.32 Z"
                   />
                 </svg> */}
-                <img src="/icon.png" alt="Store Manager" className="h-6" />
+                <img src="/icon.png" alt="Store Manager" className="h-14" />
                 <span className="text-base text-primary font-semibold">
                   {t('storeManager')}
                 </span>

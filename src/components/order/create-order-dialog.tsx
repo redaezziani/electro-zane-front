@@ -75,16 +75,17 @@ export function CreateOrderDialog({
     customerPhone: '',
     customerEmail: '',
     customerAddress: {},
-    items: [{ skuId: '', quantity: 1 }],
+    items: [{ skuId: '', quantity: 1, imei: '' }],
     deliveryLat: lat ?? undefined,
     deliveryLng: lng ?? undefined,
     deliveryPlace: place || '',
     notes: '',
     trackingNumber: '',
+    language: locale || 'en',
   });
 
   const [errors, setErrors] = useState({
-    items: [{ skuId: '', quantity: '' }],
+    items: [{ skuId: '', quantity: '', imei: '' }],
   });
 
   useEffect(() => {
@@ -169,18 +170,18 @@ export function CreateOrderDialog({
           setFormData((prev) => ({
             ...prev,
             items: prev.items.map((item, idx) =>
-              idx === emptyIndex ? { skuId: foundSku.id, quantity: 1 } : item,
+              idx === emptyIndex ? { skuId: foundSku.id, quantity: 1, imei: '' } : item,
             ),
           }));
         } else {
           // Add new item
           setFormData((prev) => ({
             ...prev,
-            items: [...prev.items, { skuId: foundSku.id, quantity: 1 }],
+            items: [...prev.items, { skuId: foundSku.id, quantity: 1, imei: '' }],
           }));
           setErrors((prev) => ({
             ...prev,
-            items: [...prev.items, { skuId: '', quantity: '' }],
+            items: [...prev.items, { skuId: '', quantity: '', imei: '' }],
           }));
         }
         toast.success(
@@ -218,11 +219,11 @@ export function CreateOrderDialog({
   const addOrderItem = () => {
     setFormData((prev) => ({
       ...prev,
-      items: [...prev.items, { skuId: '', quantity: 1 }],
+      items: [...prev.items, { skuId: '', quantity: 1, imei: '' }],
     }));
     setErrors((prev) => ({
       ...prev,
-      items: [...prev.items, { skuId: '', quantity: '' }],
+      items: [...prev.items, { skuId: '', quantity: '', imei: '' }],
     }));
   };
 
@@ -241,19 +242,30 @@ export function CreateOrderDialog({
     e.preventDefault();
 
     const newErrors = {
-      items: formData.items.map(() => ({ skuId: '', quantity: '' })),
+      items: formData.items.map(() => ({ skuId: '', quantity: '', imei: '' })),
     };
 
     formData.items.forEach((item, idx) => {
       if (!item.skuId) newErrors.items[idx].skuId = t.errors?.skuRequired;
       if (!item.quantity || item.quantity < 1)
         newErrors.items[idx].quantity = t.errors?.quantityMin;
+
+      // Check if product is a phone and IMEI is required
+      const selectedProduct = products.find(p =>
+        p.variants?.some(v => v.skus?.some(s => s.id === item.skuId))
+      );
+      const isPhone = selectedProduct?.categories?.some(cat =>
+        cat.name.toLowerCase().includes('phone')
+      );
+      if (isPhone && item.imei && item.imei.length !== 15) {
+        newErrors.items[idx].imei = 'IMEI must be 15 digits';
+      }
     });
 
     setErrors(newErrors);
 
     if (
-      newErrors.items.some((itemErr) => itemErr.skuId || itemErr.quantity)
+      newErrors.items.some((itemErr) => itemErr.skuId || itemErr.quantity || itemErr.imei)
     )
       return;
 
@@ -269,13 +281,14 @@ export function CreateOrderDialog({
         items: formData.items.map((item) => ({
           skuId: item.skuId,
           quantity: item.quantity,
+          imei: item.imei || undefined,
         })),
         deliveryLat: formData.deliveryLat,
         deliveryLng: formData.deliveryLng,
         deliveryPlace: formData.deliveryPlace,
         notes: formData.notes,
         trackingNumber: formData.trackingNumber,
-        language: locale, // Add user's current locale for PDF generation
+        language: formData.language,
       };
 
       // @ts-expect-error - Backend doesn't require all Order fields, calculates them server-side
@@ -286,15 +299,16 @@ export function CreateOrderDialog({
         customerPhone: '',
         customerEmail: '',
         customerAddress: {},
-        items: [{ skuId: '', quantity: 1 }],
+        items: [{ skuId: '', quantity: 1, imei: '' }],
         deliveryLat: lat ?? undefined,
         deliveryLng: lng ?? undefined,
         deliveryPlace: place || '',
         notes: '',
         trackingNumber: '',
+        language: locale || 'en',
       });
       setErrors({
-        items: [{ skuId: '', quantity: '' }],
+        items: [{ skuId: '', quantity: '', imei: '' }],
       });
       setIsDialogOpen(false);
     } catch (error) {
@@ -392,6 +406,27 @@ export function CreateOrderDialog({
             </div>
           </div>
 
+          {/* Invoice Language */}
+          <div className="space-y-2">
+            <Label htmlFor="language">Invoice Language</Label>
+            <Select
+              value={formData.language}
+              onValueChange={(val) =>
+                setFormData((prev) => ({ ...prev, language: val }))
+              }
+            >
+              <SelectTrigger>
+                <SelectValue placeholder="Select language" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="en">English</SelectItem>
+                <SelectItem value="ar">Arabic (العربية)</SelectItem>
+                <SelectItem value="fr">French (Français)</SelectItem>
+                <SelectItem value="es">Spanish (Español)</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
+
           {/* Barcode Scanner Status */}
           <div className="space-y-2 border rounded-md p-3 bg-muted/30">
             <div className="flex items-center gap-2">
@@ -470,6 +505,41 @@ export function CreateOrderDialog({
                     )}
                   </div>
                 </div>
+
+                {/* IMEI field for phones */}
+                {(() => {
+                  const selectedProduct = products.find(p =>
+                    p.variants?.some(v => v.skus?.some(s => s.id === item.skuId))
+                  );
+                  const isPhone = selectedProduct?.categories?.some(cat =>
+                    cat.name.toLowerCase().includes('phone')
+                  );
+
+                  if (isPhone) {
+                    return (
+                      <div className="space-y-2">
+                        <Label htmlFor={`imei-${idx}`}>IMEI (15 digits)</Label>
+                        <Input
+                          id={`imei-${idx}`}
+                          type="text"
+                          maxLength={15}
+                          value={item.imei}
+                          onChange={(e) =>
+                            handleItemChange(idx, 'imei', e.target.value)
+                          }
+                          placeholder="Enter IMEI number"
+                        />
+                        {errors.items[idx]?.imei && (
+                          <p className="text-sm text-destructive">
+                            {errors.items[idx].imei}
+                          </p>
+                        )}
+                      </div>
+                    );
+                  }
+                  return null;
+                })()}
+
                 <div className="flex justify-end gap-2">
                   {formData.items.length > 1 && (
                     <Button

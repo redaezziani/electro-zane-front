@@ -49,7 +49,7 @@ interface UpdateOrderPayload {
   status?: string;
   paymentStatus?: string;
   language?: string;
-  items?: { skuId: string; quantity: number }[];
+  items?: { skuId: string; quantity: number; imei?: string }[];
 }
 
 export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
@@ -70,7 +70,8 @@ export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
     trackingNumber: order.trackingNumber,
     status: order.status,
     paymentStatus: order.paymentStatus,
-    items: order.items.map((i) => ({ skuId: i.skuId, quantity: i.quantity })),
+    language: order.language || 'en',
+    items: order.items.map((i) => ({ skuId: i.skuId, quantity: i.quantity, imei: '' })),
   });
 
   const [errors, setErrors] = useState<
@@ -93,7 +94,7 @@ export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
   const addOrderItem = () => {
     setForm((prev) => ({
       ...prev,
-      items: [...(prev.items || []), { skuId: "", quantity: 1 }],
+      items: [...(prev.items || []), { skuId: "", quantity: 1, imei: "" }],
     }));
   };
 
@@ -116,8 +117,8 @@ export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
     if (Object.keys(newErrors).length) return;
 
     try {
-      // Include user's current locale for PDF regeneration
-      await updateOrder(order.id, { ...form, language: locale });
+      // Use the form's language (not the UI locale)
+      await updateOrder(order.id, form);
       toast.success(t.toast?.success || "Order updated successfully");
     } catch (err) {
       toast.error(t.toast?.failed || "Failed to update order");
@@ -298,6 +299,24 @@ export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
                   {errors.paymentStatus}
                 </p>
               )}
+            </div>
+
+            <div className="space-y-1 col-span-2">
+              <Label htmlFor="language">Invoice Language</Label>
+              <Select
+                value={form.language || "en"}
+                onValueChange={(v) => handleChange("language", v)}
+              >
+                <SelectTrigger id="language">
+                  <SelectValue placeholder="Select language" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="en">English</SelectItem>
+                  <SelectItem value="ar">Arabic (العربية)</SelectItem>
+                  <SelectItem value="fr">French (Français)</SelectItem>
+                  <SelectItem value="es">Spanish (Español)</SelectItem>
+                </SelectContent>
+              </Select>
             </div>
           </section>
 
