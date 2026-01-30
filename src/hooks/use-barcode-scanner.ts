@@ -6,18 +6,25 @@ interface BarcodeScannerOptions {
   onScan: (barcode: string) => void;
   minLength?: number;
   timeout?: number;
+  enabled?: boolean;
 }
 
 export function useBarcodeScanner({
   onScan,
   minLength = 3,
   timeout = 100,
+  enabled = true,
 }: BarcodeScannerOptions) {
   const [isScanning, setIsScanning] = useState(false);
   const bufferRef = useRef<string>("");
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // Don't attach listener if disabled
+    if (!enabled) {
+      return;
+    }
+
     const handleKeyPress = (e: KeyboardEvent) => {
       // Ignore if user is typing in ANY input field or textarea
       // The BarcodeInput component handles its own scanning
@@ -70,7 +77,7 @@ export function useBarcodeScanner({
         clearTimeout(timeoutRef.current);
       }
     };
-  }, [onScan, minLength, timeout]);
+  }, [onScan, minLength, timeout, enabled]);
 
   return { isScanning };
 }

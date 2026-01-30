@@ -28,7 +28,7 @@ import {
   SheetTitle,
 } from '@/components/ui/sheet';
 import { Separator } from '@/components/ui/separator';
-import { MoreHorizontal, Trash2, Package, CloudDownload } from 'lucide-react';
+import { MoreHorizontal, Trash2, Package, CloudDownload, Plus } from 'lucide-react';
 import { useOrdersStore, type Order } from '@/stores/orders-store';
 import { toast } from 'sonner';
 import PaginationTable from '@/components/pagination-table';
@@ -45,6 +45,7 @@ export function EnhancedOrderTable() {
   const [search, setSearch] = useSearchQuery('q', 400);
   const [scannedOrder, setScannedOrder] = useState<Order | null>(null);
   const [orderDetailsOpen, setOrderDetailsOpen] = useState(false);
+  const [createOrderDialogOpen, setCreateOrderDialogOpen] = useState(false);
   const {
     orders,
     loading,
@@ -162,10 +163,11 @@ export function EnhancedOrderTable() {
     }
   };
 
-  // Enable global barcode scanner
+  // Enable global barcode scanner (only when create order dialog is closed)
   useBarcodeScanner({
     onScan: handleBarcodeScanned,
     minLength: 5, // Order numbers are typically longer
+    enabled: !createOrderDialogOpen, // Disable when create order dialog is open
   });
 
   const columns: TableColumn<Order>[] = [
@@ -339,7 +341,19 @@ export function EnhancedOrderTable() {
                 ) || `Delete Selected (${selectedOrders.length})`}
               </Button>
             )}
-            <CreateOrderDialog />
+            <CreateOrderDialog
+              isOpen={createOrderDialogOpen}
+              onClose={() => setCreateOrderDialogOpen(false)}
+              trigger={
+                <Button
+                  className="flex items-center gap-2"
+                  onClick={() => setCreateOrderDialogOpen(true)}
+                >
+                  <Plus className="h-4 w-4" />
+                  {t.dialogs?.createOrder?.trigger || 'Add Order'}
+                </Button>
+              }
+            />
           </div>
         }
       />
