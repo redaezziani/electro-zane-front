@@ -21,6 +21,13 @@ import {
   AlertDialogHeader,
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+} from '@/components/ui/sheet';
+import { Separator } from '@/components/ui/separator';
 import { MoreHorizontal, Trash2, Package, CloudDownload } from 'lucide-react';
 import { useOrdersStore, type Order } from '@/stores/orders-store';
 import { toast } from 'sonner';
@@ -32,9 +39,12 @@ import UpdateOrderSheet from './edit-order-sheet';
 import { IconCircleCheckFilled } from '@tabler/icons-react';
 import { useLocale } from '@/components/local-lang-swither';
 import { getMessages } from '@/lib/locale';
+import { useBarcodeScanner } from '@/hooks/use-barcode-scanner';
 
 export function EnhancedOrderTable() {
   const [search, setSearch] = useSearchQuery('q', 400);
+  const [scannedOrder, setScannedOrder] = useState<Order | null>(null);
+  const [orderDetailsOpen, setOrderDetailsOpen] = useState(false);
   const {
     orders,
     loading,
@@ -133,6 +143,30 @@ export function EnhancedOrderTable() {
       toast.error(t.toast?.noInvoice ?? 'No invoice available');
     }
   };
+
+  // Barcode scanner to open order details
+  const handleBarcodeScanned = async (barcode: string) => {
+    console.log('🔍 Order barcode scanned:', barcode);
+
+    // Find order by orderNumber (barcode matches order number)
+    const order = orders.find((o) => o.orderNumber === barcode);
+
+    if (order) {
+      console.log('✅ Order found:', order.orderNumber);
+      setScannedOrder(order);
+      setOrderDetailsOpen(true);
+      toast.success(`Order ${order.orderNumber} opened`);
+    } else {
+      console.log('❌ Order not found for barcode:', barcode);
+      toast.error(`Order ${barcode} not found`);
+    }
+  };
+
+  // Enable global barcode scanner
+  useBarcodeScanner({
+    onScan: handleBarcodeScanned,
+    minLength: 5, // Order numbers are typically longer
+  });
 
   const columns: TableColumn<Order>[] = [
     {
@@ -382,6 +416,73 @@ export function EnhancedOrderTable() {
           onPageChange={setPage}
           onPageSizeChange={setPageSize}
         />
+      )}
+
+      {/* Scanned Order Details Sheet */}
+      {scannedOrder && (
+        <Sheet open={orderDetailsOpen} onOpenChange={setOrderDetailsOpen}>
+          <SheetContent className="w-full px-4 sm:min-w-167.5 lg:w-175 xl:w-225 overflow-y-auto">
+            <SheetHeader>
+              <SheetTitle>
+                Order Details - {scannedOrder.orderNumber}
+              </SheetTitle>
+            </SheetHeader>
+
+            <div className="space-y-6 py-4">
+              {/* General Info */}
+              <section>
+                <h3 className="text-lg font-semibold mb-3">General Information</h3>
+                <div className="space-y-2">
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Order Number:</span>
+                    <span className="font-medium">{scannedOrder.orderNumber}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Status:</span>
+                    <Badge>{scannedOrder.status}</Badge>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Payment Status:</span>
+                    <Badge>{scannedOrder.paymentStatus}</Badge>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Customer:</span>
+                    <span>{scannedOrder.customerName}</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-muted-foreground">Phone:</span>
+                    <span>{scannedOrder.customerPhone}</span>
+                  </div>
+                </div>
+              </section>
+
+              <Separator />
+
+              {/* Order Items */}
+              <section>
+                <h3 className="text-lg font-semibold mb-3">Order Items</h3>
+                <div className="space-y-2">
+                  {scannedOrder.items?.map((item, idx) => (
+                    <div key={idx} className="flex justify-between p-2 bg-muted rounded">
+                      <span>{item.productName} x {item.quantity}</span>
+                      <span>{formatCurrency(Number(item.totalPrice))}</span>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              <Separator />
+
+              {/* Total */}
+              <section>
+                <div className="flex justify-between text-lg font-bold">
+                  <span>Total:</span>
+                  <span>{formatCurrency(Number(scannedOrder.totalAmount))}</span>
+                </div>
+              </section>
+            </div>
+          </SheetContent>
+        </Sheet>
       )}
     </div>
   );
