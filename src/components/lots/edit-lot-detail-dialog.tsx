@@ -84,12 +84,12 @@ export function EditLotDetailDialog({
     try {
       setLoading(true);
       await lotsApi.updateLotDetail(lotDetail.id, data);
-      toast.success(t.pages.lots.updateDetailSuccess || "Lot detail updated successfully");
+      toast.success("Lot detail updated successfully");
       onOpenChange(false);
       onSuccess();
     } catch (error) {
       console.error("Failed to update lot detail:", error);
-      toast.error(t.pages.lots.updateDetailError || "Failed to update lot detail");
+      toast.error("Failed to update lot detail");
     } finally {
       setLoading(false);
     }
