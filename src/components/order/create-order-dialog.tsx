@@ -81,7 +81,7 @@ export function CreateOrderDialog({
     deliveryPlace: place || '',
     notes: '',
     trackingNumber: '',
-    language: locale || 'en',
+    language: (locale || 'en') as string,
   });
 
   const [errors, setErrors] = useState({
@@ -305,7 +305,7 @@ export function CreateOrderDialog({
         deliveryPlace: place || '',
         notes: '',
         trackingNumber: '',
-        language: locale || 'en',
+        language: (locale || 'en') as string,
       });
       setErrors({
         items: [{ skuId: '', quantity: '', imei: '' }],

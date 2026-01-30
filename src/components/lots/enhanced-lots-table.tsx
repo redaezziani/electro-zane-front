@@ -165,11 +165,11 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
   };
 
   const handleDeleteDetail = async (lotId: string, detailId: string) => {
-    if (!confirm(t.pages.lots.confirmDeleteDetail || 'Are you sure you want to delete this lot detail?')) return;
+    if (!confirm('Are you sure you want to delete this lot detail?')) return;
 
     try {
       await lotsApi.deleteLotDetail(detailId);
-      toast.success(t.pages.lots.deleteDetailSuccess || 'Lot detail deleted successfully');
+      toast.success('Lot detail deleted successfully');
 
       // Refresh lot details
       const details = await lotsApi.getLotDetailsByLotId(lotId);
@@ -179,7 +179,7 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
       }));
     } catch (error) {
       console.error('Failed to delete lot detail:', error);
-      toast.error(t.pages.lots.deleteDetailError || 'Failed to delete lot detail');
+      toast.error('Failed to delete lot detail');
     }
   };
 
