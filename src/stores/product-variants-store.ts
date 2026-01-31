@@ -15,7 +15,8 @@ export interface ProductSKU {
   id: string;
   sku: string;
   barcode?: string;
-  price: number;
+  initPrice?: number; // Initial/cost price (what we bought it for)
+  price: number; // Selling price
   stock: number;
   lowStockAlert: number;
   weight?: number;
@@ -71,7 +72,8 @@ export interface CreateProductVariantDto {
 export interface CreateProductSKUDto {
   sku?: string;
   barcode?: string;
-  price: number; // required
+  initPrice?: number; // Initial/cost price (what we bought it for)
+  price: number; // Selling price (required)
   stock: number; // ✅ always send number
   lowStockAlert?: number;
   weight?: number;

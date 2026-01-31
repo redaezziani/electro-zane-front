@@ -44,6 +44,7 @@ const editSKUSchema = z.object({
   variantId: z.string().min(1),
   sku: z.string().min(1),
   barcode: z.string().optional(),
+  initPrice: z.number().min(0),
   price: z.number().min(0),
   stock: z.number().min(0),
   lowStockAlert: z.number().min(0),
@@ -85,6 +86,7 @@ export function EditSKUDialog({ open, onOpenChange, sku }: EditSKUDialogProps) {
       variantId: '',
       sku: '',
       barcode: '',
+      initPrice: 0,
       price: 0,
       stock: 0,
       lowStockAlert: 5,
@@ -110,6 +112,7 @@ export function EditSKUDialog({ open, onOpenChange, sku }: EditSKUDialogProps) {
         variantId: sku.variantId || '',
         sku: sku.sku,
         barcode: sku.barcode || '',
+        initPrice: sku.initPrice || 0,
         price: sku.price,
         stock: sku.stock,
         lowStockAlert: sku.lowStockAlert,
@@ -129,6 +132,7 @@ export function EditSKUDialog({ open, onOpenChange, sku }: EditSKUDialogProps) {
       const formData = new FormData();
       formData.append('sku', data.sku);
       if (data.barcode) formData.append('barcode', data.barcode);
+      formData.append('initPrice', String(data.initPrice));
       formData.append('price', String(data.price));
       formData.append('stock', String(data.stock));
       formData.append('lowStockAlert', String(data.lowStockAlert));
@@ -257,9 +261,9 @@ export function EditSKUDialog({ open, onOpenChange, sku }: EditSKUDialogProps) {
               ))}
             </div>
 
-            {/* Pricing */}
-            <div className="grid grid-cols-1 gap-4">
-              {['price'].map((name) => (
+            {/* Init Price & Selling Price */}
+            <div className="grid grid-cols-2 gap-4">
+              {['initPrice', 'price'].map((name) => (
                 <FormField
                   key={name}
                   control={form.control}

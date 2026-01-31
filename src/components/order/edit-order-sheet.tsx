@@ -49,7 +49,7 @@ interface UpdateOrderPayload {
   status?: string;
   paymentStatus?: string;
   language?: string;
-  items?: { skuId: string; quantity: number; imei?: string }[];
+  items?: { skuId: string; quantity: number; sellPrice?: number; imei?: string }[];
 }
 
 export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
@@ -71,7 +71,7 @@ export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
     status: order.status,
     paymentStatus: order.paymentStatus,
     language: order.language || 'en',
-    items: order.items.map((i) => ({ skuId: i.skuId, quantity: i.quantity, imei: '' })),
+    items: order.items.map((i) => ({ skuId: i.skuId, quantity: i.quantity, sellPrice: i.sellPrice || undefined, imei: '' })),
   });
 
   const [errors, setErrors] = useState<
@@ -94,7 +94,7 @@ export default function UpdateOrderSheet({ order }: UpdateOrderSheetProps) {
   const addOrderItem = () => {
     setForm((prev) => ({
       ...prev,
-      items: [...(prev.items || []), { skuId: "", quantity: 1, imei: "" }],
+      items: [...(prev.items || []), { skuId: "", quantity: 1, sellPrice: undefined, imei: "" }],
     }));
   };
 

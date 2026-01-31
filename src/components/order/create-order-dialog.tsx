@@ -75,7 +75,7 @@ export function CreateOrderDialog({
     customerPhone: '',
     customerEmail: '',
     customerAddress: {},
-    items: [{ skuId: '', quantity: 1, imei: '' }],
+    items: [{ skuId: '', quantity: 1, sellPrice: undefined as number | undefined, imei: '' }],
     deliveryLat: lat ?? undefined,
     deliveryLng: lng ?? undefined,
     deliveryPlace: place || '',
@@ -85,7 +85,7 @@ export function CreateOrderDialog({
   });
 
   const [errors, setErrors] = useState({
-    items: [{ skuId: '', quantity: '', imei: '' }],
+    items: [{ skuId: '', quantity: '', sellPrice: '', imei: '' }],
   });
 
   useEffect(() => {
@@ -170,18 +170,18 @@ export function CreateOrderDialog({
           setFormData((prev) => ({
             ...prev,
             items: prev.items.map((item, idx) =>
-              idx === emptyIndex ? { skuId: foundSku.id, quantity: 1, imei: '' } : item,
+              idx === emptyIndex ? { skuId: foundSku.id, quantity: 1, sellPrice: undefined, imei: '' } : item,
             ),
           }));
         } else {
           // Add new item
           setFormData((prev) => ({
             ...prev,
-            items: [...prev.items, { skuId: foundSku.id, quantity: 1, imei: '' }],
+            items: [...prev.items, { skuId: foundSku.id, quantity: 1, sellPrice: undefined, imei: '' }],
           }));
           setErrors((prev) => ({
             ...prev,
-            items: [...prev.items, { skuId: '', quantity: '', imei: '' }],
+            items: [...prev.items, { skuId: '', quantity: '', sellPrice: '', imei: '' }],
           }));
         }
         toast.success(
@@ -219,11 +219,11 @@ export function CreateOrderDialog({
   const addOrderItem = () => {
     setFormData((prev) => ({
       ...prev,
-      items: [...prev.items, { skuId: '', quantity: 1, imei: '' }],
+      items: [...prev.items, { skuId: '', quantity: 1, sellPrice: undefined, imei: '' }],
     }));
     setErrors((prev) => ({
       ...prev,
-      items: [...prev.items, { skuId: '', quantity: '', imei: '' }],
+      items: [...prev.items, { skuId: '', quantity: '', sellPrice: '', imei: '' }],
     }));
   };
 
@@ -242,7 +242,7 @@ export function CreateOrderDialog({
     e.preventDefault();
 
     const newErrors = {
-      items: formData.items.map(() => ({ skuId: '', quantity: '', imei: '' })),
+      items: formData.items.map(() => ({ skuId: '', quantity: '', sellPrice: '', imei: '' })),
     };
 
     formData.items.forEach((item, idx) => {
@@ -281,6 +281,7 @@ export function CreateOrderDialog({
         items: formData.items.map((item) => ({
           skuId: item.skuId,
           quantity: item.quantity,
+          sellPrice: item.sellPrice || undefined,
           imei: item.imei || undefined,
         })),
         deliveryLat: formData.deliveryLat,
@@ -299,7 +300,7 @@ export function CreateOrderDialog({
         customerPhone: '',
         customerEmail: '',
         customerAddress: {},
-        items: [{ skuId: '', quantity: 1, imei: '' }],
+        items: [{ skuId: '', quantity: 1, sellPrice: undefined, imei: '' }],
         deliveryLat: lat ?? undefined,
         deliveryLng: lng ?? undefined,
         deliveryPlace: place || '',
@@ -308,7 +309,7 @@ export function CreateOrderDialog({
         language: (locale || 'en') as string,
       });
       setErrors({
-        items: [{ skuId: '', quantity: '', imei: '' }],
+        items: [{ skuId: '', quantity: '', sellPrice: '', imei: '' }],
       });
       setIsDialogOpen(false);
     } catch (error) {
@@ -444,10 +445,16 @@ export function CreateOrderDialog({
           {/* Order Items */}
           <div className="space-y-2">
             <Label>{t.sections?.orderItems || 'Order Items'}</Label>
-            {formData.items.map((item, idx) => (
+            {formData.items.map((item, idx) => {
+              // Get selected SKU price to display
+              const selectedSku = products
+                .flatMap(p => p.variants?.flatMap(v => v.skus || []) || [])
+                .find(s => s.id === item.skuId);
+
+              return (
               <div key={idx} className="border rounded-md p-3 mb-2 space-y-3">
                 <div className="grid grid-cols-3 gap-2">
-                  <div className=" col-span-2 w-full">
+                  <div className="col-span-2 w-full">
                     <Label>{t.fields?.sku || 'SKU'}</Label>
                     <Select
                       value={item.skuId}
@@ -455,7 +462,7 @@ export function CreateOrderDialog({
                         handleItemChange(idx, 'skuId', val)
                       }
                     >
-                      <SelectTrigger className=" w-full">
+                      <SelectTrigger className="w-full">
                         <SelectValue
                           placeholder={
                             t.placeholders?.selectSKU || 'Select SKU'
@@ -470,7 +477,7 @@ export function CreateOrderDialog({
                                 (variant) =>
                                   variant.skus?.map((sku) => (
                                     <SelectItem key={sku.id} value={sku.id}>
-                                      {prod.name} - {sku.sku}
+                                      {prod.name} - {sku.sku} (${sku.price})
                                     </SelectItem>
                                   )) || [],
                               ) || [],
@@ -505,6 +512,38 @@ export function CreateOrderDialog({
                     )}
                   </div>
                 </div>
+
+                {/* Sell Price Field */}
+                {selectedSku && (
+                  <div className="space-y-2">
+                    <Label htmlFor={`sellPrice-${idx}`}>
+                      Custom Sell Price (Optional)
+                      <span className="text-xs text-muted-foreground ml-2">
+                        Default: ${selectedSku.price}
+                      </span>
+                    </Label>
+                    <Input
+                      id={`sellPrice-${idx}`}
+                      type="number"
+                      step="0.01"
+                      min={0}
+                      value={item.sellPrice || ''}
+                      onChange={(e) =>
+                        handleItemChange(
+                          idx,
+                          'sellPrice',
+                          e.target.value ? parseFloat(e.target.value) : undefined,
+                        )
+                      }
+                      placeholder={`Leave empty to use $${selectedSku.price}`}
+                    />
+                    {errors.items[idx]?.sellPrice && (
+                      <p className="text-sm text-destructive">
+                        {errors.items[idx].sellPrice}
+                      </p>
+                    )}
+                  </div>
+                )}
 
                 {/* IMEI field for phones */}
                 {(() => {
@@ -561,7 +600,8 @@ export function CreateOrderDialog({
                   )}
                 </div>
               </div>
-            ))}
+            );
+            })}
           </div>
 
           {/* Delivery */}

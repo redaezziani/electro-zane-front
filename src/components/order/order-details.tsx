@@ -155,7 +155,19 @@ export default function OrderDetails({ order }: OrderDetailsProps) {
                     </p>
                     <p className="text-xs">
                       {t.labels.qty.replace('{qty}', String(item.quantity))} ×{' '}
-                      {formatCurrency(item.unitPrice)}
+                      {item.sellPrice ? (
+                        <>
+                          <span className="line-through text-muted-foreground">
+                            {formatCurrency(item.unitPrice)}
+                          </span>
+                          {' '}
+                          <span className="text-green-600 font-medium">
+                            {formatCurrency(item.sellPrice)}
+                          </span>
+                        </>
+                      ) : (
+                        formatCurrency(item.unitPrice)
+                      )}
                     </p>
                   </div>
                   <p className="font-medium">

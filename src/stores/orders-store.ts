@@ -27,7 +27,8 @@ export interface SKUImage {
 export interface SKU {
   id: string;
   sku: string;
-  price: number;
+  initPrice?: number; // Initial/cost price (what we bought it for)
+  price: number; // Selling price
   coverImage: string;
   images: SKUImage[];
 }
@@ -38,7 +39,8 @@ export interface OrderItem {
   productName: string;
   skuCode: string;
   quantity: number;
-  unitPrice: number;
+  unitPrice: number; // Standard price from SKU
+  sellPrice?: number | null; // Optional: Actual selling price (if different from unitPrice)
   totalPrice: number;
   sku: SKU;
 }
@@ -93,7 +95,7 @@ interface UpdateOrderPayload {
   status?: string;
   paymentStatus?: string;
   language?: string;
-  items?: { skuId: string; quantity: number }[];
+  items?: { skuId: string; quantity: number; sellPrice?: number }[];
 }
 
 export interface OrdersResponse {
