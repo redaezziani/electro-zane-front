@@ -477,7 +477,7 @@ export function CreateOrderDialog({
                                 (variant) =>
                                   variant.skus?.map((sku) => (
                                     <SelectItem key={sku.id} value={sku.id}>
-                                      {prod.name} {variant.name ? `- ${variant.name}` : ''} - Stock: {sku.stock} - {sku.price} MAD
+                                      {prod.name} {variant.variantType && variant.variantValue ? `- ${variant.variantType}: ${variant.variantValue}` : ''} | Stock: {sku.stock} | {sku.price} MAD
                                     </SelectItem>
                                   )) || [],
                               ) || [],
