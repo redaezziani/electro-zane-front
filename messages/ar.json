@@ -176,7 +176,8 @@
             "productVariant": "شكل المنتج",
             "sku": "رمز الكود (اختياري)",
             "barcode": "الباركود (اختياري)",
-            "price": "السعر",
+            "initPrice": "السعر الأولي/التكلفة",
+            "price": "سعر البيع",
             "comparePrice": "سعر المقارنة (اختياري)",
             "costPrice": "سعر التكلفة (اختياري)",
             "stock": "كمية المخزون",
@@ -340,6 +341,8 @@
             "customerEmail": "بريد العميل الإلكتروني",
             "sku": "الكود",
             "quantity": "الكمية",
+            "sellPrice": "سعر البيع المخصص",
+            "defaultPrice": "الافتراضي",
             "deliveryLat": "خط العرض",
             "deliveryLng": "خط الطول",
             "deliveryPlace": "المكان",
@@ -365,6 +368,7 @@
             "customerEmail": "أدخل البريد الإلكتروني",
             "selectUser": "اختر مستخدم",
             "selectSKU": "اختر كود",
+            "sellPrice": "اتركه فارغاً لاستخدام السعر الافتراضي",
             "scanBarcode": "جاهز لمسح الباركود..."
           },
           "hints": {

@@ -477,7 +477,7 @@ export function CreateOrderDialog({
                                 (variant) =>
                                   variant.skus?.map((sku) => (
                                     <SelectItem key={sku.id} value={sku.id}>
-                                      {prod.name} - {sku.sku} (${sku.price})
+                                      {prod.name} {variant.name ? `- ${variant.name}` : ''} - Stock: {sku.stock} - {sku.price} MAD
                                     </SelectItem>
                                   )) || [],
                               ) || [],
@@ -517,9 +517,9 @@ export function CreateOrderDialog({
                 {selectedSku && (
                   <div className="space-y-2">
                     <Label htmlFor={`sellPrice-${idx}`}>
-                      Custom Sell Price (Optional)
+                      {t.fields?.sellPrice || 'Custom Sell Price'} ({t.optional || 'Optional'})
                       <span className="text-xs text-muted-foreground ml-2">
-                        Default: ${selectedSku.price}
+                        {t.fields?.defaultPrice || 'Default'}: {selectedSku.price} MAD
                       </span>
                     </Label>
                     <Input
@@ -535,7 +535,7 @@ export function CreateOrderDialog({
                           e.target.value ? parseFloat(e.target.value) : undefined,
                         )
                       }
-                      placeholder={`Leave empty to use $${selectedSku.price}`}
+                      placeholder={t.placeholders?.sellPrice || `Leave empty to use ${selectedSku.price} MAD`}
                     />
                     {errors.items[idx]?.sellPrice && (
                       <p className="text-sm text-destructive">

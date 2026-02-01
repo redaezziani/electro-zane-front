@@ -178,7 +178,8 @@
             "skuCode": "Código SKU",
             "sku": "SKU (opcional)",
             "barcode": "Código de barras (opcional)",
-            "price": "Precio",
+            "initPrice": "Precio Inicial/Costo",
+            "price": "Precio de Venta",
             "comparePrice": "Precio comparativo (opcional)",
             "costPrice": "Costo (opcional)",
             "stock": "Cantidad en stock",
@@ -341,6 +342,8 @@
             "customerEmail": "Correo del cliente",
             "sku": "SKU",
             "quantity": "Cantidad",
+            "sellPrice": "Precio de Venta Personalizado",
+            "defaultPrice": "Predeterminado",
             "deliveryLat": "Latitud",
             "deliveryLng": "Longitud",
             "deliveryPlace": "Lugar",
@@ -366,6 +369,7 @@
             "customerEmail": "Ingresa el correo electrónico",
             "selectUser": "Seleccionar usuario",
             "selectSKU": "Seleccionar SKU",
+            "sellPrice": "Dejar vacío para usar precio predeterminado",
             "scanBarcode": "Listo para escanear código de barras..."
           },
           "hints": {

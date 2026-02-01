@@ -176,7 +176,8 @@
             "productVariant": "Variante de produit",
             "sku": "Code SKU (optionnel)",
             "barcode": "Code-barres (optionnel)",
-            "price": "Prix",
+            "initPrice": "Prix Initial/Coût",
+            "price": "Prix de Vente",
             "comparePrice": "Prix comparatif (optionnel)",
             "costPrice": "Coût (optionnel)",
             "stock": "Quantité en stock",
@@ -337,6 +338,8 @@
             "customerEmail": "Email du client",
             "sku": "SKU",
             "quantity": "Quantité",
+            "sellPrice": "Prix de Vente Personnalisé",
+            "defaultPrice": "Par défaut",
             "deliveryLat": "Latitude",
             "deliveryLng": "Longitude",
             "deliveryPlace": "Lieu",
@@ -362,6 +365,7 @@
             "customerEmail": "Entrez l'adresse email",
             "selectUser": "Sélectionner un utilisateur",
             "selectSKU": "Sélectionner un SKU",
+            "sellPrice": "Laisser vide pour utiliser le prix par défaut",
             "scanBarcode": "Prêt à scanner le code-barres..."
           },
           "hints": {
