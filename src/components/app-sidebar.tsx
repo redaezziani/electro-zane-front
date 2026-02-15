@@ -159,7 +159,7 @@ export function AppSidebar({
   return (
     <Sidebar
       side={locale === 'ar' ? 'right' : 'left'}
-      collapsible="offcanvas"
+      collapsible="icon"
       {...props}
     >
       <SidebarHeader>

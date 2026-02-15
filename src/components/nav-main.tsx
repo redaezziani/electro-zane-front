@@ -1,7 +1,7 @@
 // frontend/src/components/nav-main.tsx
 
-import Link from "next/link";
-import { type Icon } from "@tabler/icons-react";
+import Link from 'next/link';
+import { type Icon } from '@tabler/icons-react';
 
 import {
   SidebarGroup,
@@ -9,37 +9,43 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar";
-import { usePath } from "@/hooks/use-path";
+} from '@/components/ui/sidebar';
+import { usePath } from '@/hooks/use-path';
 
-function NavMenuItem({ item }: { item: { title: string; url: string; icon?: Icon; active: boolean } }) {
-  const isActive = usePath(item.url);
+function NavMenuItem({
+  item,
+  index,
+}: {
+  item: { title: string; url: string; icon?: Icon; active: boolean };
+  index: number;
+}) {
+  // Cycle through 5 custom colors every 3 items
+  const colorIndex = Math.floor(index / 3) % 5;
 
   const linkContent = (
     <>
-      {item.icon && <item.icon />}
-      <span>{item.title}</span>
+      {item.icon && <item.icon size={24} />}
+      <span className="text-base font-medium">{item.title}</span>
     </>
   );
 
+  // Add margin-top to the first item of each group (except the very first item)
+  const isFirstInGroup = index % 3 === 0 && index !== 0;
+
   return (
-    <SidebarMenuItem key={item.title}>
+    <SidebarMenuItem key={item.title} className={isFirstInGroup ? 'mt-4' : ''}>
       <SidebarMenuButton
         tooltip={item.title}
         asChild
-        className={
-          isActive
-            ? "bg-primary text-primary-foreground hover:bg-primary/90 hover:text-primary-foreground active:bg-primary/90 active:text-primary-foreground duration-200 ease-linear"
-            : ""
-        }
+        className="py-6 text-white"
+        style={{
+          backgroundColor: `var(--color-${colorIndex + 1})`,
+        }}
       >
         {item.active ? (
           <Link href={item.url}>{linkContent}</Link>
         ) : (
-          <div
-            aria-disabled="true"
-            className="cursor-not-allowed opacity-50"
-          >
+          <div aria-disabled="true" className="cursor-not-allowed opacity-50">
             {linkContent}
           </div>
         )}
@@ -62,8 +68,8 @@ export function NavMain({
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
-          {items.map((item) => (
-            <NavMenuItem key={item.title} item={item} />
+          {items.map((item, index) => (
+            <NavMenuItem key={item.title} item={item} index={index} />
           ))}
         </SidebarMenu>
       </SidebarGroupContent>

@@ -170,7 +170,7 @@ export function DataTable<T extends object>({
   return (
     <Card className={className}>
       <CardHeader>
-        <div className="flex flex-col gap-3">
+        <div className="flex  flex-col gap-3">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex flex-1 flex-wrap gap-2">
               <div className="relative flex-1 max-w-xl min-w-[200px]">
@@ -229,7 +229,7 @@ export function DataTable<T extends object>({
       <CardContent>
         <div className="rounded-md border">
           <Table>
-            <TableHeader>
+            <TableHeader className="bg-primary">
               <TableRow>
                 {expandable && <TableHead className="w-12"></TableHead>}
                 {columns.map((column) => (
@@ -266,9 +266,10 @@ export function DataTable<T extends object>({
                 filteredData.map((item, index) => {
                   const itemKey = String(getNestedValue(item, expandedRowKey));
                   const isExpanded = expandedRows.has(itemKey);
-                  const rowKey = ('id' in item
-                    ? String((item as { id: string | number }).id)
-                    : undefined) || `row-${index}`;
+                  const rowKey =
+                    ('id' in item
+                      ? String((item as { id: string | number }).id)
+                      : undefined) || `row-${index}`;
 
                   return (
                     <Fragment key={rowKey}>
