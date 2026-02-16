@@ -15,6 +15,7 @@ export const roleProtectedRoutes = {
   '/dashboard/order-items': [UserRole.USER, UserRole.MODERATOR, UserRole.ADMIN],
   '/dashboard/lots': [UserRole.MODERATOR, UserRole.ADMIN],
   '/dashboard/lot-arrivals': [UserRole.MODERATOR, UserRole.ADMIN],
+  '/dashboard/shipments': [UserRole.MODERATOR, UserRole.ADMIN],
   '/dashboard/analytics': [],
   '/dashboard/logs': [UserRole.ADMIN], // Only admins can view logs
   '/dashboard/settings': [],

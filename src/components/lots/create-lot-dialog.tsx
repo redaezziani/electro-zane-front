@@ -46,8 +46,9 @@ export function CreateLotDialog({ open, onOpenChange, onSuccess }: CreateLotDial
   const onSubmit = async (data: CreateLotDto) => {
     try {
       setLoading(true);
-      await lotsApi.createLot(data);
+      const createdLot = await lotsApi.createLot(data);
       toast.success(t.pages.lots.createSuccess);
+      toast.info(t.pages.lots.addPiecesPrompt || "Now add pieces to this lot!");
       reset();
       onOpenChange(false);
       onSuccess();
@@ -89,43 +90,6 @@ export function CreateLotDialog({ open, onOpenChange, onSuccess }: CreateLotDial
             {errors.companyCity && (
               <p className="text-sm text-destructive">{errors.companyCity.message}</p>
             )}
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="totalQuantity">{t.pages.lots.totalQuantity}</Label>
-              <Input
-                id="totalQuantity"
-                type="number"
-                {...register("totalQuantity", {
-                  required: t.common.required,
-                  valueAsNumber: true,
-                  min: { value: 1, message: t.pages.lots.minQuantity },
-                })}
-                placeholder="100"
-              />
-              {errors.totalQuantity && (
-                <p className="text-sm text-destructive">{errors.totalQuantity.message}</p>
-              )}
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="totalPrice">{t.pages.lots.totalPrice}</Label>
-              <Input
-                id="totalPrice"
-                type="number"
-                step="0.01"
-                {...register("totalPrice", {
-                  required: t.common.required,
-                  valueAsNumber: true,
-                  min: { value: 0, message: t.pages.lots.minPrice },
-                })}
-                placeholder="1000.00"
-              />
-              {errors.totalPrice && (
-                <p className="text-sm text-destructive">{errors.totalPrice.message}</p>
-              )}
-            </div>
           </div>
 
           <div className="space-y-2">

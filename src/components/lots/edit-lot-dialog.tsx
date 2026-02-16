@@ -45,8 +45,6 @@ export function EditLotDialog({ open, onOpenChange, lot, onSuccess }: EditLotDia
       reset({
         companyName: lot.companyName,
         companyCity: lot.companyCity,
-        totalQuantity: lot.totalQuantity,
-        totalPrice: lot.totalPrice,
         status: lot.status,
         notes: lot.notes || "",
       });
@@ -92,31 +90,6 @@ export function EditLotDialog({ open, onOpenChange, lot, onSuccess }: EditLotDia
               {...register("companyCity")}
               placeholder={t.pages.lots.companyCityPlaceholder}
             />
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <div className="space-y-2">
-              <Label htmlFor="totalQuantity">{t.pages.lots.totalQuantity}</Label>
-              <Input
-                id="totalQuantity"
-                type="number"
-                {...register("totalQuantity", {
-                  valueAsNumber: true,
-                })}
-              />
-            </div>
-
-            <div className="space-y-2">
-              <Label htmlFor="totalPrice">{t.pages.lots.totalPrice}</Label>
-              <Input
-                id="totalPrice"
-                type="number"
-                step="0.01"
-                {...register("totalPrice", {
-                  valueAsNumber: true,
-                })}
-              />
-            </div>
           </div>
 
           <div className="space-y-2">

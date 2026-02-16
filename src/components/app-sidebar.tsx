@@ -12,6 +12,7 @@ import {
   IconBoxSeam,
   IconClipboardList,
   IconFileText,
+  IconTruck,
 } from '@tabler/icons-react';
 
 const SpainIcon = () => (
@@ -147,6 +148,12 @@ export function AppSidebar({
       url: '/dashboard/lots',
       icon: SpainIcon,
       active: isRouteAccessible('/dashboard/lots'),
+    },
+    {
+      title: t('links.shipments'),
+      url: '/dashboard/shipments',
+      icon: IconTruck,
+      active: isRouteAccessible('/dashboard/shipments'),
     },
     {
       title: t('links.lotArrivals'),

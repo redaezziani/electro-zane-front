@@ -7,12 +7,12 @@ import { Badge } from '@/components/ui/badge';
 import { Plus, Edit, Trash2, Package } from 'lucide-react';
 import { useLocale } from '@/components/local-lang-swither';
 import { getMessages } from '@/lib/locale';
-import { lotsApi, Lot, LotStatus, LotDetail } from '@/services/api/lots';
+import { lotsApi, Lot, LotStatus, LotPiece, PieceStatus } from '@/services/api/lots';
 import { toast } from 'sonner';
 import { CreateLotDialog } from './create-lot-dialog';
-import { CreateLotDetailDialog } from './create-lot-detail-dialog';
+import { CreateLotPieceDialog } from './create-lot-piece-dialog';
 import { EditLotDialog } from './edit-lot-dialog';
-import { EditLotDetailDialog } from './edit-lot-detail-dialog';
+import { EditLotPieceDialog } from './edit-lot-piece-dialog';
 
 interface EnhancedLotsTableProps {
   startDate?: Date;
@@ -27,13 +27,13 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
   const [lots, setLots] = useState<Lot[]>([]);
   const [filteredLots, setFilteredLots] = useState<Lot[]>([]);
   const [loading, setLoading] = useState(true);
-  const [lotDetails, setLotDetails] = useState<Record<string, LotDetail[]>>({});
+  const [lotPieces, setLotPieces] = useState<Record<string, LotPiece[]>>({});
   const [createDialogOpen, setCreateDialogOpen] = useState(false);
-  const [createDetailDialogOpen, setCreateDetailDialogOpen] = useState(false);
+  const [createPieceDialogOpen, setCreatePieceDialogOpen] = useState(false);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const [editDetailDialogOpen, setEditDetailDialogOpen] = useState(false);
+  const [editPieceDialogOpen, setEditPieceDialogOpen] = useState(false);
   const [selectedLot, setSelectedLot] = useState<Lot | null>(null);
-  const [selectedLotDetail, setSelectedLotDetail] = useState<LotDetail | null>(null);
+  const [selectedPiece, setSelectedPiece] = useState<LotPiece | null>(null);
   const [search, setSearch] = useState(initialSearch || '');
 
   const fetchLots = async () => {
@@ -60,7 +60,7 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
     }
   }, [initialSearch]);
 
-  // Filter lots by date range and search (including detailId)
+  // Filter lots by date range and search
   useEffect(() => {
     let filtered = lots;
 
@@ -75,33 +75,33 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
       filtered = filtered.filter((lot) => {
         const lotDate = new Date(lot.createdAt);
         const end = new Date(endDate);
-        end.setHours(23, 59, 59, 999); // End of day
+        end.setHours(23, 59, 59, 999);
         return lotDate <= end;
       });
     }
 
-    // Filter by search term (including detailId from nested lot details)
+    // Filter by search term
     if (search) {
       filtered = filtered.filter((lot) => {
-        // Check if lot fields match
         const lotMatches =
           lot.companyName?.toLowerCase().includes(search.toLowerCase()) ||
           lot.companyCity?.toLowerCase().includes(search.toLowerCase()) ||
           lot.lotId?.toString().includes(search) ||
           lot.notes?.toLowerCase().includes(search.toLowerCase());
 
-        // Check if any detail's detailId matches
-        const details = lotDetails[lot.id] || [];
-        const detailMatches = details.some((detail) =>
-          detail.detailId?.toString().includes(search)
+        // Check if any piece matches
+        const pieces = lotPieces[lot.id] || [];
+        const pieceMatches = pieces.some((piece) =>
+          piece.name?.toLowerCase().includes(search.toLowerCase()) ||
+          piece.pieceId?.toString().includes(search)
         );
 
-        return lotMatches || detailMatches;
+        return lotMatches || pieceMatches;
       });
     }
 
     setFilteredLots(filtered);
-  }, [lots, startDate, endDate, search, lotDetails]);
+  }, [lots, startDate, endDate, search, lotPieces]);
 
   const getStatusBadge = (status: LotStatus) => {
     const statusConfig = {
@@ -135,6 +135,42 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
     return <Badge variant={config.variant}>{config.label}</Badge>;
   };
 
+  const getPieceStatusBadge = (status: PieceStatus) => {
+    const statusConfig: Record<PieceStatus, { className: string; label: string }> = {
+      NEW: {
+        className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800',
+        label: t.pages.lots.pieceStatus?.NEW || 'New',
+      },
+      USED: {
+        className: 'bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-300 border-gray-200 dark:border-gray-800',
+        label: t.pages.lots.pieceStatus?.USED || 'Used',
+      },
+      REFURBISHED: {
+        className: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 border-purple-200 dark:border-purple-800',
+        label: t.pages.lots.pieceStatus?.REFURBISHED || 'Refurbished',
+      },
+      DAMAGED: {
+        className: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 border-red-200 dark:border-red-800',
+        label: t.pages.lots.pieceStatus?.DAMAGED || 'Damaged',
+      },
+      AVAILABLE: {
+        className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 border-green-200 dark:border-green-800',
+        label: t.pages.lots.pieceStatus?.AVAILABLE || 'Available',
+      },
+      SHIPPED: {
+        className: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 border-orange-200 dark:border-orange-800',
+        label: t.pages.lots.pieceStatus?.SHIPPED || 'Shipped',
+      },
+      ARRIVED: {
+        className: 'bg-teal-100 text-teal-800 dark:bg-teal-900 dark:text-teal-300 border-teal-200 dark:border-teal-800',
+        label: t.pages.lots.pieceStatus?.ARRIVED || 'Arrived',
+      },
+    };
+
+    const config = statusConfig[status] || statusConfig.NEW;
+    return <Badge variant="outline" className={config.className}>{config.label}</Badge>;
+  };
+
   const handleDelete = async (id: string) => {
     if (!confirm(t.pages.lots.confirmDelete)) return;
 
@@ -153,187 +189,142 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
     setEditDialogOpen(true);
   };
 
-  const handleAddDetail = (lot: Lot) => {
+  const handleAddPiece = (lot: Lot) => {
     setSelectedLot(lot);
-    setCreateDetailDialogOpen(true);
+    setCreatePieceDialogOpen(true);
   };
 
-  const handleEditDetail = (lot: Lot, detail: LotDetail) => {
+  const handleEditPiece = (lot: Lot, piece: LotPiece) => {
     setSelectedLot(lot);
-    setSelectedLotDetail(detail);
-    setEditDetailDialogOpen(true);
+    setSelectedPiece(piece);
+    setEditPieceDialogOpen(true);
   };
 
-  const handleDeleteDetail = async (lotId: string, detailId: string) => {
-    if (!confirm('Are you sure you want to delete this lot detail?')) return;
+  const handleDeletePiece = async (lotId: string, pieceId: string) => {
+    if (!confirm(t.pages.lots.confirmDeletePiece || 'Are you sure you want to delete this piece?')) return;
 
     try {
-      await lotsApi.deleteLotDetail(detailId);
-      toast.success('Lot detail deleted successfully');
+      await lotsApi.deleteLotPiece(pieceId);
+      toast.success(t.pages.lots.deletePieceSuccess || 'Piece deleted successfully');
 
-      // Refresh lot details
-      const details = await lotsApi.getLotDetailsByLotId(lotId);
-      setLotDetails((prev) => ({
+      // Refresh lot pieces
+      const response = await lotsApi.getLotPiecesByLotId(lotId);
+      setLotPieces((prev) => ({
         ...prev,
-        [lotId]: details,
+        [lotId]: response.pieces,
       }));
+
+      // Refresh lots to get updated totals
+      fetchLots();
     } catch (error) {
-      console.error('Failed to delete lot detail:', error);
-      toast.error('Failed to delete lot detail');
+      console.error('Failed to delete piece:', error);
+      toast.error(t.pages.lots.deletePieceError || 'Failed to delete piece');
     }
   };
 
   const handleRowExpand = async (lot: Lot) => {
-    if (!lotDetails[lot.id]) {
+    if (!lotPieces[lot.id]) {
       try {
-        const details = await lotsApi.getLotDetailsByLotId(lot.id);
-        setLotDetails((prev) => ({ ...prev, [lot.id]: details }));
+        const response = await lotsApi.getLotPiecesByLotId(lot.id);
+        setLotPieces((prev) => ({ ...prev, [lot.id]: response.pieces }));
       } catch (error) {
-        console.error('Failed to fetch lot details:', error);
-        toast.error(t.pages.lots.fetchDetailsError);
+        console.error('Failed to fetch lot pieces:', error);
+        toast.error(t.pages.lots.fetchPiecesError || 'Failed to fetch pieces');
       }
     }
   };
 
-  const getDetailStatus = (detail: LotDetail) => {
-    // Check if there are any arrivals for this detail
-    if (detail.arrivals && detail.arrivals.length > 0) {
-      const latestArrival = detail.arrivals[0]; // Assuming first is latest
-      return latestArrival.status;
-    }
-
-    // Check piece details statuses
-    if (detail.pieceDetails && detail.pieceDetails.length > 0) {
-      const hasVerified = detail.pieceDetails.some(p => p.status === 'verified');
-      const hasDamaged = detail.pieceDetails.some(p => p.status === 'damaged');
-      const hasIncomplete = detail.pieceDetails.some(p => p.status === 'incomplete');
-      const hasExcess = detail.pieceDetails.some(p => p.status === 'excess');
-
-      if (hasDamaged) return 'DAMAGED';
-      if (hasIncomplete) return 'INCOMPLETE';
-      if (hasExcess) return 'EXCESS';
-      if (hasVerified) return 'VERIFIED';
-    }
-
-    return 'PENDING';
-  };
-
-  const getDetailStatusBadge = (status: string) => {
-    const statusConfig: Record<string, { className: string; label: string }> = {
-      PENDING: {
-        className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800',
-        label: t.pages.lotArrivals.status.pending,
-      },
-      VERIFIED: {
-        className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 border-green-200 dark:border-green-800',
-        label: t.pages.lotArrivals.status.verified,
-      },
-      DAMAGED: {
-        className: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 border-red-200 dark:border-red-800',
-        label: t.pages.lotArrivals.status.damaged,
-      },
-      INCOMPLETE: {
-        className: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 border-orange-200 dark:border-orange-800',
-        label: t.pages.lotArrivals.status.incomplete,
-      },
-      EXCESS: {
-        className: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 border-purple-200 dark:border-purple-800',
-        label: t.pages.lotArrivals.status.excess,
-      },
-    };
-
-    const config = statusConfig[status] || statusConfig.PENDING;
-    return <Badge variant="outline" className={config.className}>{config.label}</Badge>;
-  };
-
   const renderExpandedRow = (lot: Lot) => {
-    const details = lotDetails[lot.id];
+    const pieces = lotPieces[lot.id];
 
     return (
       <div className="p-4">
-        <h3 className="font-semibold mb-2">{t.pages.lots.lotDetails}</h3>
-        {!details || details.length === 0 ? (
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-semibold">{t.pages.lots.pieces || 'Pieces'}</h3>
+          <Button
+            size="sm"
+            onClick={() => handleAddPiece(lot)}
+          >
+            <Plus className="h-4 w-4 mr-2" />
+            {t.pages.lots.addPiece || 'Add Piece'}
+          </Button>
+        </div>
+
+        {!pieces || pieces.length === 0 ? (
           <p className="text-sm text-muted-foreground">
-            {t.pages.lots.noDetails}
+            {t.pages.lots.noPieces || 'No pieces added yet'}
           </p>
         ) : (
           <div className="space-y-2">
-            {details.map((detail) => (
+            {pieces.map((piece) => (
               <div
-                key={detail.id}
+                key={piece.id}
                 className="border rounded p-3 bg-background"
+                style={{ borderLeftColor: piece.color || undefined, borderLeftWidth: piece.color ? '4px' : undefined }}
               >
-                <div className="flex justify-between items-start mb-2">
-                  <div className="grid grid-cols-2 md:grid-cols-5 gap-2 text-sm flex-1">
+                <div className="flex justify-between items-start">
+                  <div className="grid grid-cols-2 md:grid-cols-5 gap-3 text-sm flex-1">
                     <div>
                       <span className="font-medium">
-                        {t.pages.lots.detailId}:
+                        {t.pages.lots.pieceId || 'Piece #'}:
                       </span>{' '}
-                      #{detail.detailId}
+                      #{piece.pieceId}
+                    </div>
+                    <div className="md:col-span-2">
+                      <span className="font-medium">
+                        {t.pages.lots.pieceName || 'Name'}:
+                      </span>{' '}
+                      {piece.name}
                     </div>
                     <div>
                       <span className="font-medium">
-                        {t.pages.lots.quantity}:
+                        {t.common.quantity}:
                       </span>{' '}
-                      {detail.quantity}
+                      {piece.quantity}
                     </div>
                     <div>
                       <span className="font-medium">
-                        {t.pages.lots.price}:
+                        {t.pages.lots.unitPrice || 'Unit Price'}:
                       </span>{' '}
-                      {Number(detail.price).toFixed(2)} MAD
-                    </div>
-                    <div>
-                      <span className="font-medium">
-                        {t.pages.lots.shippingCompany}:
-                      </span>{' '}
-                      {detail.shippingCompany}
-                    </div>
-                    <div>
-                      <span className="font-medium">
-                        {t.pages.lotArrivals.status.label}:
-                      </span>{' '}
-                      {getDetailStatusBadge(getDetailStatus(detail))}
+                      {Number(piece.unitPrice).toFixed(2)} MAD
                     </div>
                   </div>
                   <div className="flex gap-1 ml-2">
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleEditDetail(lot, detail)}
+                      onClick={() => handleEditPiece(lot, piece)}
                     >
                       <Edit className="h-4 w-4" />
                     </Button>
                     <Button
                       variant="ghost"
                       size="sm"
-                      onClick={() => handleDeleteDetail(lot.id, detail.id)}
+                      onClick={() => handleDeletePiece(lot.id, piece.id)}
                     >
                       <Trash2 className="h-4 w-4 text-destructive" />
                     </Button>
                   </div>
                 </div>
-                {detail.pieceDetails && detail.pieceDetails.length > 0 && (
-                  <div className="mt-2 pt-2 border-t">
-                    <span className="text-xs font-medium">
-                      {t.pages.lots.pieces}:
-                    </span>
-                    <div className="flex flex-wrap gap-2 mt-1">
-                      {detail.pieceDetails.map((piece, idx) => (
-                        <Badge
-                          key={idx}
-                          variant="outline"
-                          className="text-xs"
-                        >
-                          {piece.name} ({piece.quantity})
-                        </Badge>
-                      ))}
-                    </div>
+
+                <div className="mt-2 grid grid-cols-2 md:grid-cols-3 gap-3 text-sm">
+                  <div>
+                    <span className="font-medium">
+                      {t.pages.lots.totalPrice || 'Total'}:
+                    </span>{' '}
+                    {Number(piece.totalPrice).toFixed(2)} MAD
                   </div>
-                )}
-                {detail.notes && (
+                  <div>
+                    <span className="font-medium">
+                      {t.pages.lots.pieceStatus?.label || 'Status'}:
+                    </span>{' '}
+                    {getPieceStatusBadge(piece.status)}
+                  </div>
+                </div>
+
+                {piece.notes && (
                   <div className="mt-2 text-xs text-muted-foreground">
-                    {t.pages.lots.notes}: {detail.notes}
+                    {t.pages.lots.notes}: {piece.notes}
                   </div>
                 )}
               </div>
@@ -387,7 +378,7 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
             size="sm"
             onClick={(e) => {
               e.stopPropagation();
-              handleAddDetail(lot);
+              handleAddPiece(lot);
             }}
           >
             <Package className="h-4 w-4" />
@@ -452,18 +443,20 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
 
       {selectedLot && (
         <>
-          <CreateLotDetailDialog
-            open={createDetailDialogOpen}
-            onOpenChange={setCreateDetailDialogOpen}
-            lot={selectedLot}
+          <CreateLotPieceDialog
+            open={createPieceDialogOpen}
+            onOpenChange={setCreatePieceDialogOpen}
+            lotId={selectedLot.id}
             onSuccess={() => {
-              // Refresh lot details
-              lotsApi.getLotDetailsByLotId(selectedLot.id).then((details) => {
-                setLotDetails((prev) => ({
+              // Refresh lot pieces
+              lotsApi.getLotPiecesByLotId(selectedLot.id).then((response) => {
+                setLotPieces((prev) => ({
                   ...prev,
-                  [selectedLot.id]: details,
+                  [selectedLot.id]: response.pieces,
                 }));
               });
+              // Refresh lots to get updated totals
+              fetchLots();
             }}
           />
 
@@ -476,19 +469,21 @@ export function EnhancedLotsTable({ startDate, endDate, initialSearch }: Enhance
         </>
       )}
 
-      {selectedLotDetail && selectedLot && (
-        <EditLotDetailDialog
-          open={editDetailDialogOpen}
-          onOpenChange={setEditDetailDialogOpen}
-          lotDetail={selectedLotDetail}
+      {selectedPiece && selectedLot && (
+        <EditLotPieceDialog
+          open={editPieceDialogOpen}
+          onOpenChange={setEditPieceDialogOpen}
+          piece={selectedPiece}
           onSuccess={() => {
-            // Refresh lot details
-            lotsApi.getLotDetailsByLotId(selectedLot.id).then((details) => {
-              setLotDetails((prev) => ({
+            // Refresh lot pieces
+            lotsApi.getLotPiecesByLotId(selectedLot.id).then((response) => {
+              setLotPieces((prev) => ({
                 ...prev,
-                [selectedLot.id]: details,
+                [selectedLot.id]: response.pieces,
               }));
             });
+            // Refresh lots to get updated totals
+            fetchLots();
           }}
         />
       )}

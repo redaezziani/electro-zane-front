@@ -43,7 +43,7 @@ export function LotArrivalsTable({ statusFilter, startDate, endDate }: LotArriva
       setArrivals(response.lotArrivals);
     } catch (error) {
       console.error('Failed to fetch lot arrivals:', error);
-      toast.error(t.pages.lotArrivals.fetchError);
+      toast.error(t.pages.lotArrivals.fetchError || 'Failed to fetch arrivals');
     } finally {
       setLoading(false);
     }
@@ -68,7 +68,7 @@ export function LotArrivalsTable({ statusFilter, startDate, endDate }: LotArriva
       filtered = filtered.filter((arrival) => {
         const arrivalDate = new Date(arrival.createdAt);
         const end = new Date(endDate);
-        end.setHours(23, 59, 59, 999); // End of day
+        end.setHours(23, 59, 59, 999);
         return arrivalDate <= end;
       });
     }
@@ -80,23 +80,23 @@ export function LotArrivalsTable({ statusFilter, startDate, endDate }: LotArriva
     const statusConfig: Record<ArrivalStatus, { className: string; label: string }> = {
       PENDING: {
         className: 'bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-300 border-blue-200 dark:border-blue-800',
-        label: t.pages.lotArrivals.status.pending,
+        label: t.pages.lotArrivals.status?.pending || 'Pending',
       },
       VERIFIED: {
         className: 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300 border-green-200 dark:border-green-800',
-        label: t.pages.lotArrivals.status.verified,
+        label: t.pages.lotArrivals.status?.verified || 'Verified',
       },
       DAMAGED: {
         className: 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300 border-red-200 dark:border-red-800',
-        label: t.pages.lotArrivals.status.damaged,
+        label: t.pages.lotArrivals.status?.damaged || 'Damaged',
       },
       INCOMPLETE: {
         className: 'bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-300 border-orange-200 dark:border-orange-800',
-        label: t.pages.lotArrivals.status.incomplete,
+        label: t.pages.lotArrivals.status?.incomplete || 'Incomplete',
       },
       EXCESS: {
         className: 'bg-purple-100 text-purple-800 dark:bg-purple-900 dark:text-purple-300 border-purple-200 dark:border-purple-800',
-        label: t.pages.lotArrivals.status.excess,
+        label: t.pages.lotArrivals.status?.excess || 'Excess',
       },
     };
 
@@ -117,45 +117,58 @@ export function LotArrivalsTable({ statusFilter, startDate, endDate }: LotArriva
   const columns: TableColumn<LotArrival>[] = [
     {
       key: 'arrivalId',
-      label: t.pages.lotArrivals.arrivalId,
+      label: t.pages.lotArrivals.arrivalId || 'Arrival #',
       render: (arrival) => (
         <span className="font-medium">#{arrival.arrivalId}</span>
       ),
     },
     {
-      key: 'lotDetailId',
-      label: t.pages.lotArrivals.lotDetailId,
+      key: 'shipmentId',
+      label: t.pages.shipments?.shipmentId || 'Shipment #',
       render: (arrival) => (
         <Link
-          href={`/dashboard/lots?detailId=${arrival.lotDetail?.detailId || arrival.lotDetailId}`}
+          href={`/dashboard/shipments?shipmentId=${arrival.shipment?.shipmentId || arrival.shipmentId}`}
           className="text-primary hover:underline font-medium"
           onClick={(e) => e.stopPropagation()}
         >
-          #{arrival.lotDetail?.detailId || arrival.lotDetailId}
+          #{arrival.shipment?.shipmentId || 'N/A'}
+        </Link>
+      ),
+    },
+    {
+      key: 'lotId',
+      label: t.pages.lots.lotId || 'Lot #',
+      render: (arrival) => (
+        <Link
+          href={`/dashboard/lots?lotId=${arrival.lot?.lotId || arrival.lotId}`}
+          className="text-primary hover:underline font-medium"
+          onClick={(e) => e.stopPropagation()}
+        >
+          #{arrival.lot?.lotId || 'N/A'}
         </Link>
       ),
     },
     {
       key: 'quantity',
-      label: t.pages.lotArrivals.quantity,
+      label: t.pages.lotArrivals.quantity || 'Quantity',
     },
     {
-      key: 'price',
-      label: t.pages.lotArrivals.price,
-      render: (arrival) => `${Number(arrival.price).toFixed(2)} MAD`,
+      key: 'totalValue',
+      label: t.pages.lotArrivals.totalValue || 'Total Value',
+      render: (arrival) => `${Number(arrival.totalValue).toFixed(2)} MAD`,
     },
     {
       key: 'shippingCompany',
-      label: t.pages.lotArrivals.shippingCompany,
+      label: t.pages.lotArrivals.shippingCompany || 'Shipping Company',
     },
     {
       key: 'status',
-      label: t.pages.lotArrivals.status.label,
+      label: t.pages.lotArrivals.status?.label || 'Status',
       render: (arrival) => getStatusBadge(arrival.status),
     },
     {
       key: 'verifiedAt',
-      label: t.pages.lotArrivals.verifiedAt,
+      label: t.pages.lotArrivals.verifiedAt || 'Verified At',
       render: (arrival) =>
         arrival.verifiedAt
           ? new Date(arrival.verifiedAt).toLocaleDateString(locale)
@@ -201,9 +214,9 @@ export function LotArrivalsTable({ statusFilter, startDate, endDate }: LotArriva
         title=""
         data={filteredArrivals}
         columns={columns}
-        searchKeys={['arrivalId', 'shippingCompany', 'shippingCity']}
+        searchKeys={['arrivalId', 'shippingCompany', 'shippingCompanyCity']}
         searchPlaceholder={t.common.search}
-        emptyMessage={t.pages.lotArrivals.noData}
+        emptyMessage={t.pages.lotArrivals.noData || 'No arrivals found'}
         searchValue={search}
         onSearchChange={setSearch}
       />

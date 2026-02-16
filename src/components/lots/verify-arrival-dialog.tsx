@@ -52,27 +52,16 @@ export function VerifyArrivalDialog({
     name: "pieceDetails",
   });
 
-  // Watch color changes
-  const quantityColor = watch("quantityColor");
-  const priceColor = watch("priceColor");
-  const shippingCompanyColor = watch("shippingCompanyColor");
-  const shippingCityColor = watch("shippingCityColor");
-  const pieceDetails = watch("pieceDetails");
-
   useEffect(() => {
     if (arrival) {
       reset({
         quantity: arrival.quantity,
-        price: arrival.price,
+        totalValue: arrival.totalValue,
         shippingCompany: arrival.shippingCompany,
         shippingCompanyCity: arrival.shippingCompanyCity,
         pieceDetails: arrival.pieceDetails || [],
         status: arrival.status,
         notes: arrival.notes || "",
-        quantityColor: arrival.quantityColor || "#3b82f6",
-        priceColor: arrival.priceColor || "#10b981",
-        shippingCompanyColor: arrival.shippingCompanyColor || "#f59e0b",
-        shippingCityColor: arrival.shippingCityColor || "#8b5cf6",
       });
     }
   }, [arrival, reset]);
@@ -81,12 +70,12 @@ export function VerifyArrivalDialog({
     try {
       setLoading(true);
       await lotsApi.updateLotArrival(arrival.id, data);
-      toast.success(t.pages.lotArrivals.updateSuccess);
+      toast.success(t.pages.lotArrivals.updateSuccess || "Arrival updated successfully");
       onOpenChange(false);
       onSuccess();
     } catch (error) {
       console.error("Failed to update lot arrival:", error);
-      toast.error(t.pages.lotArrivals.updateError);
+      toast.error(t.pages.lotArrivals.updateError || "Failed to update arrival");
     } finally {
       setLoading(false);
     }
@@ -97,90 +86,91 @@ export function VerifyArrivalDialog({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
           <DialogTitle>
-            {t.pages.lotArrivals.verifyArrival} #{arrival.arrivalId}
+            {t.pages.lotArrivals.verifyArrival || "Verify Arrival"} #{arrival.arrivalId}
           </DialogTitle>
         </DialogHeader>
 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          {/* Shipment Information */}
+          <div className="border-b pb-4">
+            <h3 className="font-semibold mb-3">
+              {t.pages.lotArrivals.shipmentInfo || "Shipment Information"}
+            </h3>
+            <div className="grid grid-cols-2 gap-4 text-sm">
+              <div>
+                <span className="font-medium text-muted-foreground">
+                  {t.pages.shipments?.shipmentId || "Shipment #"}:
+                </span>{' '}
+                #{arrival.shipment?.shipmentId || 'N/A'}
+              </div>
+              <div>
+                <span className="font-medium text-muted-foreground">
+                  {t.pages.shipments?.trackingNumber || "Tracking"}:
+                </span>{' '}
+                {arrival.shipment?.trackingNumber || 'N/A'}
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
-              <Label htmlFor="quantity">{t.pages.lotArrivals.quantity}</Label>
-              <div className="flex gap-2">
-                <Input
-                  id="quantity"
-                  type="number"
-                  className="flex-1"
-                  style={{ borderColor: quantityColor, borderWidth: '2px' }}
-                  {...register("quantity", { valueAsNumber: true })}
-                />
-                <Input
-                  type="color"
-                  className="w-16 h-10 cursor-pointer"
-                  {...register("quantityColor")}
-                  title="Pick a color"
-                />
-              </div>
+              <Label htmlFor="quantity">
+                {t.pages.lotArrivals.quantityReceived || "Quantity Received"}
+              </Label>
+              <Input
+                id="quantity"
+                type="number"
+                {...register("quantity", {
+                  valueAsNumber: true,
+                  min: { value: 0, message: "Quantity must be 0 or greater" }
+                })}
+              />
+              {errors.quantity && (
+                <p className="text-sm text-destructive">{errors.quantity.message}</p>
+              )}
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="price">{t.pages.lotArrivals.price}</Label>
-              <div className="flex gap-2">
-                <Input
-                  id="price"
-                  type="number"
-                  step="0.01"
-                  className="flex-1"
-                  style={{ borderColor: priceColor, borderWidth: '2px' }}
-                  {...register("price", { valueAsNumber: true })}
-                />
-                <Input
-                  type="color"
-                  className="w-16 h-10 cursor-pointer"
-                  {...register("priceColor")}
-                  title="Pick a color"
-                />
-              </div>
+              <Label htmlFor="totalValue">
+                {t.pages.lotArrivals.totalValue || "Total Value"}
+              </Label>
+              <Input
+                id="totalValue"
+                type="number"
+                step="0.01"
+                {...register("totalValue", {
+                  valueAsNumber: true,
+                  min: { value: 0, message: "Value must be 0 or greater" }
+                })}
+              />
+              {errors.totalValue && (
+                <p className="text-sm text-destructive">{errors.totalValue.message}</p>
+              )}
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="shippingCompany">{t.pages.lotArrivals.shippingCompany}</Label>
-            <div className="flex gap-2">
-              <Input
-                id="shippingCompany"
-                className="flex-1"
-                style={{ borderColor: shippingCompanyColor, borderWidth: '2px' }}
-                {...register("shippingCompany")}
-              />
-              <Input
-                type="color"
-                className="w-16 h-10 cursor-pointer"
-                {...register("shippingCompanyColor")}
-                title="Pick a color"
-              />
-            </div>
+            <Label htmlFor="shippingCompany">
+              {t.pages.lotArrivals.shippingCompany || "Shipping Company"}
+            </Label>
+            <Input
+              id="shippingCompany"
+              {...register("shippingCompany")}
+            />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="shippingCompanyCity">{t.pages.lotArrivals.shippingCity}</Label>
-            <div className="flex gap-2">
-              <Input
-                id="shippingCompanyCity"
-                className="flex-1"
-                style={{ borderColor: shippingCityColor, borderWidth: '2px' }}
-                {...register("shippingCompanyCity")}
-              />
-              <Input
-                type="color"
-                className="w-16 h-10 cursor-pointer"
-                {...register("shippingCityColor")}
-                title="Pick a color"
-              />
-            </div>
+            <Label htmlFor="shippingCompanyCity">
+              {t.pages.lotArrivals.shippingCity || "Shipping City"}
+            </Label>
+            <Input
+              id="shippingCompanyCity"
+              {...register("shippingCompanyCity")}
+            />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="status">{t.pages.lotArrivals.status.label}</Label>
+            <Label htmlFor="status">{t.pages.lotArrivals.status?.label || "Status"}</Label>
             <Select
               value={watch("status")}
               onValueChange={(value) => setValue("status", value as ArrivalStatus)}
@@ -189,83 +179,106 @@ export function VerifyArrivalDialog({
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value={ArrivalStatus.PENDING}>{t.pages.lotArrivals.status.pending}</SelectItem>
-                <SelectItem value={ArrivalStatus.VERIFIED}>{t.pages.lotArrivals.status.verified}</SelectItem>
-                <SelectItem value={ArrivalStatus.DAMAGED}>{t.pages.lotArrivals.status.damaged}</SelectItem>
-                <SelectItem value={ArrivalStatus.INCOMPLETE}>{t.pages.lotArrivals.status.incomplete}</SelectItem>
-                <SelectItem value={ArrivalStatus.EXCESS}>{t.pages.lotArrivals.status.excess}</SelectItem>
+                <SelectItem value={ArrivalStatus.PENDING}>
+                  {t.pages.lotArrivals.status?.pending || "Pending"}
+                </SelectItem>
+                <SelectItem value={ArrivalStatus.VERIFIED}>
+                  {t.pages.lotArrivals.status?.verified || "Verified"}
+                </SelectItem>
+                <SelectItem value={ArrivalStatus.DAMAGED}>
+                  {t.pages.lotArrivals.status?.damaged || "Damaged"}
+                </SelectItem>
+                <SelectItem value={ArrivalStatus.INCOMPLETE}>
+                  {t.pages.lotArrivals.status?.incomplete || "Incomplete"}
+                </SelectItem>
+                <SelectItem value={ArrivalStatus.EXCESS}>
+                  {t.pages.lotArrivals.status?.excess || "Excess"}
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
 
           <div className="space-y-2">
             <div className="flex justify-between items-center">
-              <Label>{t.pages.lotArrivals.pieceDetails}</Label>
+              <Label>
+                {t.pages.lotArrivals.pieceDetails || "Piece Details"}
+              </Label>
               <Button
                 type="button"
                 variant="outline"
                 size="sm"
-                onClick={() => append({ name: "", quantity: 0, status: "", color: "#6366f1" })}
+                onClick={() => append({
+                  name: "",
+                  quantityExpected: 0,
+                  quantityReceived: 0,
+                  status: "",
+                  notes: ""
+                })}
               >
                 <Plus className="h-4 w-4 mr-1" />
-                {t.pages.lotArrivals.addPiece}
+                {t.pages.lotArrivals.addPiece || "Add Piece"}
               </Button>
             </div>
 
-            <div className="space-y-2 border rounded-lg p-3 max-h-[200px] overflow-y-auto">
-              {fields.map((field, index) => {
-                const pieceColor = pieceDetails?.[index]?.color || "#6366f1";
-                return (
+            <div className="space-y-2 border rounded-lg p-3 max-h-[250px] overflow-y-auto">
+              {fields.length === 0 ? (
+                <p className="text-sm text-muted-foreground text-center py-4">
+                  {t.pages.lotArrivals.noPieces || "No pieces added yet"}
+                </p>
+              ) : (
+                fields.map((field, index) => (
                   <div
                     key={field.id}
-                    className="flex gap-2 items-start p-2 rounded border-2"
-                    style={{ borderColor: pieceColor }}
+                    className="border rounded p-3 space-y-2"
                   >
-                    <div className="flex-1">
+                    <div className="flex justify-between items-start">
                       <Input
                         {...register(`pieceDetails.${index}.name`)}
-                        placeholder={t.pages.lotArrivals.pieceName}
+                        placeholder={t.pages.lotArrivals.pieceName || "Piece name"}
+                        className="flex-1"
                       />
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="icon"
+                        onClick={() => remove(index)}
+                        className="ml-2"
+                      >
+                        <Trash2 className="h-4 w-4 text-destructive" />
+                      </Button>
                     </div>
-                    <div className="w-24">
+                    <div className="grid grid-cols-3 gap-2">
                       <Input
                         type="number"
-                        {...register(`pieceDetails.${index}.quantity`, { valueAsNumber: true })}
-                        placeholder={t.pages.lotArrivals.qty}
+                        {...register(`pieceDetails.${index}.quantityExpected`, { valueAsNumber: true })}
+                        placeholder={t.pages.lotArrivals.quantityExpected || "Expected"}
                       />
-                    </div>
-                    <div className="w-32">
+                      <Input
+                        type="number"
+                        {...register(`pieceDetails.${index}.quantityReceived`, { valueAsNumber: true })}
+                        placeholder={t.pages.lotArrivals.quantityReceived || "Received"}
+                      />
                       <Input
                         {...register(`pieceDetails.${index}.status`)}
-                        placeholder={t.pages.lotArrivals.status.label}
+                        placeholder={t.pages.lotArrivals.status?.label || "Status"}
                       />
                     </div>
                     <Input
-                      type="color"
-                      className="w-12 h-10 cursor-pointer"
-                      {...register(`pieceDetails.${index}.color`)}
-                      title="Pick a color"
+                      {...register(`pieceDetails.${index}.notes`)}
+                      placeholder={t.pages.lotArrivals.notes || "Notes"}
                     />
-                    <Button
-                      type="button"
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => remove(index)}
-                    >
-                      <Trash2 className="h-4 w-4" />
-                    </Button>
                   </div>
-                );
-              })}
+                ))
+              )}
             </div>
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="notes">{t.pages.lotArrivals.notes}</Label>
+            <Label htmlFor="notes">{t.pages.lotArrivals.notes || "Notes"}</Label>
             <Textarea
               id="notes"
               {...register("notes")}
-              placeholder={t.pages.lotArrivals.notesPlaceholder}
+              placeholder={t.pages.lotArrivals.notesPlaceholder || "Add any notes..."}
               rows={3}
             />
           </div>
@@ -280,7 +293,7 @@ export function VerifyArrivalDialog({
               {t.common.cancel}
             </Button>
             <Button type="submit" disabled={loading}>
-              {loading ? t.common.updating : t.pages.lotArrivals.verify}
+              {loading ? t.common.updating : (t.pages.lotArrivals.verify || "Verify")}
             </Button>
           </div>
         </form>
