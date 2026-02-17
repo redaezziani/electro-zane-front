@@ -960,7 +960,8 @@
         "to": "Hasta:",
         "pickDate": "Seleccionar fecha",
         "clearFilters": "Limpiar filtros"
-      }
+      },
+      "noPieces": "No se han agregado piezas todavía"
     },
     "settings": {
       "title": "Configuración",
@@ -1574,6 +1575,9 @@
     "updating": "Actualizando...",
     "adding": "Añadiendo...",
     "add": "Añadir",
+    "next": "Siguiente",
+    "back": "Atrás",
+    "all": "Todos",
     "required": "Este campo es obligatorio",
     "error": "Ocurrió un error. Por favor, inténtalo de nuevo.",
     "search": "Buscar...",

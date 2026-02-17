@@ -113,6 +113,58 @@ export interface UpdateLotPieceDto {
   metadata?: any;
 }
 
+export interface PieceDetailInput {
+  name: string;
+  quantity: number;
+  status?: string;
+  color?: string;
+}
+
+export interface CreateLotDetailDto {
+  lotId: string;
+  quantity: number;
+  price: number;
+  shippingCompany: string;
+  shippingCompanyCity: string;
+  pieceDetails: PieceDetailInput[];
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
+  notes?: string;
+}
+
+export interface UpdateLotDetailDto {
+  quantity?: number;
+  price?: number;
+  shippingCompany?: string;
+  shippingCompanyCity?: string;
+  pieceDetails?: PieceDetailInput[];
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
+  notes?: string;
+}
+
+export interface LotDetail {
+  id: string;
+  detailId: number;
+  lotId: string;
+  quantity: number;
+  price: number;
+  shippingCompany: string;
+  shippingCompanyCity: string;
+  pieceDetails: PieceDetailInput[];
+  quantityColor?: string;
+  priceColor?: string;
+  shippingCompanyColor?: string;
+  shippingCityColor?: string;
+  notes?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
 // ============================================
 // INTERFACES - SHIPMENTS & SHIPMENT PIECES
 // ============================================
@@ -345,6 +397,16 @@ export const lotsApi = {
 
   async deleteLotPiece(id: string): Promise<void> {
     await axiosInstance.delete(`/lot-pieces/${id}`);
+  },
+
+  async createLotDetail(data: CreateLotDetailDto): Promise<LotDetail> {
+    const response = await axiosInstance.post<LotDetail>('/lot-details', data);
+    return response.data;
+  },
+
+  async updateLotDetail(id: string, data: UpdateLotDetailDto): Promise<LotDetail> {
+    const response = await axiosInstance.patch<LotDetail>(`/lot-details/${id}`, data);
+    return response.data;
   },
 
   // ==================== SHIPMENTS ====================

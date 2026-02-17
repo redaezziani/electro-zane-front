@@ -62,13 +62,14 @@ export function CreateShipmentDialog({
 
       // Convert datetime-local format to ISO 8601
       const shipmentData: CreateShipmentDto = {
-        ...data,
+        shippingCompany: data.shippingCompany,
+        shippingCompanyCity: data.shippingCompanyCity,
+        trackingNumber: data.trackingNumber,
         estimatedArrival: data.estimatedArrival
           ? new Date(data.estimatedArrival).toISOString()
           : undefined,
-        actualArrival: data.actualArrival
-          ? new Date(data.actualArrival).toISOString()
-          : undefined,
+        notes: data.notes,
+        status: data.status,
         pieces: selectedPieces,
       };
 

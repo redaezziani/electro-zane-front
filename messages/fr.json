@@ -956,7 +956,8 @@
         "to": "À:",
         "pickDate": "Choisir une date",
         "clearFilters": "Effacer les filtres"
-      }
+      },
+      "noPieces": "Aucune pièce ajoutée pour le moment"
     },
     "settings": {
       "title": "Paramètres",
@@ -1551,6 +1552,9 @@
     "updating": "Mise à jour...",
     "adding": "Ajout...",
     "add": "Ajouter",
+    "next": "Suivant",
+    "back": "Retour",
+    "all": "Tous",
     "required": "Ce champ est obligatoire",
     "error": "Une erreur s'est produite. Veuillez réessayer.",
     "search": "Rechercher...",

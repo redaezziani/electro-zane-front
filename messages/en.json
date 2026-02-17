@@ -960,7 +960,8 @@
         "to": "To:",
         "pickDate": "Pick date",
         "clearFilters": "Clear filters"
-      }
+      },
+      "noPieces": "No pieces added yet"
     },
     "settings": {
       "title": "Settings",
@@ -1556,6 +1557,9 @@
     "updating": "Updating...",
     "adding": "Adding...",
     "add": "Add",
+    "next": "Next",
+    "back": "Back",
+    "all": "All",
     "required": "This field is required",
     "error": "An error occurred. Please try again.",
     "search": "Search...",
