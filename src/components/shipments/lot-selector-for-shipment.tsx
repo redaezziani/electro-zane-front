@@ -50,13 +50,11 @@ export function LotSelectorForShipment({
 
     try {
       const response = await lotsApi.getLotPiecesByLotId(lotId);
-      // Filter pieces that can be shipped (not already SHIPPED, ARRIVED, or DAMAGED)
-      const shippablePieces = response.pieces.filter(
-        (p) => p.status === PieceStatus.NEW ||
-               p.status === PieceStatus.USED ||
-               p.status === PieceStatus.REFURBISHED ||
-               p.status === PieceStatus.AVAILABLE
-      );
+      // Filter pieces that have remaining quantity available to ship
+      const shippablePieces = response.pieces.filter((p) => {
+        const available = p.availableQuantity ?? p.quantity;
+        return available > 0 && p.status !== PieceStatus.DAMAGED && p.status !== PieceStatus.ARRIVED;
+      });
       setLotPieces((prev) => ({ ...prev, [lotId]: shippablePieces }));
     } catch (error) {
       console.error("Failed to fetch lot pieces:", error);
@@ -171,7 +169,7 @@ export function LotSelectorForShipment({
                           <span className="font-medium">{piece.name}</span>
                         </div>
                         <div className="text-muted-foreground">
-                          {t.pages.lots?.available || "Available"}: {piece.quantity}
+                          {t.pages.lots?.available || "Available"}: {piece.availableQuantity ?? piece.quantity}
                         </div>
                         <div className="text-muted-foreground">
                           {Number(piece.unitPrice).toFixed(2)} MAD
@@ -182,7 +180,7 @@ export function LotSelectorForShipment({
                           <Input
                             type="number"
                             min={1}
-                            max={piece.quantity}
+                            max={piece.availableQuantity ?? piece.quantity}
                             value={getPieceQuantity(piece.id)}
                             onChange={(e) =>
                               handleQuantityChange(piece.id, parseInt(e.target.value) || 1)

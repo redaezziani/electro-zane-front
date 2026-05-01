@@ -63,7 +63,6 @@ export function AppSidebar({
 
     // Route not defined in roleProtectedRoutes - deny access by default
     if (allowedRoles === undefined) {
-      console.log(`[Sidebar] Route ${url} not defined in roleProtectedRoutes`);
       return false;
     }
 
@@ -75,9 +74,6 @@ export function AppSidebar({
     // Check if user's role is in the allowed roles
     // @ts-expect-error - Role type mismatch between User.role and UserRole enum
     const hasAccess = allowedRoles.includes(user.role as UserRole);
-    console.log(
-      `[Sidebar] Route ${url}, Required roles: ${allowedRoles.join(',')}, User role: ${user.role}, Access: ${hasAccess}`,
-    );
     return hasAccess;
   };
 

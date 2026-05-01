@@ -83,13 +83,11 @@ export function AddPieceToShipmentDialog({
     try {
       setLoadingPieces(true);
       const response = await lotsApi.getLotPiecesByLotId(lotId);
-      // Filter pieces that can be shipped (not already SHIPPED, ARRIVED, or DAMAGED)
-      const shippablePieces = response.pieces.filter(
-        (p) => p.status === PieceStatus.NEW ||
-               p.status === PieceStatus.USED ||
-               p.status === PieceStatus.REFURBISHED ||
-               p.status === PieceStatus.AVAILABLE
-      );
+      // Filter pieces that have remaining quantity available to ship
+      const shippablePieces = response.pieces.filter((p) => {
+        const available = p.availableQuantity ?? p.quantity;
+        return available > 0 && p.status !== PieceStatus.DAMAGED && p.status !== PieceStatus.ARRIVED;
+      });
       setLotPieces(shippablePieces);
     } catch (error) {
       console.error("Failed to fetch lot pieces:", error);
@@ -169,7 +167,7 @@ export function AddPieceToShipmentDialog({
                   <SelectContent>
                     {lotPieces.map((piece) => (
                       <SelectItem key={piece.id} value={piece.id}>
-                        {piece.name} (Available: {piece.quantity})
+                        {piece.name} (Available: {piece.availableQuantity ?? piece.quantity})
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -191,20 +189,20 @@ export function AddPieceToShipmentDialog({
                   id="quantityShipped"
                   type="number"
                   min={1}
-                  max={selectedPiece.quantity}
+                  max={selectedPiece.availableQuantity ?? selectedPiece.quantity}
                   {...register("quantityShipped", {
                     required: t.common.required,
                     valueAsNumber: true,
                     min: { value: 1, message: "Minimum quantity is 1" },
                     max: {
-                      value: selectedPiece.quantity,
-                      message: `Maximum available: ${selectedPiece.quantity}`,
+                      value: selectedPiece.availableQuantity ?? selectedPiece.quantity,
+                      message: `Maximum available: ${selectedPiece.availableQuantity ?? selectedPiece.quantity}`,
                     },
                   })}
                   placeholder="1"
                 />
                 <p className="text-xs text-muted-foreground">
-                  {t.pages.lots?.available || "Available"}: {selectedPiece.quantity}
+                  {t.pages.lots?.available || "Available"}: {selectedPiece.availableQuantity ?? selectedPiece.quantity}
                 </p>
                 {errors.quantityShipped && (
                   <p className="text-sm text-destructive">{errors.quantityShipped.message}</p>

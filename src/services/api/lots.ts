@@ -49,6 +49,7 @@ export interface LotPiece {
   lotId: string;
   name: string;
   quantity: number;
+  availableQuantity?: number;
   unitPrice: number;
   totalPrice: number;
   status: PieceStatus;
