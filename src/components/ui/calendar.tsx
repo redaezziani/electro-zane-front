@@ -3,7 +3,7 @@
 import * as React from "react"
 import { ChevronLeftIcon, ChevronRightIcon } from "lucide-react"
 import { DayPicker } from "react-day-picker"
-import { ar } from "date-fns/locale"
+import { ar, enUS } from "date-fns/locale"
 
 import { cn } from "@/lib/utils"
 import { buttonVariants } from "@/components/ui/button"
@@ -97,7 +97,7 @@ function Calendar({
       className={cn("w-fit", isRTL && "rtl", className)}
       classNames={mergedClassNames}
       components={mergedComponents}
-      locale={isRTL ? ar : undefined}
+      locale={isRTL ? ar : enUS}
       dir={isRTL ? "rtl" : "ltr"}
       {...props}
     />

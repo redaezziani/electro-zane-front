@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/popover";
 import { CalendarIcon, X } from "lucide-react";
 import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { LogsQuery, LogType, LogAction, logsApi } from "@/services/api/logs";
 import { useLocale } from "@/components/local-lang-swither";
@@ -126,7 +127,7 @@ export function LogsFilters({ filters, onFilterChange }: LogsFiltersProps) {
             >
               <CalendarIcon className="mr-2 h-4 w-4" />
               {selectedDate ? (
-                format(selectedDate, "PPP")
+                format(selectedDate, "PPP", { locale: enUS })
               ) : (
                 <span>{t.pages.logs.filters.selectDate}</span>
               )}

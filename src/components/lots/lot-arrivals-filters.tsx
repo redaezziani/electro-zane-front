@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/select";
 import { CalendarIcon, X } from "lucide-react";
 import { format } from "date-fns";
+import { enUS } from "date-fns/locale";
 import { cn } from "@/lib/utils";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
@@ -101,7 +102,7 @@ export function LotArrivalsFilters({
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
                 {startDate ? (
-                  format(startDate, "PPP")
+                  format(startDate, "PPP", { locale: enUS })
                 ) : (
                   <span>{t.pages.lotArrivals.filters.pickDate}</span>
                 )}
@@ -131,7 +132,7 @@ export function LotArrivalsFilters({
                 )}
               >
                 <CalendarIcon className="mr-2 h-4 w-4" />
-                {endDate ? format(endDate, "PPP") : <span>{t.pages.lotArrivals.filters.pickDate}</span>}
+                {endDate ? format(endDate, "PPP", { locale: enUS }) : <span>{t.pages.lotArrivals.filters.pickDate}</span>}
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0">

@@ -11,6 +11,7 @@ import {
   subYears,
   format,
 } from "date-fns";
+import { enUS } from "date-fns/locale";
 import { DateRange } from "react-day-picker";
 
 import { Button } from "@/components/ui/button";
@@ -72,8 +73,8 @@ export default function RangeDate({
             <Calendar1 className="mr-2 h-4 w-4" />
             {date?.from && date?.to ? (
               <>
-                {format(date.from, "LLL dd, y")} -{" "}
-                {format(date.to, "LLL dd, y")}
+                {format(date.from, "LLL dd, y", { locale: enUS })} -{" "}
+                {format(date.to, "LLL dd, y", { locale: enUS })}
               </>
             ) : (
               <span>Pick a date range</span>
