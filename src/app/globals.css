@@ -183,4 +183,14 @@
   html[lang='ar'] [role='separator'] {
     transform: scaleX(-1);
   }
+
+  /* Force Latin numerals in date and number inputs regardless of locale */
+  input[type='number'],
+  input[type='date'],
+  input[type='datetime-local'],
+  input[type='time'],
+  input[type='month'],
+  input[type='week'] {
+    -webkit-locale: 'en' !important;
+  }
 }
