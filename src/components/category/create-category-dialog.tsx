@@ -4,6 +4,7 @@ import type React from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -249,12 +250,11 @@ export function CreateCategoryDialog({
 
             <div className="space-y-2">
               <Label htmlFor="sortOrder">{t.fields?.sortOrder || "Sort Order"}</Label>
-              <Input
+              <NumberInput
                 id="sortOrder"
-                type="number"
                 placeholder="0"
                 value={formData.sortOrder}
-                onChange={(e) => setFormData(prev => ({ ...prev, sortOrder: parseInt(e.target.value) || 0 }))}
+                onChange={(val) => setFormData(prev => ({ ...prev, sortOrder: val }))}
                 className={errors.sortOrder ? "border-destructive" : ""}
               />
               <p className="text-xs text-muted-foreground">

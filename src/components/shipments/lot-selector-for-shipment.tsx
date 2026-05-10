@@ -5,6 +5,7 @@ import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
 import { lotsApi, Lot, LotPiece, PieceStatus, ShipmentPieceInput } from "@/services/api/lots";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -177,15 +178,11 @@ export function LotSelectorForShipment({
                       </div>
                       {isPieceSelected(piece.id) && (
                         <div className="w-24">
-                          <Input
-                            type="number"
+                          <NumberInput
                             min={1}
                             max={piece.availableQuantity ?? piece.quantity}
                             value={getPieceQuantity(piece.id)}
-                            onChange={(e) =>
-                              handleQuantityChange(piece.id, parseInt(e.target.value) || 1)
-                            }
-                            onClick={(e) => e.stopPropagation()}
+                            onChange={(val) => handleQuantityChange(piece.id, val)}
                           />
                         </div>
                       )}

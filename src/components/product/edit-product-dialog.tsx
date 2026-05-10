@@ -4,6 +4,7 @@ import type React from "react";
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -238,14 +239,12 @@ export function EditProductDialog({ product, open, onClose }: EditProductDialogP
 
             <div className="space-y-2">
               <Label htmlFor="sortOrder">{t.fields?.sortOrder || "Sort Order"}</Label>
-              <Input
+              <NumberInput
                 id="sortOrder"
-                type="number"
                 placeholder="0"
                 value={formData.sortOrder}
-                onChange={(e) => {
-                  const value = parseInt(e.target.value) || 0;
-                  setFormData(prev => ({ ...prev, sortOrder: value }));
+                onChange={(val) => {
+                  setFormData(prev => ({ ...prev, sortOrder: val }));
                   if (errors.sortOrder) {
                     setErrors(prev => ({ ...prev, sortOrder: "" }));
                   }
