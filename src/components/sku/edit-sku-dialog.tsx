@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Input } from '@/components/ui/input';
+import { NumberInput } from '@/components/ui/number-input';
 import { Button } from '@/components/ui/button';
 import { Switch } from '@/components/ui/switch';
 import useProductVariantsStore, {
@@ -277,18 +278,11 @@ export function EditSKUDialog({ open, onOpenChange, sku }: EditSKUDialogProps) {
                         }
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          type="number"
-                          min="0"
-                          step="0.01"
-                          value={field.value ?? ''}
-                          onChange={(e) =>
-                            field.onChange(
-                              e.target.value === ''
-                                ? undefined
-                                : parseFloat(e.target.value),
-                            )
-                          }
+                        <NumberInput
+                          value={field.value as number | undefined}
+                          onChange={(v) => field.onChange(isNaN(v) ? undefined : v)}
+                          step={0.01}
+                          min={0}
                         />
                       </FormControl>
                       <FormDescription>
@@ -320,13 +314,10 @@ export function EditSKUDialog({ open, onOpenChange, sku }: EditSKUDialogProps) {
                         }
                       </FormLabel>
                       <FormControl>
-                        <Input
-                          type="number"
-                          min="0"
-                          value={field.value ?? 0}
-                          onChange={(e) =>
-                            field.onChange(parseInt(e.target.value) || 0)
-                          }
+                        <NumberInput
+                          value={field.value as number | undefined}
+                          onChange={(v) => field.onChange(isNaN(v) ? 0 : v)}
+                          min={0}
                         />
                       </FormControl>
                       <FormDescription>
@@ -351,18 +342,11 @@ export function EditSKUDialog({ open, onOpenChange, sku }: EditSKUDialogProps) {
                   <FormItem>
                     <FormLabel>{t.fields?.weight}</FormLabel>
                     <FormControl>
-                      <Input
-                        type="number"
-                        step="0.1"
-                        min="0"
-                        value={field.value ?? ''}
-                        onChange={(e) =>
-                          field.onChange(
-                            e.target.value === ''
-                              ? undefined
-                              : parseFloat(e.target.value),
-                          )
-                        }
+                      <NumberInput
+                        value={field.value as number | undefined}
+                        onChange={(v) => field.onChange(isNaN(v) ? undefined : v)}
+                        step={0.1}
+                        min={0}
                       />
                     </FormControl>
                     <FormDescription>{t.fields?.weight}</FormDescription>

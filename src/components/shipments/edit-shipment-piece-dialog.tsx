@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
 import { lotsApi, UpdateShipmentPieceDto, ShipmentPiece } from "@/services/api/lots";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
@@ -34,6 +35,7 @@ export function EditShipmentPieceDialog({
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm<UpdateShipmentPieceDto>();
 
   useEffect(() => {
@@ -94,20 +96,24 @@ export function EditShipmentPieceDialog({
             <Label htmlFor="quantityShipped">
               {t.pages.shipments?.quantityToShip || "Quantity Shipped"}
             </Label>
-            <Input
-              id="quantityShipped"
-              type="number"
-              min={1}
-              max={maxQuantity}
-              {...register("quantityShipped", {
+            <Controller
+              control={control}
+              name="quantityShipped"
+              rules={{
                 required: t.common.required,
-                valueAsNumber: true,
                 min: { value: 1, message: "Minimum quantity is 1" },
-                max: {
-                  value: maxQuantity,
-                  message: `Maximum available: ${maxQuantity}`,
-                },
-              })}
+                max: { value: maxQuantity, message: `Maximum available: ${maxQuantity}` },
+              }}
+              render={({ field }) => (
+                <NumberInput
+                  id="quantityShipped"
+                  value={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
+                  min={1}
+                  max={maxQuantity}
+                />
+              )}
             />
             <p className="text-xs text-muted-foreground">
               {t.pages.lots?.available || "Available"}: {maxQuantity}

@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
 import { lotsApi, UpdateLotPieceDto, PieceStatus, LotPiece } from "@/services/api/lots";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -43,6 +44,7 @@ export function EditLotPieceDialog({
     reset,
     setValue,
     watch,
+    control,
   } = useForm<UpdateLotPieceDto>();
 
   useEffect(() => {
@@ -99,13 +101,19 @@ export function EditLotPieceDialog({
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="quantity">{t.common.quantity}</Label>
-              <Input
-                id="quantity"
-                type="number"
-                {...register("quantity", {
-                  valueAsNumber: true,
-                  min: { value: 1, message: t.pages.lots.minQuantity || "Minimum quantity is 1" },
-                })}
+              <Controller
+                control={control}
+                name="quantity"
+                rules={{ min: { value: 1, message: t.pages.lots.minQuantity || "Minimum quantity is 1" } }}
+                render={({ field }) => (
+                  <NumberInput
+                    id="quantity"
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    min={1}
+                  />
+                )}
               />
               {errors.quantity && (
                 <p className="text-sm text-destructive">{errors.quantity.message}</p>
@@ -114,14 +122,20 @@ export function EditLotPieceDialog({
 
             <div className="space-y-2">
               <Label htmlFor="unitPrice">{t.pages.lots.unitPrice || "Unit Price"}</Label>
-              <Input
-                id="unitPrice"
-                type="number"
-                step="0.01"
-                {...register("unitPrice", {
-                  valueAsNumber: true,
-                  min: { value: 0, message: t.pages.lots.minPrice || "Minimum price is 0" },
-                })}
+              <Controller
+                control={control}
+                name="unitPrice"
+                rules={{ min: { value: 0, message: t.pages.lots.minPrice || "Minimum price is 0" } }}
+                render={({ field }) => (
+                  <NumberInput
+                    id="unitPrice"
+                    value={field.value}
+                    onChange={field.onChange}
+                    onBlur={field.onBlur}
+                    step={0.01}
+                    min={0}
+                  />
+                )}
               />
               {errors.unitPrice && (
                 <p className="text-sm text-destructive">{errors.unitPrice.message}</p>

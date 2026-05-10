@@ -29,6 +29,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Button } from "@/components/ui/button";
 import { Switch } from "@/components/ui/switch";
 import useProductVariantsStore from "@/stores/product-variants-store";
@@ -242,13 +243,10 @@ export function CreateProductVariantDialog({
                 <FormItem>
                   <FormLabel>{t.fields.sortOrder}</FormLabel>
                   <FormControl>
-                    <Input
-                      type="number"
-                      min="0"
-                      {...field}
-                      onChange={(e) =>
-                        field.onChange(parseInt(e.target.value) || 0)
-                      }
+                    <NumberInput
+                      value={field.value}
+                      onChange={(v) => field.onChange(isNaN(v) ? 0 : v)}
+                      min={0}
                     />
                   </FormControl>
                   <FormDescription>{t.hints.sortOrder}</FormDescription>

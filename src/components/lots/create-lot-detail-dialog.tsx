@@ -1,13 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useForm, useFieldArray } from "react-hook-form";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
 import { lotsApi, CreateLotDetailDto, Lot } from "@/services/api/lots";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
@@ -90,17 +91,22 @@ export function CreateLotDetailDialog({
             <div className="space-y-2">
               <Label htmlFor="quantity">{t.pages.lots.quantity}</Label>
               <div className="flex gap-2">
-                <Input
-                  id="quantity"
-                  type="number"
-                  className="flex-1"
-                  style={{ borderColor: quantityColor, borderWidth: '2px' }}
-                  {...register("quantity", {
-                    required: t.common.required,
-                    valueAsNumber: true,
-                    min: { value: 1, message: t.pages.lots.minQuantity },
-                  })}
-                  placeholder="10"
+                <Controller
+                  control={control}
+                  name="quantity"
+                  rules={{ required: t.common.required, min: { value: 1, message: t.pages.lots.minQuantity } }}
+                  render={({ field }) => (
+                    <NumberInput
+                      id="quantity"
+                      className="flex-1"
+                      style={{ borderColor: quantityColor, borderWidth: '2px' }}
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      min={1}
+                      placeholder="10"
+                    />
+                  )}
                 />
                 <Input
                   type="color"
@@ -117,18 +123,23 @@ export function CreateLotDetailDialog({
             <div className="space-y-2">
               <Label htmlFor="price">{t.pages.lots.price}</Label>
               <div className="flex gap-2">
-                <Input
-                  id="price"
-                  type="number"
-                  step="0.01"
-                  className="flex-1"
-                  style={{ borderColor: priceColor, borderWidth: '2px' }}
-                  {...register("price", {
-                    required: t.common.required,
-                    valueAsNumber: true,
-                    min: { value: 0, message: t.pages.lots.minPrice },
-                  })}
-                  placeholder="299.99"
+                <Controller
+                  control={control}
+                  name="price"
+                  rules={{ required: t.common.required, min: { value: 0, message: t.pages.lots.minPrice } }}
+                  render={({ field }) => (
+                    <NumberInput
+                      id="price"
+                      className="flex-1"
+                      style={{ borderColor: priceColor, borderWidth: '2px' }}
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      step={0.01}
+                      min={0}
+                      placeholder="299.99"
+                    />
+                  )}
                 />
                 <Input
                   type="color"
@@ -217,14 +228,19 @@ export function CreateLotDetailDialog({
                       />
                     </div>
                     <div className="w-24">
-                      <Input
-                        type="number"
-                        {...register(`pieceDetails.${index}.quantity`, {
-                          required: true,
-                          valueAsNumber: true,
-                          min: 1,
-                        })}
-                        placeholder={t.pages.lots.qty}
+                      <Controller
+                        control={control}
+                        name={`pieceDetails.${index}.quantity`}
+                        rules={{ required: true, min: 1 }}
+                        render={({ field }) => (
+                          <NumberInput
+                            value={field.value}
+                            onChange={field.onChange}
+                            onBlur={field.onBlur}
+                            min={1}
+                            placeholder={t.pages.lots.qty}
+                          />
+                        )}
                       />
                     </div>
                     <div className="w-32">

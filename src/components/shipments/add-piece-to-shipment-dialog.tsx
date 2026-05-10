@@ -1,13 +1,14 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { useLocale } from "@/components/local-lang-swither";
 import { getMessages } from "@/lib/locale";
 import { lotsApi, CreateShipmentPieceDto, Lot, LotPiece, PieceStatus } from "@/services/api/lots";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import {
@@ -48,6 +49,7 @@ export function AddPieceToShipmentDialog({
     reset,
     watch,
     setValue,
+    control,
   } = useForm<CreateShipmentPieceDto>();
 
   useEffect(() => {
@@ -185,21 +187,28 @@ export function AddPieceToShipmentDialog({
                 <Label htmlFor="quantityShipped">
                   {t.pages.shipments?.quantityToShip || "Quantity to Ship"}
                 </Label>
-                <Input
-                  id="quantityShipped"
-                  type="number"
-                  min={1}
-                  max={selectedPiece.availableQuantity ?? selectedPiece.quantity}
-                  {...register("quantityShipped", {
+                <Controller
+                  control={control}
+                  name="quantityShipped"
+                  rules={{
                     required: t.common.required,
-                    valueAsNumber: true,
                     min: { value: 1, message: "Minimum quantity is 1" },
                     max: {
                       value: selectedPiece.availableQuantity ?? selectedPiece.quantity,
                       message: `Maximum available: ${selectedPiece.availableQuantity ?? selectedPiece.quantity}`,
                     },
-                  })}
-                  placeholder="1"
+                  }}
+                  render={({ field }) => (
+                    <NumberInput
+                      id="quantityShipped"
+                      value={field.value}
+                      onChange={field.onChange}
+                      onBlur={field.onBlur}
+                      min={1}
+                      max={selectedPiece.availableQuantity ?? selectedPiece.quantity}
+                      placeholder="1"
+                    />
+                  )}
                 />
                 <p className="text-xs text-muted-foreground">
                   {t.pages.lots?.available || "Available"}: {selectedPiece.availableQuantity ?? selectedPiece.quantity}
