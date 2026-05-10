@@ -50,7 +50,6 @@ export function NumberInput({
       step={step}
       isDisabled={disabled}
       name={name}
-      locale="en-US"
       formatOptions={{
         useGrouping: false,
         minimumFractionDigits: 0,
