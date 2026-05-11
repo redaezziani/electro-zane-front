@@ -165,19 +165,17 @@ export function LotSelectorForShipment({
                           handlePieceToggle(piece, checked as boolean)
                         }
                       />
-                      <div className="flex-1 grid grid-cols-3 gap-2 text-sm">
-                        <div>
-                          <span className="font-medium">{piece.name}</span>
-                        </div>
-                        <div className="text-muted-foreground">
+                      <div className="flex-1 flex items-center justify-between gap-4 text-sm min-w-0">
+                        <span className="font-medium truncate min-w-0">{piece.name}</span>
+                        <span className="text-muted-foreground whitespace-nowrap">
                           {t.pages.lots?.available || "Available"}: {piece.availableQuantity ?? piece.quantity}
-                        </div>
-                        <div className="text-muted-foreground">
+                        </span>
+                        <span className="text-muted-foreground whitespace-nowrap">
                           {Number(piece.unitPrice).toFixed(2)} MAD
-                        </div>
+                        </span>
                       </div>
                       {isPieceSelected(piece.id) && (
-                        <div className="w-24">
+                        <div className="w-32 shrink-0">
                           <NumberInput
                             min={1}
                             max={piece.availableQuantity ?? piece.quantity}
