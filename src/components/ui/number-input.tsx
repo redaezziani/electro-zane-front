@@ -41,7 +41,7 @@ export function NumberInput({
 
   return (
     <NumberField
-      value={value !== undefined && !isNaN(value) ? value : undefined}
+      value={value !== undefined && !isNaN(value) && isFinite(value) ? value : undefined}
       defaultValue={defaultValue}
       onChange={onChange}
       onBlur={onBlur}

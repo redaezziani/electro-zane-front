@@ -80,7 +80,7 @@ export function LotSelectorForShipment({
 
   const getPieceQuantity = (pieceId: string) => {
     const piece = selectedPieces.find((p) => p.lotPieceId === pieceId);
-    return piece?.quantityShipped || 0;
+    return piece?.quantityShipped ?? 1;
   };
 
   const handlePieceToggle = (piece: LotPiece, checked: boolean) => {
