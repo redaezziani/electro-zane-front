@@ -1,7 +1,6 @@
 "use client";
 
 import { MinusIcon, PlusIcon } from "lucide-react";
-import { Button, Group, I18nProvider, Input, NumberField } from "react-aria-components";
 import { cn } from "@/lib/utils";
 import type { CSSProperties } from "react";
 
@@ -36,57 +35,75 @@ export function NumberInput({
   placeholder,
   style,
 }: NumberInputProps) {
-  const fractionDigits =
-    step > 0 && step < 1 ? Math.round(-Math.log10(step)) : 0;
-
   const isControlled = value !== undefined && onChange !== undefined;
-  const safeValue =
-    isControlled && isFinite(value!) && !isNaN(value!) ? value : undefined;
+  const currentValue = isControlled ? value! : (defaultValue ?? 0);
+
+  const decrement = () => {
+    if (disabled) return;
+    const next = currentValue - step;
+    const clamped = min !== undefined ? Math.max(min, next) : next;
+    onChange?.(clamped);
+  };
+
+  const increment = () => {
+    if (disabled) return;
+    const next = currentValue + step;
+    const clamped = max !== undefined ? Math.min(max, next) : next;
+    onChange?.(clamped);
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const parsed = Number(e.target.value);
+    if (!isNaN(parsed)) {
+      let clamped = parsed;
+      if (min !== undefined) clamped = Math.max(min, clamped);
+      if (max !== undefined) clamped = Math.min(max, clamped);
+      onChange?.(clamped);
+    }
+  };
+
+  const atMin = min !== undefined && currentValue <= min;
+  const atMax = max !== undefined && currentValue >= max;
 
   return (
-    <I18nProvider locale="en-US">
-    <NumberField
-      value={safeValue}
-      defaultValue={safeValue !== undefined ? undefined : defaultValue}
-      onChange={onChange}
-      onBlur={onBlur}
-      minValue={min}
-      maxValue={max}
-      step={step}
-      isDisabled={disabled}
-      name={name}
-      formatOptions={{
-        useGrouping: false,
-        minimumFractionDigits: 0,
-        maximumFractionDigits: Math.max(fractionDigits, 20),
-      }}
+    <div
+      style={style}
+      className={cn(
+        "relative inline-flex h-9 w-full items-center overflow-hidden whitespace-nowrap rounded-md border border-input text-sm shadow-xs",
+        disabled && "opacity-50 pointer-events-none",
+        className,
+      )}
     >
-      <Group
-        style={style}
-        className={cn(
-          "relative inline-flex h-9 w-full items-center overflow-hidden whitespace-nowrap rounded-md border border-input text-sm shadow-xs outline-none transition-[color,box-shadow] data-focus-within:border-ring data-disabled:opacity-50 data-focus-within:ring-[3px] data-focus-within:ring-ring/50 data-focus-within:has-aria-invalid:border-destructive data-focus-within:has-aria-invalid:ring-destructive/20 dark:data-focus-within:has-aria-invalid:ring-destructive/40",
-          className,
-        )}
+      <button
+        type="button"
+        onClick={decrement}
+        disabled={disabled || atMin}
+        className="-ms-px flex aspect-square h-full items-center justify-center rounded-s-md border border-input bg-background text-muted-foreground/80 text-sm hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
       >
-        <Button
-          className="-ms-px flex aspect-square h-[inherit] items-center justify-center rounded-s-md border border-input bg-background text-muted-foreground/80 text-sm transition-[color,box-shadow] hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
-          slot="decrement"
-        >
-          <MinusIcon aria-hidden="true" size={16} />
-        </Button>
-        <Input
-          id={id}
-          placeholder={placeholder}
-          className="w-full grow bg-background px-3 py-2 text-center text-foreground tabular-nums outline-none"
-        />
-        <Button
-          className="-me-px flex aspect-square h-[inherit] items-center justify-center rounded-e-md border border-input bg-background text-muted-foreground/80 text-sm transition-[color,box-shadow] hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
-          slot="increment"
-        >
-          <PlusIcon aria-hidden="true" size={16} />
-        </Button>
-      </Group>
-    </NumberField>
-    </I18nProvider>
+        <MinusIcon aria-hidden="true" size={16} />
+      </button>
+      <input
+        id={id}
+        name={name}
+        type="number"
+        value={currentValue}
+        onChange={handleChange}
+        onBlur={onBlur}
+        disabled={disabled}
+        placeholder={placeholder}
+        min={min}
+        max={max}
+        step={step}
+        className="w-full grow bg-background px-3 py-2 text-center text-foreground tabular-nums outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+      />
+      <button
+        type="button"
+        onClick={increment}
+        disabled={disabled || atMax}
+        className="-me-px flex aspect-square h-full items-center justify-center rounded-e-md border border-input bg-background text-muted-foreground/80 text-sm hover:bg-accent hover:text-foreground disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        <PlusIcon aria-hidden="true" size={16} />
+      </button>
+    </div>
   );
 }
