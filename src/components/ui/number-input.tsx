@@ -1,7 +1,7 @@
 "use client";
 
 import { MinusIcon, PlusIcon } from "lucide-react";
-import { Button, Group, Input, NumberField } from "react-aria-components";
+import { Button, Group, I18nProvider, Input, NumberField } from "react-aria-components";
 import { cn } from "@/lib/utils";
 import type { CSSProperties } from "react";
 
@@ -39,10 +39,15 @@ export function NumberInput({
   const fractionDigits =
     step > 0 && step < 1 ? Math.round(-Math.log10(step)) : 0;
 
+  const isControlled = value !== undefined && onChange !== undefined;
+  const safeValue =
+    isControlled && isFinite(value!) && !isNaN(value!) ? value : undefined;
+
   return (
+    <I18nProvider locale="en-US">
     <NumberField
-      value={value !== undefined && !isNaN(value) && isFinite(value) ? value : undefined}
-      defaultValue={defaultValue}
+      value={safeValue}
+      defaultValue={safeValue !== undefined ? undefined : defaultValue}
       onChange={onChange}
       onBlur={onBlur}
       minValue={min}
@@ -82,5 +87,6 @@ export function NumberInput({
         </Button>
       </Group>
     </NumberField>
+    </I18nProvider>
   );
 }
